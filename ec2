@@ -1,0 +1,28 @@
+✅ EC2 Security Best Practices — Quick Summary
+
+🔑 Use SSH keys only (disable password login)
+
+🚫 No root SSH access — use normal users + sudo
+
+👤 One user per person (easy auditing & revocation)
+
+🔒 Correct SSH permissions
+.ssh → 700, authorized_keys → 600
+
+🌐 Restrict Security Groups
+SSH (22) → your IP only, never 0.0.0.0/0
+
+🛡 Use IAM Roles, not access keys on EC2
+
+🔄 Keep OS updated regularly
+
+📜 Enable logging & monitoring
+
+🔁 Rotate/remove unused SSH keys
+
+🧱 Run services as non-root
+
+☁️ Prefer SSM over SSH when possible
+
+👉 Golden rule:
+SSH locked + SG restricted + IAM roles = secure EC2 ✅
