@@ -26,3 +26,24 @@ SSH (22) → your IP only, never 0.0.0.0/0
 
 👉 Golden rule:
 SSH locked + SG restricted + IAM roles = secure EC2 ✅
+
+
+
+✅ Use IAM Roles, not Access Keys on EC2 — Summary
+
+❌ Never use aws configure on EC2
+❌ Never store AWS access keys on the instance
+✅ Attach an IAM Role to EC2
+✅ EC2 gets temporary, auto-rotated credentials
+✅ Permissions are controlled by IAM policies
+✅ Fully auditable via CloudTrail
+✅ AWS CLI/SDK works without any config
+
+Golden rule:
+Humans use IAM Users.
+EC2 and services use IAM Roles.
+
+👉 IAM Roles = secure, scalable, zero-key access for EC2
+
+
+
