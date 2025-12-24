@@ -28,11 +28,18 @@ SSH locked + SG restricted + IAM roles = secure EC2 ✅
 ✅ Fully auditable via CloudTrail
 ✅ AWS CLI/SDK works without any config
 
-Golden rule:
-Humans use IAM Users.
-EC2 and services use IAM Roles.
+👉Golden rule:
+   Humans use IAM Users.
+   EC2 and services use IAM Roles.
 
 👉 IAM Roles = secure, scalable, zero-key access for EC2
 
 
+✅ The RIGHT way: IAM Role on EC2
+How it works
+Create an IAM Role
+Attach least-privilege policies
+Attach the role to EC2
+EC2 receives temporary credentials automatically
 
+👉 EC2 → IAM Role → Temporary creds → AWS APIs
