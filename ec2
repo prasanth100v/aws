@@ -36,6 +36,8 @@ SSH locked + SG restricted + IAM roles = secure EC2 ✅
 
 
 ✅ The RIGHT way: IAM Role on EC2
+❌ The WRONG way (don’t do this) : aws configure
+
 How it works
 Create an IAM Role
 Attach least-privilege policies
