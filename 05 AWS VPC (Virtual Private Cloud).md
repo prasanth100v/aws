@@ -1,7 +1,4 @@
-# 🌐 AWS VPC (Virtual Private Cloud) – Complete Guide
-
----
-
+# 🌐 AWS VPC (Virtual Private Cloud) 
 ## 🧠 What is AWS VPC?
 
 Amazon VPC (Virtual Private Cloud) is a **logically isolated network** in AWS.
@@ -12,10 +9,7 @@ Amazon VPC (Virtual Private Cloud) is a **logically isolated network** in AWS.
 - Configure routing
 - Apply security controls
 
----
-
 ## 🧩 Key Components of VPC
-
 ### 🌍 VPC
 - Your private network in AWS
 
@@ -25,31 +19,21 @@ Amazon VPC (Virtual Private Cloud) is a **logically isolated network** in AWS.
   - 🌐 Public Subnet
   - 🔒 Private Subnet
 - Limit: Up to 200 subnets per VPC
-
----
-
+  
 ### 🛣️ Route Tables
 - Control how traffic flows inside VPC
-
----
 
 ### 🌐 Internet Gateway (IGW)
 - Enables internet access
 - Only **one IGW per VPC**
 
----
-
 ### 🔄 NAT Gateway
 - Allows **private subnet → internet (outbound only)**
 - Deployed in **public subnet**
 
----
-
 ### 🔥 Security Groups
 - Instance-level firewall
 - Controls inbound & outbound traffic
-
----
 
 ### 🧱 Network ACLs (NACLs)
 - Subnet-level firewall
@@ -60,23 +44,15 @@ Amazon VPC (Virtual Private Cloud) is a **logically isolated network** in AWS.
 ### 🔗 VPC Peering
 - Connect two VPCs privately
 
----
-
 ### 🌉 Transit Gateway
 - Central hub for connecting multiple VPCs
-
----
 
 ### 🚪 VPC Endpoints
 - Private access to AWS services (S3, DynamoDB)
 - No internet required
 
----
-
 ### 🌐 IP Support
 - Supports both IPv4 & IPv6
-
----
 
 ## 🏗️ Public vs Private Subnet
 
@@ -92,21 +68,15 @@ Amazon VPC (Virtual Private Cloud) is a **logically isolated network** in AWS.
 - Defines IP range of VPC  
 - Example: `10.0.0.0/16` → 65,536 IPs
 
----
-
 ## 🔢 VPC Limits
 
 - Default: 5 VPCs per region per account
 - Can request increase via AWS Support
 
----
-
 ## 🌍 Region Scope
 
 - VPC is **region-specific**
 - Cannot span multiple regions
-
----
 
 ## 💰 VPC Pricing
 
@@ -115,8 +85,6 @@ Amazon VPC (Virtual Private Cloud) is a **logically isolated network** in AWS.
   - NAT Gateway 💸
   - Transit Gateway 💸
   - Cross-region peering 💸
-
----
 
 ## 🌐 Elastic IP (EIP)
 
@@ -138,8 +106,6 @@ Amazon VPC (Virtual Private Cloud) is a **logically isolated network** in AWS.
 - ap-south-1b
 - ap-south-1c
 
----
-
 ## ⚖️ IGW vs NAT Gateway
 
 | Feature | IGW | NAT Gateway |
@@ -154,8 +120,6 @@ Amazon VPC (Virtual Private Cloud) is a **logically isolated network** in AWS.
 - Secure connection between:
   - On-premises ↔ AWS VPC
 
----
-
 ## 🚀 AWS Direct Connect
 
 - Private dedicated connection to AWS
@@ -164,8 +128,6 @@ Amazon VPC (Virtual Private Cloud) is a **logically isolated network** in AWS.
   - More secure
   - Reliable
 
----
-
 ## 🚪 VPC Endpoint
 
 - Private access to AWS services
@@ -173,8 +135,6 @@ Amazon VPC (Virtual Private Cloud) is a **logically isolated network** in AWS.
   - Internet Gateway
   - NAT Gateway
   - VPN
-
----
 
 ## 🌉 Virtual Private Gateway (VGW)
 
@@ -195,9 +155,7 @@ Amazon VPC (Virtual Private Cloud) is a **logically isolated network** in AWS.
 5. Enable DNS (optional)  
 6. Click Create  
 
----
-
-## 🔧 Next Steps
+#### 🔧 Next Steps
 
 - Create Subnets  
 - Attach Internet Gateway  
