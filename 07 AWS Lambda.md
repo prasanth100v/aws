@@ -1,9 +1,8 @@
 # 🌈 AWS Lambda 
 ## 🚀 What is AWS Lambda?
-
-**AWS Lambda** is a **serverless compute service** that runs your code  
-- 🎯 AWS Lambda = Run code without servers, pay only for execution
-- 👉 without provisioning or managing servers.
+AWS Lambda is a **serverless compute service** that runs your code **without managing servers**. 
+- 👉 Focus on writing code, AWS handles infrastructure.
+🎯 AWS Lambda = Run code without servers, pay only for execution
 
 💡 Ideal for:
 - Microservices
@@ -52,12 +51,12 @@ Supports:
 - 📥 SQS
 - 📊 CloudWatch
 
-### 🔄 Cold Start vs Warm Start
+## 🔄 Cold Start vs Warm Start
 
 | Type | Description |
 |------|------------|
-| Cold Start | First execution, slightly slower |
-| Warm Start | Reused instance, faster execution |
+| ❄️ Cold Start | First execution (slightly slower) |
+| 🔥 Warm Start | Faster execution (reused environment) |
 
 ---
 
@@ -92,8 +91,7 @@ Cost = Memory (GB) × Execution Time (seconds)
 - 🗄 DynamoDB Streams (DB updates trigger function)
 - 📬 SNS / SQS
 
-### 🌐 VPC Support
-
+## 🌐 Lambda in VPC
 - Can run inside a **VPC**
 - Access private resources:
   - RDS
@@ -155,7 +153,7 @@ Response / Action 🚀
 
 ---
 
-# 🧠 Final Summary
+## 🧠 Final Summary
 
 ✔ Serverless compute  
 ✔ Auto scaling + cost efficient  
