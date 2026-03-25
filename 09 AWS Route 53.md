@@ -1,5 +1,4 @@
 # 🌐 AWS Route 53 – Complete Guide
-
 ## 📌 What is AWS Route 53?
 AWS Route 53 is a **scalable and highly available DNS (Domain Name System)** web service.
 
@@ -129,7 +128,11 @@ Protects Against:
 3️⃣ Enter domain name  
 4️⃣ Choose Public or Private  
 5️⃣ Add DNS Records  
-6️⃣ Update NS in registrar (GoDaddy, etc.)  
+    1. Click **Create Record**
+    2. Select type (A, CNAME, etc.)
+    3. Enter value
+    4. Save 
+6️⃣ Update NS in registrar ( Domain Registrar) (GoDaddy, etc.)  
 7️⃣ Test using nslookup  
 
 🎉 Done! Route 53 is managing your domain.
@@ -148,3 +151,10 @@ Perfect for:
 - Websites
 - Applications
 - Global traffic routing
+
+## Why Route 53 over traditional DNS?
+  - Global infrastructure
+  - High availability
+  - Built-in health checks
+  - Advanced routing policies
+  - Tight integration with AWS services
