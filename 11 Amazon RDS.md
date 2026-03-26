@@ -41,7 +41,7 @@ Amazon RDS (Relational Database Service) is a **managed database service** by AW
 
 - 🔒 Sync = Safety first (no data loss)        (Tasks are executed one after another. The next task waits until the current task finishes.)
 - 🚀 Async = Speed first (better performance)  (Tasks can run independently, without waiting for others to finish.)
-- 
+
 ### 📈 Scaling
  - 🔼 Vertical scaling (instance type change)
  - 🔼 Storage scaling (increase anytime)
