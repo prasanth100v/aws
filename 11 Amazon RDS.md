@@ -34,14 +34,14 @@ Amazon RDS (Relational Database Service) is a **managed database service** by AW
 - Synchronous replication, Used for availability (NOT performance)
 
 ### 📊 Read Replicas
-- Improves performance (NOT failover)
-- Up to 5 read replicas
-- Asynchronous replication
-- Best for **read-heavy workloads**
+ - Improves performance (NOT failover)
+ - Up to 5 read replicas
+ - Asynchronous replication
+ - Best for **read-heavy workloads**
 
 - 🔒 Sync = Safety first (no data loss)        (Tasks are executed one after another. The next task waits until the current task finishes.)
 - 🚀 Async = Speed first (better performance)  (Tasks can run independently, without waiting for others to finish.)
-
+- 
 ### 📈 Scaling
  - 🔼 Vertical scaling (instance type change)
  - 🔼 Storage scaling (increase anytime)
@@ -60,7 +60,7 @@ Amazon RDS (Relational Database Service) is a **managed database service** by AW
 - 🚫 No ssh, no terminal access ❌, You don’t see the OS (Linux/Windows) running underneath, You only connect via DB clients..
 - 📌 Why? Because RDS is a managed service — AWS controls the server, OS, patching, security, everything.
 
-To connect your app:
+#### To connect your app:
 ```
 Endpoint (hostname) + Username + Password + Port (e.g., 3306 for MySQL)
 ```
