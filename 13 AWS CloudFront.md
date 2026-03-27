@@ -1,5 +1,5 @@
 # 🌐 AWS CloudFront
-![Uploading ChatGPT Image Mar 27, 2026, 09_31_15 PM.png…]()
+<img width="1536" height="1024" alt="ChatGPT Image Mar 27, 2026, 09_31_15 PM" src="https://github.com/user-attachments/assets/c52bf51a-54cf-476c-8fa2-b9ecbc574941" />
 
 ## What is AWS CloudFront?
 
