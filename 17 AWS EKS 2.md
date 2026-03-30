@@ -32,8 +32,26 @@
 | 🛠️ Tools          | 🧑‍💻 kubectl            | 🔧 Manage workloads                        |
 |                    | ⚙️ eksctl                | 🚀 Create/manage clusters                  |
 
+## 🚀 Production-Grade Kubernetes on AWS (EKS Stack)
+| 🧩 Component            | 📌 Service                                                | 💡 Purpose                             |
+| ----------------------- | --------------------------------------------------------- | -------------------------------------- |
+| ☸️ Kubernetes           | Amazon EKS                                                | 🧠 Managed Kubernetes control plane    |
+| 🖥️ Compute             | Amazon EC2 / AWS Fargate                                  | ⚙️ Run worker nodes or serverless pods |
+| 🔐 Secrets & Encryption | AWS Secrets Manager / AWS Key Management Service          | 🔒 Secure secrets & encryption         |
+| 👤 Identity & Access    | AWS Identity and Access Management                        | 🛡️ RBAC integration & access control  |
+| 🗄️ Database            | Amazon RDS / Amazon Aurora                                | 📊 Managed databases for apps          |
+| 📦 Object Storage       | Amazon S3                                                 | 💾 Store logs, backups, Helm charts    |
+| 📈 Auto Scaling         | AWS Auto Scaling                                          | 🔄 Scale worker nodes automatically    |
+| 🔐 TLS Certificates     | AWS Certificate Manager                                   | 🌐 Manage HTTPS certificates           |
+| 🌐 Networking           | VPC + IAM                                                 | 🔗 Secure networking & access control  |
+| 📦 Container Registry   | Amazon ECR                                                | 🐳 Store Docker images                 |
+| ⚖️ Load Balancing       | AWS Application Load Balancer / AWS Network Load Balancer | 🔀 Distribute traffic to services      |
+| 📊 Monitoring & Logs    | Amazon CloudWatch                                         | 📈 Logging, metrics, alerts            |
 
 ---
+
+# AWS EKS
+“Kubernetes follows a master-worker architecture where the Control Plane makes all cluster decisions, and Worker Nodes execute those decisions by running containerized applications.”
 
 ## 🪜 Create Amazon EKS Cluster (Console Steps)
 | 🧩 Step                  | 📌 Action                                                           | 💡 Description                     |
