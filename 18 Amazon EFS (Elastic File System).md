@@ -134,18 +134,28 @@ Amazon Elastic File System (EFS) is a serverless, scalable, fully managed file s
 ### Install NFS Utilities
 ```bash
 
-sudo yum install -y amazon-efs-utils                      # Amazon Linux
-sudo apt install -y nfs-common                            # Ubuntu/Debian
+sudo yum install -y amazon-efs-utils                 # Amazon Linux
+sudo apt install -y nfs-common                       # Ubuntu/Debian
 
-sudo mkdir -p /mnt/efs                                # 📁 Create Mount Directory       
+sudo mkdir -p /mnt/efs                               # 📁 Create Mount Directory       
 
 sudo mount -t efs fs-xxxxxxxx:/ /mnt/efs            # 🔌 Mount EFS
               OR
-sudo mount -t efs -o tls fs-xxxxxxxx:/ /mnt/efs     # 🔐 Mount with Encryption
+sudo mount -t efs -o tls fs-xxxxxxxx:/ /mnt/efs     # 🔐 Attach EFS storage to my EC2 instance securely 🔐
 
-df -h | grep efs   # ✅ Verify Mount
+df -h | grep efs                                    # ✅ Verify Mount
 
 ```
+
+### 🧩 Command Breakdown
+| 🧩 Part            | 📌 Meaning        | 💡 Explanation                                |
+| ------------------ | ----------------- | --------------------------------------------- |
+| 🛠️ `sudo`         | Run as admin      | 🔒 Required for mounting file systems         |
+| 📂 `mount`         | Linux command     | 🔗 Attaches storage to your system            |
+| 🔧 `-t efs`        | EFS mount type    | 📦 Uses EFS mount helper (`amazon-efs-utils`) |
+| 🔐 `-o tls`        | Enable encryption | 🛡️ Encrypts data in transit (EC2 ↔ EFS)      |
+| 🆔 `fs-xxxxxxxx:/` | File system ID    | 📂 Your EFS identifier                        |
+| 📍 `/mnt/efs`      | Mount point       | 🖥️ Local directory to access files           |
 
 ---
 
