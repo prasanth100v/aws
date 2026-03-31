@@ -96,8 +96,6 @@ You pay based on:
 | 🎯 Use Case    | 📦 Long-term storage             | ⚡ Temporary / cache storage          |
 
 
-------------------------------------------------------------------------
-
 ## 🎯 Provisioned IOPS Explained
 | 🧩 Scenario                 | 📌 Setup                                                        | 💡 Result                                     |
 | ---------------------------- | ---------------------------------------------------------------- | --------------------------------------------- |
@@ -111,13 +109,98 @@ You pay based on:
 | 🚫 No Slowdowns          | 🔄 Stable latency for critical apps                     |
 | 🎯 Ideal Use Cases       | 🏦 Banking<br>🛒 E-commerce<br>⚙️ Mission-critical apps |
 
+------------------------------------------------------------------------
+
+## 🌩️ AWS EBS VOLUME CREATION
+## 🟢 STEP 1: CREATE EBS VOLUME
+  
+📍 Go to :
+  * 👉 Amazon EC2 Dashboard
+  * 👉 Left Menu → Elastic Block Store → Volumes
+  * 👉 Click Create Volume
+
+## 🔵 STEP 2: CONFIGURE EBS VOLUME
+ ### configuration:
+  Volume Type (Choose based on use case) 
+  * volume_type: "gp3"                  # ⚡ General Purpose SSD (Recommended)
+  * size: "10 GiB"                      # 📦 Minimum: 1 GiB (SSD), 500 GiB (HDD)
+  * availability_zone: "ap-south-1a"    # 🌍 Must match EC2 AZ
+  * snapshot_id: null                    # 📸 Optional (use existing snapshot)
+  * encryption:
+    * enabled: true                      # 🔐 Encrypt using AWS KMS
+    * kms_key: "default/aws/ebs"
+  * tags:
+    * Name: "MyEBSVolume"
+    * Environment: "Dev"
+
+    action: "Click Create Volume"
+
+## 🟡 STEP 3: ATTACH VOLUME TO EC2
+ ### attach_volume:
+   * Select created volume
+   * Click Actions → Attach Volume
+      details:
+       * instance_id: "i-xxxxxxxxxxxx"
+       *  device_name: "/dev/xvdf"              # 💡 Linux device name
+
+## 🔴 STEP 4: FORMAT & MOUNT (LINUX)
+ ### linux_commands:
+ #### 🔍 List all disks
+   ```
+    "lsblk"        # Identify new volume (e.g., xvdf)"
+   ```
+  👉 You’ll see something like: xvda  (root disk) & xvdf  (new EBS volume)
+  
+  #### 🧱 Format the volume  (Prepares disk for use & You can also use )
+   ```
+    sudo mkfs -t ext4 /dev/xvdf             # "Create file system (ext4 recommended)"
+   ````
+ #### 📁 Create mount directory
+   ```
+    sudo mkdir /mnt/myvolume                 # "Create mount point"
+   ```
+#### 🔗 Mount volume
+   ```
+   sudo mount /dev/xvdf /mnt/myvolume            # "Attach volume to directory"
+   ```
+ #### ✅ Verify mount
+  ```
+      df -h                # You should see your new volume
+  ```
+
+## 🔄 Optional: Auto Mount on Reboot (Very Important 🚨)
+#### 👉 Without this, volume disappears after reboot
+Edit fstab: 
+ * The file **/etc/fstab** tells Linux: 👉 “Mount this disk automatically when the system starts”
+```
+sudo nano /etc/fstab
+```
+Add :
+```
+/dev/xvdf  /mnt/myvolume  ext4  defaults,nofail  0  2
+```
+### 🧩 Understanding your entry :
+| Field           | Meaning                          |
+| --------------- | -------------------------------- |
+| `/dev/xvdf`     | Your EBS volume (device name)    |
+| `/mnt/myvolume` | Where it should be mounted       |
+| `ext4`          | File system type                 |
+| `defaults`      | Standard mount options           |
+| `nofail`        | ⚠️ Don’t crash if volume missing |
+| `0`             | Backup option (ignore)           |
+| `2`             | Filesystem check order           |
+
+### 💡 Real-Life Analogy
+ * Without fstab → You manually plug USB every time 🔌
+ * With fstab → USB auto-connects on startup ⚡
+
+------------------------------------------------------------------------
+
 ## 🧠 Summary
 
 -   EBS = Persistent, scalable block storage
 -   Supports snapshots, encryption, and resizing
 -   Multiple volume types for different workloads
 -   Essential for production systems on AWS
-
-------------------------------------------------------------------------
 
 ✨ **Tip:** Use gp3 for most workloads, io2 for critical systems, and sc1 for cheap storage.
