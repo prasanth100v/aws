@@ -1,0 +1,123 @@
+# 🚀 AWS EBS (Elastic Block Store) 
+## 📌 What is AWS EBS?
+Amazon EBS (Elastic Block Store) is a **scalable, high-performance block storage service** designed for use with EC2 instances. 
+It provides **persistent storage**, meaning your data remains safe even when instances are stopped.
+
+👉 Think of EBS like a hard disk (SSD/HDD) attached to your virtual machine.
+   * ✔ Persistent
+   * ✔ Fast
+   * ✔ Reliable
+
+### 🖼️ How EBS Works (Architecture)
+  * 👉 EBS volume is attached to an EC2 instance like a disk
+  * 👉 Data stays safe even if the instance stops
+
+## 🔑 Key Features of AWS EBS
+| 🧩 Feature            | 💡 Description                                                                            |
+| --------------------- | ----------------------------------------------------------------------------------------- |
+| 💾 Persistent Storage | 📦 Data remains safe even if EC2 is stopped or restarted (Unlike temporary storage)          |
+| 🌍 AZ Bound           | 📍 EBS volume exists in one Availability Zone only (Cannot directly attach to EC2 in another AZ.)    |
+| 📸 Snapshots          | ☁️ Snapshots are stored in **Amazon S3**. Used for: backup & restore, Migration across regions & Disaster recovery      |
+| 🔐 Encryption         | 🛡️ Data encrypted at rest, in transit, and in snapshots using AWS Key Management Service |
+
+
+### ❗ Can you reduce (shrink) an AWS EBS volume?
+   NO ❌, In Amazon EBS, you cannot decrease (shrink) the size of an existing volume.
+
+
+------------------------------------------------------------------------
+
+## 📦 EBS Volume Types
+
+### ⚡ High Performance SSD Options
+| 🧩 Type                       | 📌 Description            | 💡 Key Details                                    |
+| ----------------------------- | ------------------------- | ------------------------------------------------- |
+| 🟢 General Purpose SSD (gp2)  | ⚖️ Balanced performance   | 📊 ~3 IOPS per GB (up to 16,000 IOPS)             |
+| 🟢 General Purpose SSD (gp3)  | 🚀 Modern, cost-efficient | 🔄 Independent IOPS & throughput scaling          |
+| 🔵 Provisioned IOPS SSD (io1) | 🎯 High performance       | 🏦 Designed for critical workloads                |
+| 🔵 Provisioned IOPS SSD (io2) | 🔥 Extreme performance    | ⚡ Up to 256,000 IOPS & 4,000 MB/s (Block Express) |
+
+
+### 🧊 HDD (Low Cost)
+| 🧩 Type                           | 📌 Description         | 💡 Best Use Cases                                      |
+| --------------------------------- | ---------------------- | ------------------------------------------------------ |
+| 🟡 Throughput Optimized HDD (st1) | 📊 High throughput HDD | 📈 Big data, 📝 log processing, 🎥 streaming workloads |
+| ⚪ Cold HDD (sc1)                  | 💰 Lowest cost HDD     | 🗂️ Archive data, 📦 rarely accessed data              |
+
+------------------------------------------------------------------------
+
+## ⚙️ Performance Concepts
+| 🧩 Concept          | 📌 Description                        | 💡 Key Insight                                  |
+| ------------------- | ------------------------------------- | ----------------------------------------------- |
+| 📊 IOPS             | 🔢 Input/Output Operations Per Second | ⚡ SSD → High IOPS (fast operations)<br>🐢 HDD → Lower IOPS |
+| 🚀 Throughput       | 📈 Data transfer speed (MB/s)         | 📦 Important for large data transfers (HDD volumes optimized for throughput)     |
+| ⚡ Burst Performance | 🔄 Temporary performance boost        | 🚀 gp2 supports temporary high performance bursts    |
+
+* 🔢 IOPS                      :  (Speed of operations : 👉 Number of read/write operations per second)
+* 📦 Throughput (Data speed    : Measured in MB/s)
+* 💥 Burst Performance         : gp2 volumes can temporarily boost speed
+------------------------------------------------------------------------
+
+## 🔄 Resize Without Downtime
+-   Modify anytime:
+    -   Volume size
+    -   IOPS
+    -   Throughput
+    -   Volume type (gp2 → gp3 etc.)
+-   No need to stop EC2 instance
+
+## 🔌 Attach & Detach
+-   Attach volume to running EC2 👉 No need to stop the server
+-   Detach and reattach anytime (You can reattach it to the same or different EC2 (within the same AZ))
+
+### 🔗 Multi-Attach
+-   io1/io2 volumes can attach to multiple EC2 instances (same AZ)
+
+## 🔁 Backup & Restore
+-   Snapshots used to:
+    -   Restore volumes
+    -   Create new volumes
+    -   Copy across regions
+
+## 💰 Pricing Factors
+You pay based on: 
+ * 📦 Storage (GB/month)
+ * ⚡ Provisioned IOPS (io1/io2)
+ * 📸 Snapshot storage (S3)
+ * 🌐 Data transfer (if applicable)
+
+------------------------------------------------------------------------
+
+## ⚖️ EBS vs Instance Store
+| 🧩 Feature     | 💽 EBS (Elastic Block Store)     | ⚡ Instance Store                     |
+| -------------- | --------------------------------- | ------------------------------------  |
+| 💾 Persistence | ✅ Yes (data is safe after stop) | ❌ No (data lost on stop/terminate)   |
+| 📍 Location    | 🌐 Network attached              | 🖥️ Physically attached (local disk)   |
+| 🎯 Use Case    | 📦 Long-term storage             | ⚡ Temporary / cache storage          |
+
+
+------------------------------------------------------------------------
+
+## 🎯 Provisioned IOPS Explained
+| 🧩 Scenario                 | 📌 Setup                                                        | 💡 Result                                     |
+| ---------------------------- | ---------------------------------------------------------------- | --------------------------------------------- |
+| ❌ Without Provisioned IOPS | 💽 Using gp3                                                   | ⚠️ Performance may fluctuate under heavy load |
+| ✅ With Provisioned IOPS    | 💽 io1 / io2<br>📦 500 GB<br>⚡ 25,000 IOPS<br>🚀 1,000 MiB/s | 🔥 Consistent, high performance               |
+
+### 💡 Key Benefits
+| 🧩 Benefit               | 💡 Explanation                                          |
+| ------------------------ | ------------------------------------------------------- |
+| ⚡ Consistent Performance | 📊 No fluctuations even under heavy load                |
+| 🚫 No Slowdowns          | 🔄 Stable latency for critical apps                     |
+| 🎯 Ideal Use Cases       | 🏦 Banking<br>🛒 E-commerce<br>⚙️ Mission-critical apps |
+
+## 🧠 Summary
+
+-   EBS = Persistent, scalable block storage
+-   Supports snapshots, encryption, and resizing
+-   Multiple volume types for different workloads
+-   Essential for production systems on AWS
+
+------------------------------------------------------------------------
+
+✨ **Tip:** Use gp3 for most workloads, io2 for critical systems, and sc1 for cheap storage.
