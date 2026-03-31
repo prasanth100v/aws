@@ -145,28 +145,17 @@ You pay based on:
 
 ## 🔴 STEP 4: FORMAT & MOUNT (LINUX)
  ### linux_commands:
- #### 🔍 List all disks
-   ```
-    "lsblk"        # Identify new volume (e.g., xvdf)"
-   ```
-  👉 You’ll see something like: xvda  (root disk) & xvdf  (new EBS volume)
+  ```
+    lsblk                                   # 🔍 List all disks    # 👉 You’ll see something like: xvda  (root disk) & xvdf  (new EBS volume)
   
-  #### 🧱 Format the volume  (Prepares disk for use & You can also use )
+    sudo mkfs -t ext4 /dev/xvdf             # 🧱 Format the volume  (Prepares disk for use ) # (ext4 file system)
+  
+    sudo mkdir /mnt/myvolume                 #📁 Create mount directory #mount point
+   
+    sudo mount /dev/xvdf /mnt/myvolume      # 🔗 Mount volume   "Attach volume to directory"
+ 
+    df -h                                    #✅ Verify mount # You should see your new volume
    ```
-    sudo mkfs -t ext4 /dev/xvdf             # "Create file system (ext4 recommended)"
-   ````
- #### 📁 Create mount directory
-   ```
-    sudo mkdir /mnt/myvolume                 # "Create mount point"
-   ```
-#### 🔗 Mount volume
-   ```
-   sudo mount /dev/xvdf /mnt/myvolume            # "Attach volume to directory"
-   ```
- #### ✅ Verify mount
-  ```
-      df -h                # You should see your new volume
-  ```
 
 ## 🔄 Optional: Auto Mount on Reboot (Very Important 🚨)
 #### 👉 Without this, volume disappears after reboot
