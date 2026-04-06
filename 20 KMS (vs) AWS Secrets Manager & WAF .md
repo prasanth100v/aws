@@ -13,12 +13,12 @@
       * No hardcoding ❌
 
 
-| 🧩 Feature      | 🔐 AWS KMS                     | 🔒 AWS Secrets Manager     |
-| --------------- | ------------------------------ | -------------------------- |
-| 🎯 Purpose      | 🔑 Encryption & key management | 🗝️ Store & manage secrets |
+| 🧩 Feature      | 🔐 AWS KMS                      | 🔒 AWS Secrets Manager       |
+| --------------- | -------------------------------- | ---------------------------- |
+| 🎯 Purpose      | 🔑 Encryption & key management  | 🗝️ Store & manage secrets   |
 | 💾 Stores Data? | ❌ No (stores keys only)        | ✅ Yes (stores secrets)     |
-| 🎯 Use Case     | 🔐 Encrypt/decrypt data        | 🔑 Passwords, API keys     |
-| 🔄 Rotation     | ⚠️ Manual / limited            | ✅ Automatic rotation       |
+| 🎯 Use Case     | 🔐 Encrypt/decrypt data         | 🔑 Store Passwords, API keys |
+| 🔄 Rotation     | ⚠️ Manual / limited             | ✅ Automatic rotation        |
 
 
 ---
