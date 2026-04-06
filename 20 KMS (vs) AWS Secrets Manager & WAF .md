@@ -18,6 +18,7 @@
 | 8️⃣     | 🔍 Review            | 👀 Verify all configurations                                    |
 | 9️⃣     | ✅ Create            | 🚀 Click **Create key**                                         |
 
+---
 
 ## 🔒 What is AWS Secrets Manager?
   * ✨ Use AWS Secrets Manager to store and manages sensitive data (secrets) like passwords🗄️, API keys🔑, Tokens🎫 and database credentials with automatic rotation.
