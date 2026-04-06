@@ -1,9 +1,23 @@
 # 🔐 AWS KMS (Key Management Service) vs AWS Secrets Manager
 ## 🧠 What is KMS?
-  * ✨ KMS is used to create and manage encryption keys (`encrypt🔒` and `decrypt🔓` data and manage cryptographic keys securely).
-  * It integrates with AWS services like `S3, RDS, and EBS` to protect sensitive data by handling encryption automatically.
+  * 👉 AWS KMS is used to create and manage cryptographic keys for `encrypting` 🔒 and `decrypting` 🔓 data.
+  * ✨ It integrates with AWS services like `S3, RDS, and EBS` to protect sensitive data by handling encryption automatically.
   * 📌 Example: You upload sensitive files to an `S3 bucket` and want to encrypt them using a KMS key.
   * 🔑 Key Concept : A `cryptographic key` = secret string used for `encryption/decryption`
+
+## 🔐 Create AWS KMS Key (Step-by-Step)
+| 🧩 Step | 📌 Action           | 💡 Details                                                      |
+| ------- | -------------------- | ---------------------------------------------------------------- |
+| 1️⃣     | 🖥️ Open Console      | 🌐 Go to AWS Console → Search **KMS (Key Management Service)**   |
+| 2️⃣     | ➕ Create Key        | 🆕 Click **“Create key”**                                       |
+| 3️⃣     | 🔑 Key Type          | ⚙️ Choose **Symmetric** (common) or Asymmetric                  |
+| 4️⃣     | 🎯 Key Usage         | 🔐 Select **Encrypt and Decrypt**                               |
+| 5️⃣     | 🏷️ Add Alias         | 📝 Example: `my-kms-key`                                        |
+| 6️⃣     | 👤 Define Admins     | 🛡️ Choose IAM users/roles to manage key                         |
+| 7️⃣     | 🔐 Usage Permissions | 🔑 Select who can use the key (encrypt/decrypt)                 |
+| 8️⃣     | 🔍 Review            | 👀 Verify all configurations                                    |
+| 9️⃣     | ✅ Create            | 🚀 Click **Create key**                                         |
+
 
 ## 🔒 What is AWS Secrets Manager?
   * ✨ Use AWS Secrets Manager to store and manages sensitive data (secrets) like passwords🗄️, API keys🔑, Tokens🎫 and database credentials with automatic rotation.
@@ -12,14 +26,39 @@
       * App fetches secret dynamically
       * No hardcoding ❌
 
+## 🔐 Create Secret in AWS Secrets Manager (Step-by-Step)
+| 🧩 Step | 📌 Action              | 💡 Details                                                  |
+| ------- | ---------------------- | ----------------------------------------------------------- |
+| 1️⃣     | 🌐 Open Console        | 🔍 Go to AWS Console → Search **Secrets Manager**           |
+| 2️⃣     | ➕ Store Secret         | 🆕 Click **“Store a new secret”**                           |
+| 3️⃣     | 🧩 Select Type         | 📦 Choose: RDS / Database / **Other (API keys, passwords)** |
+| 4️⃣     | ✍️ Enter Values        | 🔑 Add key-value or JSON (username, password, API key)      |
+| 5️⃣     | 🔐 Encryption          | 🛡️ Use default (**aws/secretsmanager**) or custom KMS key  |
+| 6️⃣     | 🏷️ Name Secret         | 📝 Example: `prod/db-credentials` + tags/description        |
+| 7️⃣     | 🔄 Rotation (Optional) | ⚙️ Enable auto-rotation using Lambda (e.g., 30 days)        |
+| 8️⃣     | ✅ Create               | 🚀 Review and click **Store**                               |
 
+### 🔐 Access Secrets from AWS Secrets Manager
+| 🧩 Method        | 📌 What it Means               | 💡 Example                                                            |
+| ---------------- | ------------------------------- | --------------------------------------------------------------------- |
+| 🌐 AWS Console   | 👀 View secret manually in UI  | Open AWS → Secrets Manager → Select secret → **Retrieve value**       |
+| 💻 AWS CLI       | ⚡ Fetch via command line      | `aws secretsmanager get-secret-value --secret-id prod/db-credentials` |
+| 🧑‍💻 SDK (Code)    | 🔗 Access inside applications  | Python / Java / Node.js fetch secrets dynamically                     |
+
+ * 👉 Access Methods = Ways to read or use your stored secret
+ * 🔍 Real Example
+     * Instead of hardcoding password in code ❌
+     * Your app fetches it from Secrets Manager using SDK ✅
+
+---
+
+## ⚖️ AWS KMS vs AWS Secrets Manager
 | 🧩 Feature      | 🔐 AWS KMS                      | 🔒 AWS Secrets Manager       |
 | --------------- | -------------------------------- | ---------------------------- |
 | 🎯 Purpose      | 🔑 Encryption & key management  | 🗝️ Store & manage secrets   |
 | 💾 Stores Data? | ❌ No (stores keys only)        | ✅ Yes (stores secrets)     |
 | 🎯 Use Case     | 🔐 Encrypt/decrypt data         | 🔑 Store Passwords, API keys |
 | 🔄 Rotation     | ⚠️ Manual / limited             | ✅ Automatic rotation        |
-
 
 ---
 
@@ -51,13 +90,19 @@
 ---
 
 ## ⚙️ AWS WAF Setup:
+| 🧩 Step | 📌 Action          | 💡 Description                                                                               |
+| ------- | ------------------ | --------------------------------------------------------------------------------------------- |
+| 1️⃣     | 🖥️ Open Console   | 🌐 Go to AWS Console → **AWS WAF**                                                             |
+| 2️⃣     | 🏗️ Create Web ACL | 📝 Define name & choose region or CloudFront                                                   |
+| 3️⃣     | 🔗 Choose Resource | ⚖️ Attach AWS WAF to `ALB`, `API Gateway`, or `CloudFront`                                    |
+| 4️⃣     | 🧩 Add Rules       | 🛡️ Use Managed Rules (`AWS-provided`) or Custom Rules (IP block, rate limit, geo restriction) |
+| 5️⃣     | 🎯 Default Action  | ⚙️ Choose `Allow` / `Block` or `Count` for unmatched requests                                 |
+| 6️⃣     | 📄 Enable Logging  | 📊 Send `logs` to CloudWatch / S3                                                             |
+| 7️⃣     | ✅ Review & Create  | 🚀 Finalize and deploy `Web ACL `                                                            |
 
-1. 🖥️ Open AWS WAF Console — Navigate to `AWS WAF` in the AWS Management Console.  
-2. 🏗️ Create Web ACL — Define a name and select a region or CloudFront.  
-3. 🔗 Choose Resource — Attach AWS WAF to `ALB`, `API Gateway`, `CloudFront`  
-4. 🧩 Add Rules — Use Managed Rules (`AWS-provided`) or create Custom Rules (`IP blocking`, `rate limits`, `geo-restriction`).  
-5. 🎯 Set Default Action — Choose `Allow`, `Block`, or `Count` for unmatched requests.  
-6. 📄 Enable Logging — Send `logs` to CloudWatch S3  
-7. ✅ Review & Create — Finalize and deploy the `Web ACL`.
 
+### 🏁 Final Summary
 
+ * ✨ KMS → Encryption keys 🔐
+ * ✨ Secrets Manager → Store secrets 🔒
+ * ✨ WAF → Protect web apps 🛡️
