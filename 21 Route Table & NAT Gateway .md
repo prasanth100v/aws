@@ -1,48 +1,3 @@
-# 🛡️ AWS Shield
-## 🚀 What is AWS Shield?
- * ✨ AWS Shield is a managed service from Amazon Web Services that protects applications from `DDoS` (Distributed Denial of Service) attacks.
- * 👉 DDoS = flooding servers with `huge traffic` to crash them 💥
- * ⚙️ Types of AWS Shield:
-      * 🟢 AWS Shield Standard – Free, 🔄 `automatic protection` against common DDoS attacks.
-      * 🔵 AWS Shield Advanced – Paid service with 🚀 `Advanced protection`, real-time monitoring, and 📞 `AWS support` during attacks
-
-### ❓ Why Use AWS Shield?
-
-- 🛡️ Protects websites and applications from DDoS attacks.  
-- 🔗 Works with CloudFront, ALB, Route 53, and AWS Global Accelerator ⚡ Maintains availability & performance.  
-- ⚡ Reduces downtime and latency during attacks.  
-
----
-
-# 🔥 What is AWS Firewall Manager?
-
- * AWS Firewall Manager allows centralized management of security policies like `WAF and Shield` across multiple AWS accounts, ensuring consistent security configurations.
- * Helps to manage:
-     * WAF rules 🛡️
-     * Shield protection ⚡
-     * Security policies 🔐
- * 📌 `Use Case Example`:
-     * A company with `multiple AWS accounts` wants to apply the `same WAF rules` to `all ALBs` and `API Gateways`.
-     * 💡 Instead of configuring each account manually, `AWS Firewall Manager` automatically enforces the rules.
-
----
-
-# 💰 AWS Cost Explorer and Budgets:
-
- * 📊 Cost Explorer is for analyzing past and current costs.
- * It provides `reports`, `trends`, and `cost forecasts` to understand where money is being spent.
- * 🎯 while Budgets is for `setting limits` and `getting alerts`, ensuring better `cost management`.
- * 👉 Cost Explorer = `Analyze` 📊 | Budgets = `Control` 🎯
-
-### 💰 Cost Explorer vs Budgets (AWS)
-| 🧩 Feature | 📊 Cost Explorer        | 🎯 Budgets                  |
-| ---------- | ----------------------- | --------------------------- |
-| 🎯 Purpose | 🔍 Cost analysis        | 🎯 Cost control             |
-| ⏳ Time     | 📊 Past & current usage | 🔮 Future tracking & alerts |
-| 🚨 Alerts  | ❌ No                    | ✅ Yes (email/SNS alerts)    |
-
----
-
 # 🌐 What is Route Table?
 
  * ✨ A route table in a VPC defines how network traffic is directed.
@@ -58,6 +13,23 @@
         * 🎯 Destination : The `IP address range` (`CIDR block 0.0.0.0/0`) where traffic is intended to go.
         * 🔗 Target      : The destination for the traffic (e.g., an `internet gateway`, `NAT gateway`, `VPC peering` connection) (`Where traffic goes`).
         * 🌍 Allow internet access :  Destination: `0.0.0.0/0` : Target: `Internet Gateway`
+
+
+## 🧭 Create Route Table (IN AWS VPC)
+| 🎯 Step | 🧭 Action            | 💡 Details                                                             |
+| ------- | -------------------- | ----------------------------------------------------------------------- |
+| 1️⃣     | 🌐 Open VPC          | 🔍 AWS Console → Search **VPC**                                         |
+| 2️⃣     | 📂 Route Tables       | 📌 Left panel → Click **Route Tables**                                  |
+| 3️⃣     | ➕ Create Route Table | 🆕 Click **Create route table**                                         |
+| 4️⃣     | 🏷️ Enter Details     | 📝 Name: `my-route-table`<br>🌐 Select your VPC                         |
+| 5️⃣     | ✅ Create            | 🚀 Click **Create route table**                                         |
+| 6️⃣     | 🔀 Add Routes        | ➡️ `0.0.0.0/0 → IGW` (public)<br>➡️ `0.0.0.0/0 → NAT Gateway` (private) |
+| 7️⃣     | 💾 Save Routes       | 💾 Click **Save changes**                                               |
+| 8️⃣     | 🔗 Associate Subnet  | 📂 Go to **Subnet associations**                                        |
+| 9️⃣     | 📍 Select Subnet     | 🔓 Public subnet → IGW<br>🔐 Private subnet → NAT                       |
+| 🔟     | ✅ Save Association   | 🚀 Click **Save**                                                      |
+
+#### 👉 Route table = Traffic controller 🧭 : `Public subnet → Internet Gateway ➡️ 🌍 Private subnet → NAT Gateway 🔒`
 
 ---
 
@@ -132,9 +104,5 @@
 
 ### 🏁 Final Summary
 
- * ✨ Shield → DDoS protection 🛡️
- * ✨ Firewall Manager → Central security control 🔥
- * ✨ Cost Explorer → Analyze costs 📊
- * ✨ Budgets → Control spending 🎯
  * ✨ Route Table → Traffic rules 🌐
  * ✨ NAT Gateway → Private internet access 🚀
