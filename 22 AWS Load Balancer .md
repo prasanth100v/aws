@@ -103,10 +103,48 @@
 
 ---
 
-# 🏛️ Classic Load Balancer (CLB)
+## ⚖️ ALB vs NLB (AWS Load Balancers)
+| 🧩 Feature                | 🌐 Application Load Balancer (ALB) | ⚡ Network Load Balancer (NLB)   |
+| ------------------------- | ---------------------------------- | ---------------------------------- |
+| 🧠 OSI Layer              | Layer 7 (Application)              | Layer 4 (Transport)             |
+| 🔗 Protocols              | HTTP, HTTPS, WebSocket, gRPC       | TCP, UDP, TLS                   |
+| 🔀 Routing Type           | 🎯 Content-based (URL/Host)        | 📍 Connection-based (IP/Port)   |
+| ⚡ Performance             | High                               | 🔥 Ultra-high                   |
+| ⏱️ Latency                | Slightly higher                    | ⚡ Very low                      |
+| 🌐 Static IP              | ❌ Not supported                    | ✅ Supported (Elastic IP)        |
+| 🛡️ Security Groups       | ✅ Supported                        | ❌ Not supported                 |
+| 🎯 Use Case               | 🌍 Web apps, microservices         | 🎮 Real-time, gaming, streaming  |
+| 🔐 SSL/TLS Termination    | ✅ Yes                              | ✅ Yes                           |
+| 📂 Path-based Routing     | ✅ Yes                              | ❌ No                            |
+| 🌍 Host-based Routing     | ✅ Yes                              | ❌ No                            |
+| 🔌 WebSocket Support      | ✅ Yes                              | ❌ No                            |
+| 📡 gRPC Support           | ✅ Yes                              | ❌ No                            |
+| ❤️ Health Checks          | HTTP / HTTPS                        | TCP (basic)                       |
+| 🎯 Target Types           | Instance, IP, Lambda                | Instance, IP                      |
+| 🔍 Source IP Preservation | ❌ Uses X-Forwarded-For             | ✅ Preserves client IP           |
+| 🔐 WAF Integration        | ✅ Supported                        | ❌ Not supported                 |
 
-The previous generation of load balancer. (Older version)  
+## ⚖️ When to Use ALB vs NLB (Real-World Use Cases)
+| 🧩 Category         | 📱 Application Type         | 🌐 Use ALB | ⚡ Use NLB | 💡 Reason                             |
+| ------------------- | --------------------------- | ---------- | --------- | ------------------------------------- |
+| 🌍 Web Apps         | Static / Dynamic Websites   | ✅          | ❌         | HTTP/HTTPS + content-based routing    |
+| 📱 APIs             | REST / GraphQL APIs         | ✅          | ❌         | Path-based routing (`/api`, `/users`) |
+| 🧩 Microservices    | EKS / ECS apps              | ✅          | ❌         | Routes traffic to multiple services   |
+| 🛒 E-commerce       | Shopping platforms          | ✅          | ❌         | Host + path routing (cart, checkout)  |
+| 📊 SaaS             | Multi-tenant apps           | ✅          | ❌         | Domain-based routing                  |
+| 🔐 Secure Web Apps  | Apps with WAF               | ✅          | ❌         | WAF integration supported             |
+| 🔄 WebSockets       | Real-time web apps          | ✅          | ❌         | Supports WebSocket                    |
+| 🎮 Gaming           | Multiplayer servers         | ❌          | ✅         | Ultra-low latency ⚡                   |
+| 📡 Streaming        | Video / audio streaming     | ❌          | ✅         | High throughput                       |
+| 📶 IoT              | MQTT / device communication | ❌          | ✅         | TCP/UDP protocol support              |
+| 💬 Messaging        | Chat applications           | ❌          | ✅         | Persistent TCP connections            |
+| 🏦 Finance          | Trading systems             | ❌          | ✅         | Low latency + high performance        |
+| 🔌 Custom Protocols | Non-HTTP apps               | ❌          | ✅         | Raw TCP/UDP support                   |
 
-⚙️ It operates at both Layer 4 (TCP/SSL) and Layer 7 (HTTP/HTTPS).  
+🔥 ALB = Smart web routing 🌐 | NLB = Speed & performance ⚡
 
-📌 Suitable for applications that were built within the EC2-Instances without the need for advanced routing (e.g., path-based or host-based routing)
+## 🏛️ Classic Load Balancer (CLB)
+
+ * Classic Load Balancer is the `legacy load balancer` that supports basic `Layer 4` and `Layer 7` traffic, but it is not recommended for modern applications.
+ * `Older generation` of load balancer. (Older version)
+ * 📌 Suitable for applications that were built within the `EC2-Instances` without the need for advanced routing (e.g., path-based or host-based routing)
