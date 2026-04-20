@@ -43,7 +43,7 @@ AWS IAM (Identity and Access Management) enables you to control:
 - JSON-based permission rules
 - Define allowed/denied actions
 #### 📌 Example Policy
-```
+```yaml
 {
   "Effect": "Allow",                     # JSON document defining permissions
   "Action": "s3:ListBucket",
@@ -100,27 +100,29 @@ Adds extra security layer:
   - Used for: CLI, SDK and API
   - 🔐 Components : Access Key ID and Secret Access Key
 
-#### When to Use What?
-| Scenario                | Use         |
-| ----------------------- | ----------- |
-| Human login             | IAM User    |
-| AWS service interaction | IAM Role    |
-| API/CLI access          | Access Keys |
-
+### When to Use What?
+| 🎯 **Scenario**                | 🛠 **Use**      | 📖 **What It Means**                                                     | 💡 **Best Practice**                                    |
+| ------------------------------ | --------------- | ------------------------------------------------------------------------- | -------------------------------------------------------- |
+| 👤 **Human login**             | 👤 IAM User    | 🧑 Individual identity for developers/admins to access AWS Console or CLI | 👉 Prefer SSO/temporary credentials over long-term users |
+| 🤖 **AWS service interaction** | 🤖 IAM Role    | ⚙️ Permissions assumed by services (EC2, Lambda, EKS Pods via IRSA)       | 👉 Use roles instead of hardcoding credentials           |
+| 🔑 **API/CLI access**          | 🔑 Access Keys | 💻 Programmatic access (Access Key ID + Secret Key)                       | ⚠️ Avoid long-lived keys; rotate regularly               |
 
 ## 🔄 IAM Users vs Roles
-| Feature | IAM User 👤 |  IAM Role 🔄 |
-|--------|----------|----------|
-| Access  | Permanent | Temporary |
-| Credentials | Long-term   | Short-term        |
-| Use Case | Humans | Services/Apps / cross-account  |
-| Security | Less secure | More secure |
+| 🧩 Feature     | 👤 IAM User                        | 🔄 IAM Role                      | 🧠 Explanation                                                  |
+| -------------- | ---------------------------------- | -------------------------------- | --------------------------------------------------------------- |
+| 🔑 Access      | 🔒 Permanent                       | ⏳ Temporary                      | Users have long-term access; roles are assumed for limited time |
+| 🧾 Credentials | 🔑 Access Key + Secret (long-term) | 🎟️ STS tokens (short-term)      | Roles use temporary credentials issued by AWS STS             |
+| 🎯 Use Case    | 👨‍💻 Humans (CLI/Console)            | 🤖 Services, apps, cross-account access | Roles are ideal for automation and cloud services                  |
+| 🔒 Security    | ⚠️ Less secure                     | ✅ More secure                    | Temporary creds reduce risk of exposure                      |
+| 🔄 Rotation    | 🔁 Manual                          | 🔄 Automatic                     |  Roles removes need for manual key rotation               |
+| ☁️ Integration | ⚠️ Limited                         | 🔗 Native with AWS services      | Roles work seamlessly with EC2, EKS (IRSA), Lambda           |
+
 
 ---
 
 ### 🔗 When to Use What?
-- 👤 Humans → IAM Users  
-- 🤖 EC2 / Lambda → IAM Roles  
+  - 👤 Humans → IAM Users  
+  - 🤖 EC2 / Lambda → IAM Roles  
 
 ### 🧩 How IAM Works
 👉 Flow: User/Service → IAM Policy → Permissions → AWS Resource
@@ -132,18 +134,18 @@ Adds extra security layer:
 
 ## 🛠️ Steps to Create IAM User
 
-1. Login to AWS Console  
-2. Go to **IAM Service**  
-3. Click **Users → Add User**  
-4. Enter username  
-5. Choose access type:
-   - Console access  
-   - Programmatic access  
-6. Attach permissions:
-   - AdministratorAccess  
-   - ReadOnlyAccess  
-7. Enable MFA (recommended)  
-8. Review & Create user  
+1. 🔑 Login to AWS Console  
+2. ⚙️ Go to **IAM Service** ` Identity & Access Management `
+3. 👤 Click **Users → Add User**  
+4. 🏷️ Enter username  
+5. 🔐 Choose access type:
+      - Console access  
+      - Programmatic access  
+6. 🛡️ Attach permissions:
+      - AdministratorAccess  
+      - ReadOnlyAccess  
+7. 🔑 Enable MFA `multi-factor authentication` (🚨 Strongly recommended)  
+8. ✅ Review & Create user  `🔍 Double-check permissions`
 
 ---
 
@@ -167,7 +169,7 @@ Adds extra security layer:
 - Users, Roles, Policies are core 
 - Always follow least privilege  
 - Use MFA for security  
-```
+```hcl
 IAM 👤
   ↓
 Users / Roles / Groups
