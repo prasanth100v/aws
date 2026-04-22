@@ -47,7 +47,7 @@
 | 🔢 Step | 📖 Action                                        | 🧠 How It Works                                                        | 💡 Important Note              |
 | ------- | ------------------------------------------------ | ---------------------------------------------------------------------- | ------------------------------ |
 | 1️⃣     | 🧭 Go to IAM → Click Roles → Create role         | 👉 Start role creation                                                 | Core IRSA step                 |
-| 2️⃣     | 🌐 Select **Trusted entity type = Web identity** | 👉 Enables OIDC-based authentication                                   | Required for IRSA              |
+| 2️⃣     | 🌐 Select **Trusted entity type = `Web identity`** | 👉 Enables OIDC-based authentication                                   | Required for IRSA              |
 | 3️⃣     | 🔗  Identity provider → Select your EKS OIDC provider| 👉 Select EKS OIDC (e.g., `oidc.eks.ap-south-1.amazonaws.com/id/XXXX`) | Links cluster to IAM           |
 | 4️⃣     | 🎯 Set Audience                                  | 👉 `sts.amazonaws.com`                                                 | Mandatory for token validation |
 | 5️⃣     | 🔐 Add Condition (`sub`)                         | 👉 This binds  specific `ServiceAccount / Namespace `                | Most important security step   |
