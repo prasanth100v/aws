@@ -192,6 +192,19 @@ Adds extra security layer:
 | 🎯 Use Case    | Humans (CLI / Console access) | Services, apps, cross-account access |
 | 🔒 Security    | ⚠️ Higher risk (static keys)  | ✅ More secure (temporary tokens)     |
 
+## What is an IAM Role?
+  * 👉 A role provides temporary access to AWS resources without sharing credentials.
+     * ✔ No long-term credentials
+     * ✔ Uses temporary security tokens
+
+## ⚖️ IAM Role Assumption Types
+| 🔐 **Type**                | 👤 **Who Assumes Role**      | 🧠 **How It Works**                                                     | 🌍 **Real Use Case**              |
+| -------------------------- | ---------------------------- | ----------------------------------------------------------------------- | --------------------------------- |
+| ☁️ **AWS Service**         | EC2, Lambda, ECS, EKS        | 👉 AWS service assumes role via service principal (`ec2.amazonaws.com`) | App accessing S3 without keys     |
+| 🏢 **AWS Account**         | IAM Users / Roles            | 👉 Another account/user assumes role using `sts:AssumeRole`             | Cross-account access (Dev → Prod) |
+| 🌐 **Web Identity (OIDC)** | External IdP / Kubernetes    | 👉 Uses OIDC token with `sts:AssumeRoleWithWebIdentity`                 | IRSA in EKS, Google login         |
+| 🏛 **SAML**                | Corporate Identity Providers | 👉 Uses SAML assertion for authentication                               | Enterprise SSO (Okta, Azure AD)   |
+
 ---
 
 ### 🔗 When to Use What?
