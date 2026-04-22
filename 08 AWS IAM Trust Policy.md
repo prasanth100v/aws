@@ -71,6 +71,7 @@
        * Trust Policy (THE HEART ❤️) : 👉 Which Pod is allowed to use this role..
 
  * ` "oidc.eks.<region>.amazonaws.com/id/<OIDC_ID>:sub": "system:serviceaccount:default:my-app" `
+
 | 🧩 **Part**                                       | 💡 **Meaning**                                       | 🧠 **Explanation**                                    | 🔒 **Security Insight**                      |
 | ------------------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------ | -------------------------------------------- |
 | 🌐 `oidc.eks.<region>.amazonaws.com/id/<OIDC_ID>` | OIDC provider for your EKS cluster (“Which cluster?”) | 👉 Unique identity provider linked to your cluster    | Ensures requests come from your cluster only |
@@ -153,6 +154,7 @@ eksctl utils associate-iam-oidc-provider \
     * Only tokens meant for `STS` are accepted (🔑 AWS Security Token Service)
 
 * 🔐 AWS STS Actions :
+
 | 🧩 Action                              | 🎯 Purpose                                        | 🧠 How It Works                                         | 💡 Common Use Case                      |
 | -------------------------------------- | ------------------------------------------------- | ------------------------------------------------------- | --------------------------------------- |
 | 🔑 **`sts:AssumeRole`**                | 👤 Assume role using AWS identity                 | 👉 IAM User/Role requests temporary credentials via AWS | EC2 instance role, cross-account access |
