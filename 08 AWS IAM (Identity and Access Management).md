@@ -66,6 +66,7 @@ AWS IAM (Identity and Access Management) enables you to control:
 ### 🤖 Roles
 - Temporary access
 - Used by AWS services or external users
+- Credentials are temporary and `auto-rotated`, typically valid for `1 hour` (3600 seconds) (default).
 - Max session duration: **12 hours**
 🎯 If AWS service talks to another → Use IAM Role
 
