@@ -126,6 +126,7 @@ AWS IAM (Identity and Access Management) enables you to control:
  * Multi-Factor Authentication adds extra security:
     * Password + OTP (phone/app/device)
 
+
 ---
 
 ## 🔑 IAM Features
@@ -206,25 +207,6 @@ Adds extra security layer:
   * Give only the minimum permissions required to perform a task—nothing more.
 
 
-| 🧩 **Concept**      | 📖 **Description**                | 🧠 **How It Works**                                                                  | 💡 **Example**               |
-| ------------------- | --------------------------------- | ------------------------------------------------------------------------------------ | ---------------------------- |
-| 🔐 **Trust Policy** | Defines **who can assume a role** | 👉 Attached to IAM Role<br>👉 Specifies trusted entities (users, services, accounts) | EC2 allowed to assume a role |
-
-### 📄 Example Trust Policy (EC2)
-```yaml
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Principal": {
-        "Service": "ec2.amazonaws.com"
-      },
-      "Action": "sts:AssumeRole"
-    }
-  ]
-}
-```
 
 ---
 
