@@ -48,7 +48,7 @@
       * 👉 “Yes, by adding multiple sub values
 
  # 📦 IRSA Trust Policy Example :
-```
+```JSON
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -156,6 +156,7 @@ eksctl utils associate-iam-oidc-provider \
   ]
 }
 ```
+
 ## 🧩 Step 5: Create Trust Policy (CRITICAL 🔥)
 
  * 👉 This defines which Kubernetes ServiceAccount can assume the role
@@ -197,19 +198,88 @@ eksctl utils associate-iam-oidc-provider \
 | 🔑 **`sts:AssumeRole`**                | 👤 Assume role using AWS identity                 | 👉 IAM User/Role requests temporary credentials via AWS | EC2 instance role, cross-account access |
 | 🌐 **`sts:AssumeRoleWithWebIdentity`** | 🔗 Assume role using external identity (OIDC/JWT) | 👉 Uses OIDC token (no AWS credentials needed)          | EKS IRSA, social login (Google, etc.)   |
 
+## 🧩 Step 6: Create IAM Role
+```
+aws iam create-role \
+  --role-name my-irsa-role \
+  --assume-role-policy-document file://trust-policy.json
+```
+#### 🔗 Attach Policy
+```
+aws iam attach-role-policy \
+  --role-name my-irsa-role \
+  --policy-arn arn:aws:iam::<ACCOUNT_ID>:policy/my-irsa-policy
+```
+
+## 🧩 Step 7: Create Kubernetes ServiceAccount
+```
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: my-app
+  namespace: default
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::<ACCOUNT_ID>:role/my-irsa-role
+```
+```Bash
+kubectl apply -f sa.yaml
+```
+
+## 🧩 Step 8: Create Pod using ServiceAccount
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: aws-test
+spec:
+  serviceAccountName: my-app
+  containers:
+  - name: aws-cli
+    image: amazon/aws-cli
+    command: ["sleep", "3600"]
+```
+```Bash
+kubectl apply -f pod.yaml
+```
+
+## 🧩 Step 7: Verify Inside Pod
+  * Command : `kubectl exec -it aws-test -- sh`
+  * Check identity `aws sts get-caller-identity`  Output should show `IAM Role ARN`
 
 
+## 🔐 IRSA Internal Flow
+
+| 🔢 Step | 📖 What Happens                   | 🧠 How It Works                                                    | 💡 Key Insight       |
+| ------- | --------------------------------- | ------------------------------------------------------------------ | -------------------- |
+| 1️⃣     | 📦 Pod starts with ServiceAccount | 👉 Pod is associated with a specific ServiceAccount                | Identity defined     |
+| 2️⃣     | 🔗 OIDC token injected            | 👉 Kubernetes mounts JWT token inside Pod (`/var/run/secrets/...`) | Used for auth        |
+| 3️⃣     | 🌐 Pod calls AWS STS              | 👉 Uses `AssumeRoleWithWebIdentity` API                            | No AWS keys needed   |
+| 4️⃣     | 🔍 STS validates token            | 👉 Verifies token with OIDC provider                               | Ensures authenticity |
+| 5️⃣     | 🔐 Trust policy checked           | 👉 Matches `sub` (SA identity) and `aud` (`sts.amazonaws.com`)     | Authorization step   |
+| 6️⃣     | ⏳ Temporary credentials returned  | 👉 STS issues short-lived credentials (AccessKey, Secret, Token)   | Secure access        |
+| 7️⃣     | ☁️ Pod accesses AWS services      | 👉 Uses credentials to access S3, DynamoDB, etc.                   | Fully secure         |
 
 
-.
+## ⚠️ IRSA Common Mistakes (VERY IMPORTANT)
 
+| ❌ Mistake                    | 📖 What Goes Wrong               | 💡 Fix                                   |
+| ---------------------------- | -------------------------------- | ---------------------------------------- |
+| 🔗 OIDC not created          | IRSA won’t work at all           | 👉 Enable OIDC provider for EKS          |
+| 🧬 Wrong `sub` format        | Role assumption fails            | 👉 Use `system:serviceaccount:<ns>:<sa>` |
+| 📂 Namespace mismatch        | Token doesn’t match trust policy | 👉 Ensure correct namespace              |
+| 🎯 Missing `aud`             | Token validation fails           | 👉 Set `sts.amazonaws.com`               |
+| 🏷 Wrong Role ARN annotation | Pod not linked to IAM Role       | 👉 Check `eks.amazonaws.com/role-arn`    |
+| 📦 Wrong ServiceAccount      | Pod uses default SA → no access  | 👉 Assign correct SA in Pod spec         |
 
+## 🔐 IRSA Security Best Practices
 
-
-
-
-
-
+| ✅ Practice                | 💡 Why It Matters                         |
+| ------------------------- | ----------------------------------------- |
+| 🎯 Least privilege        | Limit access to only required AWS actions |
+| 🧩 Separate roles per app | Avoid shared blast radius                 |
+| 🚫 Avoid `*`              | Prevent over-permission                   |
+| 📂 Restrict namespace     | Limit role usage to specific namespace    |
+| 🔍 Audit regularly        | Detect misuse & improve security          |
 
 
 ---
