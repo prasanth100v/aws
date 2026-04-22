@@ -163,8 +163,8 @@ Adds extra security layer:
 - Avoid using root credentials
 
 ### 🔑 IAM Access Keys
-  - Used for: CLI, SDK and API
-  - 🔐 Components : Access Key ID and Secret Access Key
+  - Used for: Used for programmatic access CLI, SDK and API
+  - 🔐 Components : Access Key ID and Secret Access Key  (⚠️ Should be rotated regularly)
 
 ### When to Use What?
 | 🎯 **Scenario**                | 🛠 **Use**      | 📖 **What It Means**                                                     | 💡 **Best Practice**                                    |
@@ -206,7 +206,80 @@ Adds extra security layer:
 ### What is the Principle of Least Privilege?
   * Give only the minimum permissions required to perform a task—nothing more.
 
+### What is Policy Simulation?
+  * A tool to test whether a policy allows or denies an action.
 
+### What is STS (Security Token Service)?
+  * Provides temporary credentials for accessing AWS resources.
+
+### How to restrict access to a specific IP?
+  * Use condition in policy:
+```json
+"Condition": {
+  "IpAddress": {
+    "aws:SourceIp": "192.168.1.1/32"
+  }
+}
+```
+## How do you audit IAM permissions?
+
+ * IAM Access Analyzer
+ * CloudTrail logs
+ * Credential reports
+
+
+## ⚠️ I attached full S3 access, but still getting Access Denied. Why?
+
+ * Even if IAM allows, access can still be denied due to:
+    * ❌ `Explicit Deny` in any policy
+    * ❌ `S3 Bucket Policy` blocking access
+    * ❌ SCP (Service Control Policy) restriction
+    * ❌ Incorrect `ARN` / `resource` mismatch
+    * 👉 Key line to say: `Explicit Deny` always overrides Allow across all policy types.
+
+## 🔐 User can access AWS Console but not CLI. Why?
+
+ * Console uses password (authentication)
+ * CLI requires access keys
+ * 👉 Possible issue: Access keys `not created` or `inactive`
+
+## 🔥 Two policies: one allows, one denies. What happens?
+   * 👉 Explicit Deny wins ALWAYS
+
+## User should access S3 only during office hours. How?”
+   * Use time-based condition:
+```
+"Condition": {
+  "DateGreaterThan": {"aws:CurrentTime": "09:00Z"},
+  "DateLessThan": {"aws:CurrentTime": "18:00Z"}
+}
+```
+
+## Developer accidentally exposed access keys on GitHub. What do you do?
+
+ * ❌ Immediately disable/delete keys
+ * 🔄 Rotate credentials
+ * 🔍 Check logs using CloudTrail
+ * 🔐 Apply least privilege
+ * 🚫 Use roles instead of keys going forward
+
+## You have 100 developers. How do you manage permissions efficiently?
+
+ * Use Groups
+ * Attach managed policies to groups
+ * Avoid individual user policies
+
+## User says they didn’t delete resource, but it’s gone. How do you investigate?
+
+ * Check AWS CloudTrail logs
+ * Identify:
+   * Who performed action
+   * When
+   * From which IP
+
+## How to allow access to only one specific S3 bucket?”
+
+  * Define resource ARN : `Resource": "arn:aws:s3:::my-bucket/*`
 
 ---
 
