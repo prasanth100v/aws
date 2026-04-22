@@ -122,14 +122,14 @@
 
 ## 🔐 Step 2: Enable OIDC Provider (VERY IMPORTANT)
   * Check if OIDC is already enabled:
-```
+```json
 aws eks describe-cluster \
   --name my-cluster \
   --query "cluster.identity.oidc.issuer" \
   --output text
 ```
 ### 👉 If not enabled, run:
-```
+```json
 eksctl utils associate-iam-oidc-provider \
   --cluster my-cluster \
   --approve
@@ -144,7 +144,7 @@ eksctl utils associate-iam-oidc-provider \
 
 ## 🔑 Step 4: Create IAM Policy
   * 👉 Example: Allow S3 access
-```
+```json
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -161,7 +161,7 @@ eksctl utils associate-iam-oidc-provider \
 
  * 👉 This defines which Kubernetes ServiceAccount can assume the role
  * 🔐 Trust Policy Example :
-```
+```json
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -199,20 +199,20 @@ eksctl utils associate-iam-oidc-provider \
 | 🌐 **`sts:AssumeRoleWithWebIdentity`** | 🔗 Assume role using external identity (OIDC/JWT) | 👉 Uses OIDC token (no AWS credentials needed)          | EKS IRSA, social login (Google, etc.)   |
 
 ## 🧩 Step 6: Create IAM Role
-```
+```json
 aws iam create-role \
   --role-name my-irsa-role \
   --assume-role-policy-document file://trust-policy.json
 ```
 #### 🔗 Attach Policy
-```
+```json
 aws iam attach-role-policy \
   --role-name my-irsa-role \
   --policy-arn arn:aws:iam::<ACCOUNT_ID>:policy/my-irsa-policy
 ```
 
 ## 🧩 Step 7: Create Kubernetes ServiceAccount
-```
+```yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -226,7 +226,7 @@ kubectl apply -f sa.yaml
 ```
 
 ## 🧩 Step 8: Create Pod using ServiceAccount
-```
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -298,7 +298,7 @@ kubectl apply -f pod.yaml
 
 ## 🚀 Multiple ServiceAccounts to use one IAM role
    * 👉 Use StringLike in trust policy:
-```
+```json
 "Condition": {
   "StringLike": {
     "oidc.eks.region.amazonaws.com/id/xxx:sub": [
