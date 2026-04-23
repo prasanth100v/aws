@@ -78,14 +78,14 @@
 
 ## 🔐 Step 2: Enable OIDC Provider (VERY IMPORTANT)
   * Check if OIDC is already enabled:
-```Bash
+```hcl
 aws eks describe-cluster \
   --name my-cluster \
   --query "cluster.identity.oidc.issuer" \
   --output text
 ```
 ### 👉 If not enabled, run:
-```Bash
+```hcl
 eksctl utils associate-iam-oidc-provider \
   --cluster my-cluster \
   --approve
@@ -113,7 +113,7 @@ eksctl utils associate-iam-oidc-provider \
   ]
 }
 ```
-```Bash
+```hcl
 aws iam create-policy \
   --policy-name $POLICY_NAME \
   --policy-document file://policy.json
@@ -176,13 +176,13 @@ aws iam create-policy \
 | 🌐 **`sts:AssumeRoleWithWebIdentity`** | 🔗 Assume role using external identity (`OIDC/JWT`) | 👉 Uses OIDC token (no AWS credentials needed)           | EKS IRSA, social login (Google, etc.)   |
 
 ## 🧩 Step 6: Create IAM Role
-```Bash
+```hcl
 aws iam create-role \
   --role-name my-irsa-role \
   --assume-role-policy-document file://trust-policy.json
 ```
 #### 🔗 Attach Policy to Role
-```Bash
+```hcl
 aws iam attach-role-policy \
   --role-name my-irsa-role \
   --policy-arn arn:aws:iam::<ACCOUNT_ID>:policy/my-irsa-policy
