@@ -9,18 +9,17 @@
 | ------------------- | --------------------------------- | ------------------------------------------------------------------------------------ | ---------------------------- |
 | 🔐 **Trust Policy** | Defines **who can assume a role** | 👉 Attached to IAM Role<br>👉 Specifies trusted entities (users, services, accounts) | EC2 allowed to assume a role |
 
-| 🎯 **Scenario**         | 🔐 **Trusted Entity (Principal)** | 🧠 **How It Works**                                             | 💡 **Real-World Insight**                       |
-| ----------------------- | --------------------------------- | --------------------------------------------------------------- | ----------------------------------------------- |
-| 🖥 **EC2 accessing S3** | `ec2.amazonaws.com`               | 👉 EC2 service is allowed to assume the IAM Role                | Used for instance roles (no access keys needed) |
-| 📦 **EKS Pod (IRSA)**   | OIDC provider                     | 👉 Kubernetes ServiceAccount uses OIDC token to assume IAM Role | Secure Pod → AWS access without secrets         |
-
+| 🎯 **Scenario**         | 🔐 **Trusted Entity (Principal)** | 🧠 **How It Works**                                              | 💡 **Real-World Insight**                       |
+| ----------------------- | --------------------------------- | ------------------------------------------------------------------ | ----------------------------------------------- |
+| 🖥 **EC2 accessing S3** | `ec2.amazonaws.com`               | 👉 EC2 service is allowed to assume the IAM Role                   | Used for instance roles (`no access keys` needed) |
+| 📦 **EKS Pod (IRSA)**   | OIDC provider                     | 👉 Kubernetes ServiceAccount uses `OIDC token` to assume IAM Role | Secure Pod → AWS access without secrets         |
 
 ## ⚖️ Permission Policy vs Trust Policy
 | 🧩 **Policy Type**       | 🎯 **Purpose** | 🧠 **What It Controls**            | 📍 **Attached To**  | 💡 **Example**       |
 | ------------------------ | -------------- | ---------------------------------- | ------------------- | -------------------- |
 | 📜 **Permission Policy** | Define actions | 👉 What actions are allowed/denied | User / Role / Group | Allow `s3:GetObject` |
 | 🔐 **Trust Policy**      | Define access  | 👉 Who can assume the role         | Role only           | EC2 can assume role  |
- * Trust policies control who can assume a role, while permission policies control what actions are allowed once the role is assumed.
+ * Trust policies control `who can assume a role`, while permission policies control `what actions are allowed` once the role is assumed.
 
 ## 🧩 Key Components of a Trust Policy
 | 🧩 **Field**     | 📖 **Meaning**          | 🧠 **How It Works**                                            | 💡 **Example**                                  |
@@ -47,53 +46,10 @@
   * 🎯 Can multiple ServiceAccounts use same role?
       * 👉 “Yes, by adding multiple sub values
 
- # 📦 IRSA Trust Policy Example :
-```JSON
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Principal": {
-        "Federated": "arn:aws:iam::<ACCOUNT_ID>:oidc-provider/oidc.eks.<region>.amazonaws.com/id/<OIDC_ID>"
-      },
-      "Action": "sts:AssumeRoleWithWebIdentity",
-      "Condition": {
-        "StringEquals": {
-          "oidc.eks.<region>.amazonaws.com/id/<OIDC_ID>:sub": "system:serviceaccount:default:my-app"         # ✅ which Kubernetes ServiceAccount is allowed to assume the IAM role
-        }
-      }
-    }
-  ]
-}
-```
-
- * 👉 "This trust policy allows a specific Kubernetes ServiceAccount (default:my-app) to assume an IAM role using OIDC via AssumeRoleWithWebIdentity.
- * 🚨 Why Condition is Mandatory
-   * Without this:
-       * ❌ Any pod in cluster could assume the role
-       * ✅ With this → only specific ServiceAccount can use it
-       * Trust Policy (THE HEART ❤️) : 👉 Which Pod is allowed to use this role..
-
- * ` "oidc.eks.<region>.amazonaws.com/id/<OIDC_ID>:sub": "system:serviceaccount:default:my-app" `
-
-| 🧩 **Part**                                       | 💡 **Meaning**                                       | 🧠 **Explanation**                                    | 🔒 **Security Insight**                      |
-| ------------------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------ | -------------------------------------------- |
-| 🌐 `oidc.eks.<region>.amazonaws.com/id/<OIDC_ID>` | OIDC provider for your EKS cluster (“Which cluster?”) | 👉 Unique identity provider linked to your cluster    | Ensures requests come from your cluster only |
-| 🔑 `:sub`                                         | “Who is requesting?”                                  | 👉 Refers to the **caller identity** in OIDC token    | Used to match exact ServiceAccount           |
-| 🧬 `system:serviceaccount:default:my-app`         | Kubernetes ServiceAccount identity                    | 👉 Format: `system:serviceaccount:<namespace>:<name>` | Restricts access to a specific Pod identity  |
-| 🧬 `system:serviceaccount`                        | Kubernetes identity type (“Exact Pod identity”)       | 👉 Indicates a ServiceAccount identity                | 🔑 Required for IRSA                      |
-| 📂 `default`                                      | Namespace                                             | 👉 Namespace where the ServiceAccount exists           | 📦 Limits scope to namespace               |
-| 📦 `my-app`                                       | ServiceAccount name                                   | 👉 Specific ServiceAccount allowed                     | 🎯 Only this Pod gets access              |
-
-  * In IRSA
-     * the trust policy uses the `OIDC provider` and
-     * the `sub` claim to strictly map an `IAM role` to a `specific Kubernetes ServiceAccount`, ensuring secure and scoped access.”
-
-
 ---
 
 # 🎯 Goal
+  * ✅ IRSA setup using `AWS CLI + kubectl`
   * 👉 Allow a Kubernetes Pod to access AWS service (like S3)
   * 👉 WITHOUT hardcoding credentials
   * 🧩 Think of It Like This : `Pod → ServiceAccount → IAM Role → AWS Access`
@@ -144,6 +100,7 @@ eksctl utils associate-iam-oidc-provider \
 
 ## 🔑 Step 4: Create IAM Policy
   * 👉 Example: Allow S3 access
+       * policy.json
 ```json
 {
   "Version": "2012-10-17",
@@ -156,11 +113,16 @@ eksctl utils associate-iam-oidc-provider \
   ]
 }
 ```
-
+```Bash
+aws iam create-policy \
+  --policy-name $POLICY_NAME \
+  --policy-document file://policy.json
+```
 ## 🧩 Step 5: Create Trust Policy (CRITICAL 🔥)
 
  * 👉 This defines which Kubernetes ServiceAccount can assume the role
  * 🔐 Trust Policy Example :
+       * trust-policy.json
 ```json
 {
   "Version": "2012-10-17",
@@ -173,7 +135,7 @@ eksctl utils associate-iam-oidc-provider \
       "Action": "sts:AssumeRoleWithWebIdentity",
       "Condition": {
         "StringEquals": {
-          "oidc.eks.ap-south-1.amazonaws.com/id/EXAMPLE:sub": "system:serviceaccount:default:my-app",
+          "oidc.eks.ap-south-1.amazonaws.com/id/EXAMPLE:sub": "system:serviceaccount:default:my-app",            # ✅ which Kubernetes ServiceAccount is allowed to assume the IAM role
           "oidc.eks.ap-south-1.amazonaws.com/id/EXAMPLE:aud": "sts.amazonaws.com"
         }
       }
@@ -182,21 +144,36 @@ eksctl utils associate-iam-oidc-provider \
 }
 ```
 
-### 🧠 What this means:
+ * 👉 "This trust policy allows a specific Kubernetes ServiceAccount (`default:my-app`) to assume an IAM role using OIDC via `AssumeRoleWithWebIdentity`.
+ * 🚨 Why Condition is Mandatory
+   * Without this:
+       * ❌ Any pod in cluster could assume the role
+       * ✅ With this → only specific ServiceAccount can use it
+       * Trust Policy (THE HEART ❤️) : 👉 Which Pod is allowed to use this role..
 
-| 🧩 **Field**                           | 💡 **Meaning**                      | 🧠 **How It Works**                                                                 | 🔒 **Security Insight**                      |
-| -------------------------------------- | ----------------------------------- | ------------------------------------------------------------------------------------ | -------------------------------------------- |
-| 🌐 **`Federated`**                     | OIDC provider (EKS identity source) | 👉 Points to your cluster’s OIDC provider ARN                                          | Ensures only your cluster can request access |
-| 🧬 **`sub`**                           | ServiceAccount identity             | 👉 Format: `system:serviceaccount:<namespace>:<name>`<br> Only ServiceAccount `my-app` in `default namespace` can assume role | Restricts role to a specific Pod identity    |
-| 🎯 **`aud`**                           | Token audience                      | 👉 Must be `sts.amazonaws.com`  (🔑 AWS Security Token Service)                        | Ensures token is intended for AWS STS        |
-| 🔐 **`sts:AssumeRoleWithWebIdentity`** | Action for role assumption          | 👉 Allows OIDC-based role assumption                                                      | Enables secure, token-based access           |
+### ` "oidc.eks.<region>.amazonaws.com/id/<OIDC_ID>:sub": "system:serviceaccount:default:my-app" `
+| 🧩 **Part**                                       | 💡 **Meaning**                                       | 🧠 **Explanation**                                    | 🔒 **Security Insight**                      |
+| ------------------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------ | -------------------------------------------- |
+| 🌐 `oidc.eks.<region>.amazonaws.com/id/<OIDC_ID>` | OIDC provider for your EKS cluster (“Which cluster?”) | 👉 Unique identity provider linked to your cluster    | Ensures requests come from your cluster only |
+| 🔑 `:sub`                                         | “Who is requesting?”                                  | 👉 Refers to the **caller identity** in OIDC token    | Used to match exact ServiceAccount           |
+| 🧬 `system:serviceaccount:default:my-app`         | Kubernetes ServiceAccount identity                    | 👉 Format: `system:serviceaccount:<namespace>:<name>` | Restricts access to a specific Pod identity  |
+| 🧬 `system:serviceaccount`                        | Kubernetes identity type (“Exact Pod identity”)       | 👉 Indicates a ServiceAccount identity                | 🔑 Required for IRSA                      |
+| 📂 `default`                                      | Namespace                                             | 👉 Namespace where the ServiceAccount exists           | 📦 Limits scope to namespace               |
+| 📦 `my-app`                                       | ServiceAccount name                                   | 👉 Specific ServiceAccount allowed                     | 🎯 Only this Pod gets access              |
+| 🌐 **`Federated`**                                | OIDC provider (EKS identity source)                   | 👉 Points to your cluster’s OIDC provider ARN          | Ensures only your cluster can request access |
+| 🎯 **`aud`**                                      | Token audience                                     | 👉 Must be `sts.amazonaws.com`  (🔑 AWS Security Token Service)    | Ensures token is intended for AWS STS  |
+| 🔐 **`sts:AssumeRoleWithWebIdentity`**            | Action for role assumption                           | 👉 Allows OIDC-based role assumption                     | Enables secure, token-based access           |
+
+  * In IRSA
+     * the trust policy uses the `OIDC provider` and
+     * the `sub` claim to strictly map an `IAM role` to a `specific Kubernetes ServiceAccount`, ensuring secure and scoped access.”
 
 #### 🔐 AWS STS Actions :
 
-| 🧩 Action                              | 🎯 Purpose                                        | 🧠 How It Works                                         | 💡 Common Use Case                      |
-| -------------------------------------- | ------------------------------------------------- | ------------------------------------------------------- | --------------------------------------- |
-| 🔑 **`sts:AssumeRole`**                | 👤 Assume role using AWS identity                 | 👉 IAM User/Role requests temporary credentials via AWS | EC2 instance role, cross-account access |
-| 🌐 **`sts:AssumeRoleWithWebIdentity`** | 🔗 Assume role using external identity (OIDC/JWT) | 👉 Uses OIDC token (no AWS credentials needed)          | EKS IRSA, social login (Google, etc.)   |
+| 🧩 Action                              | 🎯 Purpose                                         | 🧠 How It Works                                          | 💡 Common Use Case                      |
+| -------------------------------------- | --------------------------------------------------- | --------------------------------------------------------- | --------------------------------------- |
+| 🔑 **`sts:AssumeRole`**                | 👤 Assume role using AWS identity                  | 👉 `IAM User/Role` requests temporary credentials via AWS | EC2 instance role, cross-account access |
+| 🌐 **`sts:AssumeRoleWithWebIdentity`** | 🔗 Assume role using external identity (`OIDC/JWT`) | 👉 Uses OIDC token (no AWS credentials needed)           | EKS IRSA, social login (Google, etc.)   |
 
 ## 🧩 Step 6: Create IAM Role
 ```json
@@ -204,14 +181,14 @@ aws iam create-role \
   --role-name my-irsa-role \
   --assume-role-policy-document file://trust-policy.json
 ```
-#### 🔗 Attach Policy
+#### 🔗 Attach Policy to Role
 ```json
 aws iam attach-role-policy \
   --role-name my-irsa-role \
   --policy-arn arn:aws:iam::<ACCOUNT_ID>:policy/my-irsa-policy
 ```
 
-## 🧩 Step 7: Create Kubernetes ServiceAccount
+## 🧩 Step 7: Create Kubernetes ServiceAccount with annotations
 ```yaml
 apiVersion: v1
 kind: ServiceAccount
@@ -281,10 +258,9 @@ kubectl apply -f pod.yaml
 | 📂 Restrict namespace     | Limit role usage to specific namespace    |
 | 🔍 Audit regularly        | Detect misuse & improve security          |
 
-
 ---
 
-## 🔐 Pod getting AccessDenied (IRSA) – What to Check
+# 🔐 Pod getting AccessDenied (IRSA) – What to Check
 
 | 🧩 Check Item                | 📖 What to Verify                              | 💡 Why It Matters             |
 | ---------------------------- | ---------------------------------------------- | ----------------------------- |
@@ -296,7 +272,7 @@ kubectl apply -f pod.yaml
 | 📦 **ServiceAccount in Pod** | Pod uses correct ServiceAccount                | Default SA won’t have access  |
  * 👉 “Most common issue is mismatch in namespace or ServiceAccount name.”
 
-## 🚀 Multiple ServiceAccounts to use one IAM role
+# 🚀 Multiple ServiceAccounts to use one IAM role
    * 👉 Use StringLike in trust policy:
 ```json
 "Condition": {
@@ -341,6 +317,7 @@ kubectl apply -f pod.yaml
 
 
 # 🎯 One-Line Summary
-   * Trust policy defines who can assume the role, while permission policy defines what they can do.
+   * Trust policy defines `who can assume the role`, while permission policy defines `what they can do`.
+   * 👉 CLI IRSA flow: OIDC → Trust Policy → IAM Role → ServiceAccount annotation → Pod → STS temporary credentials
 
 
