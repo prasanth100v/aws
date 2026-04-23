@@ -1,12 +1,11 @@
-
 # IRSA setup using the AWS Console (GUI) step-by-step. No CLI required. 
 
  * 🚀 What you’ll do in GUI
-     * Enable OIDC provider (EKS)
+     * Enable OIDC provider (`EKS`)
      * Create IAM Policy
-     * Create IAM Role (with Trust Policy)
-     * Create Kubernetes ServiceAccount (with annotation)
-     * Deploy Pod and verify
+     * Create IAM Role (with `Trust Policy`)
+     * 🚀 Create Kubernetes ServiceAccount (with `annotation`)
+     * ♻️ Deploy Pod and verify
 
 ## 🧩 Step 1: Enable OIDC Provider (Console)
    
@@ -58,8 +57,8 @@
 ## 🧩 Step 4: Verify Trust Policy (GUI)
 
  * After creation:
- * Open the role
- * Go to Trust relationships → Edit
+    * Open the role
+    * Go to Trust relationships → `Edit`
  * You should see something like:
 ```json
 {
