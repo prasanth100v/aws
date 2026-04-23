@@ -1,36 +1,21 @@
 # 🔐 AWS IAM (Identity and Access Management)
 ## 🧠 What is IAM?
  * IAM (Identity and Access Management) is a service that helps you securely control access to AWS resources by defining:
-    * Who can access (users, roles)
-    * What actions they can perform (policies)
-
-AWS IAM (Identity and Access Management) enables you to control:
-
-👉 **Who (Users) → Can access → What (Resources) → Under what conditions (Permissions)**
-
-- IAM is a **FREE service**
-- 💰 You only pay for AWS resources used
+    * Who can access (`users`, `roles`)
+    * What actions they can perform (`policies`)  → Under what conditions (`Permissions`)
+    * IAM is a **FREE service**, 💰 You only pay for AWS resources used
 
 ### 🎯 IAM = Control access to AWS resources securely
-```
+```yaml
 🔄 IAM Flow :  User 👤 → Authenticated 🔑 → Policy Check 📜 → Access Granted ✅
 ```
 ## ☁️ AWS IAM Core Components
-| 🧩 **Component** | 📖 **Description**                      | 🧠 **How It Works**                                     | 💡 **Real-World Example**    |
+| 🧩 **Component** | 📖 **Description**                      | 🧠 **How It Works**                                    | 💡 **Real-World Example**    |
 | ---------------- | --------------------------------------- | ------------------------------------------------------- | ---------------------------- |
-| 👤 **Users**     | Individual identity (person/app)        | 👉 Has credentials (password, access keys)              | `john-admin`, CI/CD user     |
+| 👤 **Users**     | Individual identity (person/app)        | 👉 Has login credentials (password, access keys)       | `john-admin`, CI/CD user     |
 | 👥 **Groups**    | Collection of users                     | 👉 Permissions assigned to group → apply to all members | `Developers`, `Admins`       |
 | 🔄 **Roles**     | Temporary identity (no permanent creds) | 👉 Assumed by services/users → gets temporary access    | EC2 accessing S3, EKS IRSA   |
-| 📜 **Policies**  | JSON permission documents               | 👉 Defines **Allow/Deny**, actions, resources           | Control S3, EC2, etc. access |
-
-🏢 AWS IAM as a Company Office
-| 🧩 **IAM Concept** | 🏢 **Office Analogy**     | 🧠 **Explanation**                                 | 💡 **Example**                            |
-| ------------------ | ------------------------- | -------------------------------------------------- | ----------------------------------------- |
-| 👤 **Users**       | Employees                 | 👉 Individual identities with login credentials    | John (Dev), Admin user                    |
-| 👥 **Groups**      | Departments               | 👉 Collection of employees with shared permissions | Dev Team, Finance Team                    |
-| 🔄 **Roles**       | Temporary job assignments | 👉 Temporary access to perform specific tasks      | Developer assuming Admin role temporarily |
-| 📜 **Policies**    | Office rules              | 👉 Define what actions are allowed or denied       | “Dev team can access S3, not EC2”         |
-
+| 📜 **Policies**  | JSON permission documents               | 👉 Define what actions `resources` are allowed or denied  | Control S3, EC2, etc. access |
 
 ### 🔍 IAM Policy Structure
   * Policies are JSON documents that define permissions:
@@ -40,39 +25,38 @@ AWS IAM (Identity and Access Management) enables you to control:
 | Action       | What action is allowed | `"Action": "s3:ListBucket"` |
 | Resource     | Target resource        | `"Resource": "*"`           |
 
-
 ---
 
 ## 🔐 Core Concepts
 ### 🛡️ Secure Access Control
-- Ensures only authorized users can access AWS resources
+  - Ensures only authorized users can access AWS resources
 
 ### 🧾 Authentication & Authorization
 | Concept           | Meaning          |
 | ----------------- | ---------------- |
 | Authentication 🔑 | Who you are     |
-| Authorization 🛡️ | What you can do? |
+| Authorization 🛡️  | What you can do? |
 
 
 ## 👥 IAM Components
 ### 👤 Users
-- Individual identities
-- Have Long-term (permanent) credentials (password / access keys)
+  - Individual identities
+  - Have Long-term (`permanent`) credentials (`password` / `access keys`)
 
 ### 👨‍👩‍👧 Groups
-- Collection of users  (Dev team, Admin team)
-- Share common permissions
+ - Collection of users  (`Dev team`, `Admin team`)
+ - Share common permissions
 
 ### 🤖 Roles
-- Temporary access
-- Used by AWS services or external users
-- Credentials are temporary and `auto-rotated`, typically valid for `1 hour` (3600 seconds) (default).
-- Max session duration: **12 hours**
-🎯 If AWS service talks to another → Use IAM Role
+ - Temporary access
+ - Used by `AWS services` or `external users`
+ - Credentials are temporary and `auto-rotated`, typically valid for `1 hour` (3600 seconds) (default).
+ - Max session duration: **12 hours**
+   * 🎯 If AWS service talks to another → `Use IAM Role`
 
 ### 📜 Policies
-- JSON-based permission rules
-- Define allowed/denied actions
+ - JSON-based permission rules
+ - Define `allowed/denied` actions
 #### 📌 Example Policy
 ```yaml
 {
@@ -82,27 +66,19 @@ AWS IAM (Identity and Access Management) enables you to control:
 }
 ```
 ## 📜 Types of IAM Policies
-| 🧩 **Policy Type**               | 📖 **Description**              | 🧠 **How It Works**                                 | 💡 **Real-World Use Case**            |
-| -------------------------------- | ------------------------------- | --------------------------------------------------- | ------------------------------------- |
-| 📦 **AWS-Managed Policies**      | Predefined by AWS               | 👉 Ready-to-use policies maintained by AWS          | `AmazonS3ReadOnlyAccess`, quick setup |
-| 🛠 **Customer-Managed Policies** | Created by you                  | 👉 Custom JSON policies reusable across users/roles | Fine-grained access for apps          |
-| 📌 **Inline Policies**           | Attached directly to one entity | 👉 Exists only for that specific user/group/role    | One-off permissions for specific user |
-
-### 🔍 Key Differences
-| Feature       | Managed Policy       | Inline Policy      |
-| ------------- | -------------------- | ------------------ |
-| Reusability   | ✅ Yes                | ❌ No               |
-| Scope         | Multiple users/roles | Single entity only |
-| Management    | Easier               | Harder to manage   |
-| Best Practice | ✅ Preferred          | ⚠️ Limited use     |
+| 🧩 **Policy Type**               | 📖 **Description**              | 🧠 **How It Works**                                  | 💡 **Real-World Use Case**            |
+| -------------------------------- | ------------------------------- | ------------------------------------------------------ | ------------------------------------- |
+| 📦 **AWS-Managed Policies**      | Predefined by AWS               | 👉 Ready-to-use policies maintained by `AWS`          | `AmazonS3ReadOnlyAccess`, quick setup |
+| 🛠 **Customer-Managed Policies** | Created by you                  | 👉 Custom `JSON policies` reusable across `users/roles` | Fine-grained access for apps          |
+| 📌 **Inline Policies**           | Attached directly to one entity | 👉 Exists only for that specific `user/group/role`     | One-off permissions for specific user |
 
 ### 📦 Managed Policies
-- Reusable
-- Created by: AWS (predefined) or Users
+ - Reusable
+ - Created by: AWS (predefined) or Users
 
 ### 📌 Inline Policies
-- Attached to one entity
-- ❌ Not reusable
+ - Attached to one entity
+ - ❌ Not reusable
 
  * 🎯 Managed policies are reusable; inline policies are specific to one entity.
  * 🎯 Interview Tip
@@ -117,16 +93,14 @@ AWS IAM (Identity and Access Management) enables you to control:
 ## What happens when multiple policies are attached?
   * IAM evaluate policies
 | 🧩 Rule             | 💡 Meaning                                     |
-| ------------------- | ------------------------------------------------ |
-| ❌ **Explicit Deny** | 🚫 Highest priority, overrides `any Allow`   |
+| -------------------- | ---------------------------------------------- |
+| ❌ **Explicit Deny** | 🚫 Highest priority, overrides `any Allow`    |
 | ✅ **Allow**         | ✔️ Grants permission (only if no deny exists) |
-| ⚠️ **Default Deny** | ❌ If no policy allows it, access is denied     |
-
+| ⚠️ **Default Deny**  | ❌ If no policy allows it, access is denied   |
 
 ### What is MFA in IAM?
  * Multi-Factor Authentication adds extra security:
     * Password + OTP (phone/app/device)
-
 
 ---
 
@@ -135,37 +109,32 @@ AWS IAM (Identity and Access Management) enables you to control:
 ### 🔐 Multi-Factor Authentication (MFA)
 📘 What is MFA?
 
-Adds extra security layer:
-- Password 🔑
-  - OTP / Code 📱
-- 🎯 Benefit :  Protects against unauthorized access
+ * Adds extra security layer:
+    - Password 🔑
+    - OTP / Code 📱
+    - 🎯 Benefit :  Protects against `unauthorized access`
 
 ### ⚖️ Least Privilege
-- Grant minimum permissions needed
+  - Grant minimum permissions needed
 
 ### 🔑 IAM Access Keys
-- Used for CLI / SDK access
-- Includes:
-  - Access Key ID
-  - Secret Access Key
+ - Used for `CLI` / `SDK` access
+ - Includes:
+   - Access Key ID
+   - Secret Access Key
 
 ---
 ## ⚠️ Root User
-- Default AWS account owner
-- Full access to everything
+ - Default AWS account owner
+ - Full access to everything
 
 #### ❗ Best Practices
-❌ Don’t use root user daily
-✅ Create IAM users instead
-
-### ✅ Best Practices:
-- Enable MFA
-- Create IAM users instead
-- Avoid using root credentials
+ * ❌ Don’t use root user daily
+ * ✅ Create IAM users instead
 
 ### 🔑 IAM Access Keys
-  - Used for: Used for programmatic access CLI, SDK and API
-  - 🔐 Components : Access Key ID and Secret Access Key  (⚠️ Should be rotated regularly)
+   - Used for: Used for programmatic access `CLI`, `SDK` and `API`
+   - 🔐 Components : Access Key ID and Secret Access Key  (⚠️ Should be `rotated regularly`)
 
 ### When to Use What?
 | 🎯 **Scenario**                | 🛠 **Use**      | 📖 **What It Means**                                                     | 💡 **Best Practice**                                    |
