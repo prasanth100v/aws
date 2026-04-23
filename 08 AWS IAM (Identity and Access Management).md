@@ -4,6 +4,7 @@
     * Who can access (`users`, `roles`)
     * What actions they can perform (`policies`)  → Under what conditions (`Permissions`)
     * IAM is a **FREE service**, 💰 You only pay for AWS resources used
+    * 🧩 IAM secures AWS by controlling who can access what resources..
 
 ### 🎯 IAM = Control access to AWS resources securely
 ```yaml
@@ -125,8 +126,8 @@
 
 ---
 ## ⚠️ Root User
- - Default AWS account owner
- - Full access to everything
+  - Default AWS account owner
+  - Full access to everything
 
 #### ❗ Best Practices
  * ❌ Don’t use root user daily
@@ -148,18 +149,11 @@
 | -------------- | ---------------------------------- | -------------------------------- | --------------------------------------------------------------- |
 | 🔑 Access      | 🔒 Permanent                       | ⏳ Temporary                      | Users have long-term access; roles are assumed for limited time |
 | 🧾 Credentials | 🔑 Access Key + Secret (long-term) | 🎟️ STS tokens (short-term)      | Roles use temporary credentials issued by AWS STS             |
-| 🎯 Use Case    | 👨‍💻 Humans (CLI/Console)            | 🤖 Services, apps, cross-account access | Roles are ideal for automation and cloud services                  |
-| 🔒 Security    | ⚠️ Less secure                     | ✅ More secure                    | Temporary creds reduce risk of exposure                      |
+| 🎯 Use Case    | 👨‍💻 Humans (CLI/Console)            | 🤖 Services, apps, cross-account access | Roles are ideal for automation and cloud services      |
+| 🔒 Security    | ⚠️ Less secure                     | ✅ More secure  (temporary tokens)  | Temporary creds reduce risk of exposure                      |
 | 🔄 Rotation    | 🔁 Manual                          | 🔄 Automatic                     |  Roles removes need for manual key rotation               |
 | ☁️ Integration | ⚠️ Limited                         | 🔗 Native with AWS services      | Roles work seamlessly with EC2, EKS (IRSA), Lambda           |
 
-| 🧩 Feature     | 👤 **User**                   | 🔄 **Role**                          |
-| -------------- | ----------------------------- | ------------------------------------ |
-| 🆔 Identity    | Permanent                     | Temporary                            |
-| 🔑 Credentials | Password / Access Keys        | No long-term credentials             |
-| ⏳ Duration     | Long-lived                    | Short-lived (assumed when needed)    |
-| 🎯 Use Case    | Humans (CLI / Console access) | Services, apps, cross-account access |
-| 🔒 Security    | ⚠️ Higher risk (static keys)  | ✅ More secure (temporary tokens)     |
 
 ## What is an IAM Role?
   * 👉 A role provides temporary access to AWS resources without sharing credentials.
@@ -167,33 +161,39 @@
      * ✔ Uses temporary security tokens
 
 ## ⚖️ IAM Role Assumption Types
-| 🔐 **Type**                | 👤 **Who Assumes Role**      | 🧠 **How It Works**                                                     | 🌍 **Real Use Case**              |
+| 🔐 **Type**                | 👤 **Who Assumes Role**      | 🧠 **How It Works**                                                   | 🌍 **Real Use Case**              |
 | -------------------------- | ---------------------------- | ----------------------------------------------------------------------- | --------------------------------- |
 | ☁️ **AWS Service**         | EC2, Lambda, ECS, EKS        | 👉 AWS service assumes role via service principal (`ec2.amazonaws.com`) | App accessing S3 without keys     |
 | 🏢 **AWS Account**         | IAM Users / Roles            | 👉 Another account/user assumes role using `sts:AssumeRole`             | Cross-account access (Dev → Prod) |
 | 🌐 **Web Identity (OIDC)** | External IdP / Kubernetes    | 👉 Uses OIDC token with `sts:AssumeRoleWithWebIdentity`                 | IRSA in EKS, Google login         |
-| 🏛 **SAML**                | Corporate Identity Providers | 👉 Uses SAML assertion for authentication                               | Enterprise SSO (Okta, Azure AD)   |
+| 🏛 **SAML**                 | Corporate Identity Providers | 👉 Uses SAML assertion for authentication                               | Enterprise SSO (Okta, Azure AD)   |
 
 ---
 
 ### 🔗 When to Use What?
-  - 👤 Humans → IAM Users  
-  - 🤖 EC2 / Lambda → IAM Roles  
+  - 👤 Humans → `IAM Users  `
+  - 🤖 EC2 / Lambda → `IAM Roles ` 
 
 ### 🧩 How IAM Works
-👉 Flow: User/Service → IAM Policy → Permissions → AWS Resource
+```hcl
+IAM 👤
+  ↓
+Users / Roles / Groups
+  ↓
+Policies / Permissions 📜
+  ↓
+Secure Access to AWS Resource 🔐
+```
 
 ### 🎯 Principle of Least Privilege
-   - Grant only minimum permissions required (Dev user → Only EC2 access)
-
-### What is the Principle of Least Privilege?
-  * Give only the minimum permissions required to perform a task—nothing more.
+   - Grant only minimum permissions required (`Dev user → Only EC2 access`)
+   - Principle of Least Privilege : Give only the `minimum permissions` required to perform a task—nothing more.
 
 ### What is Policy Simulation?
-  * A tool to test whether a policy allows or denies an action.
+  * A tool to test whether a policy `allows or denies` an action.
 
 ### What is STS (Security Token Service)?
-  * Provides temporary credentials for accessing AWS resources.
+  * Provides `temporary credentials` for accessing AWS resources.
 
 ### How to restrict access to a specific IP?
   * Use condition in policy:
@@ -209,7 +209,6 @@
  * IAM Access Analyzer
  * CloudTrail logs
  * Credential reports
-
 
 ## ⚠️ I attached full S3 access, but still getting Access Denied. Why?
 
@@ -227,11 +226,11 @@
  * 👉 Possible issue: Access keys `not created` or `inactive`
 
 ## 🔥 Two policies: one allows, one denies. What happens?
-   * 👉 Explicit Deny wins ALWAYS
+   * 👉 `Explicit Deny` wins ALWAYS
 
 ## User should access S3 only during office hours. How?”
-   * Use time-based condition:
-```
+   * Use `time-based` condition:
+```json
 "Condition": {
   "DateGreaterThan": {"aws:CurrentTime": "09:00Z"},
   "DateLessThan": {"aws:CurrentTime": "18:00Z"}
@@ -285,7 +284,7 @@
 
 ### 🔐 🔐 Best Practices
 - Save Access Key & Secret Key securely
-- Enable MFA for all users
+- Enable `MFA` for all users
 - Use roles instead of access keys
 - Never share credentials  
 - Rotate keys regularly
@@ -303,13 +302,3 @@
 - Users, Roles, Policies are core 
 - Always follow least privilege  
 - Use MFA for security  
-```hcl
-IAM 👤
-  ↓
-Users / Roles / Groups
-  ↓
-Policies 📜
-  ↓
-Secure Access to AWS 🔐
-```
-## 🧩 IAM secures AWS by controlling who can access what resources and how.
