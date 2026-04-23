@@ -78,14 +78,14 @@
 
 ## 🔐 Step 2: Enable OIDC Provider (VERY IMPORTANT)
   * Check if OIDC is already enabled:
-```json
+```Bash
 aws eks describe-cluster \
   --name my-cluster \
   --query "cluster.identity.oidc.issuer" \
   --output text
 ```
 ### 👉 If not enabled, run:
-```json
+```Bash
 eksctl utils associate-iam-oidc-provider \
   --cluster my-cluster \
   --approve
