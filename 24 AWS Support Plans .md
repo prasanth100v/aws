@@ -170,3 +170,63 @@
 | 2️⃣8️⃣ | Need architecture reviews?        | 👉 Enterprise                              |
 | 2️⃣9️⃣ | Cheapest prod-ready plan?         | 👉 Business                                |
 | 3️⃣0️⃣ | Who provides support plans?       | ☁️ Amazon Web Services                     |
+
+---
+
+# ☁️ AWS Support Plan Setup Guide
+
+## 🎯 🔹 Step 1: Login to AWS
+  * 🔐 Sign in to your **AWS account**
+
+## 🛠️ 🔹 Step 2: Open Support Center
+  * ➡️ From the top menu:  
+    * 👉 Click **Support**
+    * 👉 Select **Support Center**
+
+## 📊 🔹 Step 3: Navigate to Support Plans
+
+ * 📍 Inside Support Center:  
+    * 👉 Click **Support plans** (`left panel` or `top tab`)
+
+## 📦 🔹 Step 4: Choose Your Plan
+  * You will see available plans:
+
+| Plan | Description |
+|------|------------|
+| 🆓 **Basic** | Default (Free) |
+| 👨‍💻 **Developer** | Dev/Test support |
+| 🏢 **Business** | Production-ready |
+| 🏆 **Enterprise** | Advanced + TAM |
+
+👉 Click **Change / Upgrade**
+
+## 💰 🔹 Step 5: Review Pricing 
+  * 💡 Pricing depends on **monthly AWS usage**
+
+| Plan | Cost Model |
+|------|-----------|
+| Developer | 💲 Low fixed cost |
+| Business | 📈 % of usage |
+| Enterprise | 📊 Higher % |
+
+## ✅ 🔹 Step 6: Confirm Plan
+  * 👉 Click **Confirm / Activate**
+  * 🎉 **Your plan is activated immediately**
+
+## 🔍 🔹 Step 7: Verify Plan
+   * Go back to **Support Center**
+   * Check your **Current Support Plan**
+
+---
+
+# 🚀 🎯 Key Notes
+
+ - 🟢 **Basic plan is default (no setup needed)**
+ - ⚡ **Upgrade happens instantly**
+ - ⏳ **Downgrade applies next billing cycle**
+ - 🔄 **No downtime during plan change**
+
+### 🎉 Done!
+  * You’re now ready to manage AWS support like a pro 🚀
+
+
