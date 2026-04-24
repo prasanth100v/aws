@@ -121,17 +121,17 @@ You pay based on:
 ## 🔵 STEP 2: CONFIGURE EBS VOLUME
  ### configuration:
  ```yaml
-  Volume Type (Choose based on use case) 
-  * volume_type: "gp3"                           # ⚡ General Purpose SSD (Recommended)
-  * size: "10 GiB"                               # 📦 Minimum: 1 GiB (SSD), 500 GiB (HDD)
-  * availability_zone: "ap-south-1a"             # 🌍 Must match EC2 AZ
-  * snapshot_id: null                            # 📸 Optional (use existing snapshot)
-  * encryption:
-    * enabled: true                              # 🔐 Encrypt using AWS KMS
-    * kms_key: "default/aws/ebs"
-  * tags:
-    * Name: "MyEBSVolume"
-    * Environment: "Dev"
+ Volume Type (Choose based on use case) 
+   volume_type: "gp3"                           # ⚡ General Purpose SSD (Recommended)
+   size: "10 GiB"                               # 📦 Minimum: 1 GiB (SSD), 500 GiB (HDD)
+   availability_zone: "ap-south-1a"             # 🌍 Must match EC2 AZ
+   snapshot_id: null                            # 📸 Optional (use existing snapshot)
+   encryption:
+     enabled: true                              # 🔐 Encrypt using AWS KMS
+     kms_key: "default/aws/ebs"
+   tags:
+     Name: "MyEBSVolume"
+     Environment: "Dev"
 
     action: "Click Create Volume"
 ```
@@ -141,8 +141,8 @@ You pay based on:
    * Select created volume
    * Click Actions → Attach Volume
       details:
-        * instance_id: "i-xxxxxxxxxxxx"
-        *  device_name: "/dev/xvdf"                # 💡 Linux device name
+         instance_id: "i-xxxxxxxxxxxx"
+          device_name: "/dev/xvdf"                # 💡 Linux device name
 ```
 ## 🔴 STEP 4: FORMAT & MOUNT (LINUX)
  ### linux_commands:
