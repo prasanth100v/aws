@@ -141,38 +141,46 @@ You pay based on:
    * Click Actions → Attach Volume
       details:
        * instance_id: "i-xxxxxxxxxxxx"
-       *  device_name: "/dev/xvdf"              # 💡 Linux device name
+       *  device_name: "/dev/xvdf"               # 💡 Linux device name
 
 ## 🔴 STEP 4: FORMAT & MOUNT (LINUX)
  ### linux_commands:
-  ```
-    lsblk                                   # 🔍 List all disks    # 👉 You’ll see something like: xvda  (root disk) & xvdf  (new EBS volume)
+  ```hcl
+    lsblk                                     # 🔍 List all disks    # 👉 You’ll see something like: xvda  (root disk) & xvdf  (new EBS volume)
   
-    sudo mkfs -t ext4 /dev/xvdf             # 🧱 Format the volume  (Prepares disk for use ) # (ext4 file system)
+    sudo mkfs -t ext4 /dev/xvdf               # 🧱 Format the volume  (Prepares disk for use ) # (ext4 file system)
   
-    sudo mkdir /mnt/myvolume                 #📁 Create mount directory #mount point
+    sudo mkdir /mnt/myvolume                  #📁 Create mount directory #mount point
    
-    sudo mount /dev/xvdf /mnt/myvolume      # 🔗 Mount volume   "Attach volume to directory"
+    sudo mount /dev/xvdf /mnt/myvolume        # 🔗 Mount volume   "Attach volume to directory"
  
-    df -h                                    #✅ Verify mount # You should see your new volume
+    df -Th                                    #✅ Verify mount # You should see your new volume
    ```
 
 ## 🔄 Optional: Auto Mount on Reboot (Very Important 🚨)
 #### 👉 Without this, volume disappears after reboot
+
+### 🔍 Get Volume UUID (Best Practice)
+```yaml
+sudo blkid
+```
+Example output: you’ve got the UUID 👍
+```hcl
+/dev/nvme1n1: UUID="5b0d7452-df2e-4a66-b245-dd12d2449f89" BLOCK_SIZE="4096" TYPE="ext4"
+```
+
 Edit fstab: 
  * The file **/etc/fstab** tells Linux: 👉 “Mount this disk automatically when the system starts”
-```
+```yaml
 sudo nano /etc/fstab
 ```
 Add :
-```
+```yaml
 UUID=5b0d7452-df2e-4a66-b245-dd12d2449f89   /data   ext4   defaults,nofail   0   2
 ```
 ### 🧩 Understanding your entry :
 | Field           | Meaning                          |
 | --------------- | -------------------------------- |
-| `/dev/xvdf`     | Your EBS volume (device name)    |
-| `/mnt/myvolume` | Where it should be mounted       |
 | `ext4`          | File system type                 |
 | `defaults`      | Standard mount options           |
 | `nofail`        | ⚠️ Don’t crash if volume missing |
@@ -181,15 +189,32 @@ UUID=5b0d7452-df2e-4a66-b245-dd12d2449f89   /data   ext4   defaults,nofail   0  
 
 ### 💡 Real-Life Analogy
  * Without fstab → You manually plug USB every time 🔌
- * With fstab → USB auto-connects on startup ⚡
+ * With `fstab` → USB auto-connects on startup ⚡
 
-------------------------------------------------------------------------
+### ✅ Test it (VERY IMPORTANT)
+```yaml
+sudo mount -a
+```
+  * 👉 No output = `everything correct`
+  * 👉 Any error = `fix before reboot`
+
+### 🔄 Reboot
+```yaml
+sudo reboot
+```
+### 🔍 Verify after reboot
+```yaml
+df -h
+```
+ * You should still see: `/data   mounted ✅`
+
+---
 
 ## 🧠 Summary
 
--   EBS = Persistent, scalable block storage
--   Supports snapshots, encryption, and resizing
--   Multiple volume types for different workloads
--   Essential for production systems on AWS
+ - EBS = Persistent, scalable block storage
+ - Supports snapshots, encryption, and resizing
+ - Multiple volume types for different workloads
+ - Essential for production systems on AWS
 
-✨ **Tip:** Use gp3 for most workloads, io2 for critical systems, and sc1 for cheap storage.
+✨ **Tip:** Use gp3 for most workloads, io2 for critical systems, and `sc1` for cheap storage.
