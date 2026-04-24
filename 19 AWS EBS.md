@@ -166,7 +166,7 @@ sudo nano /etc/fstab
 ```
 Add :
 ```
-/dev/xvdf  /mnt/myvolume  ext4  defaults,nofail  0  2
+UUID=5b0d7452-df2e-4a66-b245-dd12d2449f89   /data   ext4   defaults,nofail   0   2
 ```
 ### 🧩 Understanding your entry :
 | Field           | Meaning                          |
