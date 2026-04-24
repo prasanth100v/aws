@@ -22,7 +22,7 @@ It provides **persistent storage**, meaning your data remains safe even when ins
 
 
 ### ❗ Can you reduce (shrink) an AWS EBS volume?
-   NO ❌, In Amazon EBS, you cannot decrease (shrink) the size of an existing volume.
+  * NO ❌, In Amazon EBS, you cannot decrease (shrink) the size of an existing volume.
 
 
 ------------------------------------------------------------------------
@@ -36,7 +36,6 @@ It provides **persistent storage**, meaning your data remains safe even when ins
 | 🟢 General Purpose SSD (gp3)  | 🚀 Modern, cost-efficient | 🔄 Independent IOPS & throughput scaling          |
 | 🔵 Provisioned IOPS SSD (io1) | 🎯 High performance       | 🏦 Designed for critical workloads                |
 | 🔵 Provisioned IOPS SSD (io2) | 🔥 Extreme performance    | ⚡ Up to 256,000 IOPS & 4,000 MB/s (Block Express) |
-
 
 ### 🧊 HDD (Low Cost)
 | 🧩 Type                           | 📌 Description         | 💡 Best Use Cases                                      |
@@ -67,17 +66,17 @@ It provides **persistent storage**, meaning your data remains safe even when ins
 -   No need to stop EC2 instance
 
 ## 🔌 Attach & Detach
--   Attach volume to running EC2 👉 No need to stop the server
--   Detach and reattach anytime (You can reattach it to the same or different EC2 (within the same AZ))
+ -   Attach volume to running EC2 👉 No need to stop the server
+ -   Detach and reattach anytime (You can reattach it to the same or different EC2 (within the same AZ))
 
 ### 🔗 Multi-Attach
--   io1/io2 volumes can attach to multiple EC2 instances (same AZ)
+ -   io1/io2 volumes can attach to multiple EC2 instances (same AZ)
 
 ## 🔁 Backup & Restore
--   Snapshots used to:
-    -   Restore volumes
-    -   Create new volumes
-    -   Copy across regions
+ -   Snapshots used to:
+     -   Restore volumes
+     -   Create new volumes
+     -   Copy across regions
 
 ## 💰 Pricing Factors
 You pay based on: 
@@ -116,33 +115,35 @@ You pay based on:
   
 📍 Go to :
   * 👉 Amazon EC2 Dashboard
-  * 👉 Left Menu → Elastic Block Store → Volumes
-  * 👉 Click Create Volume
+     * 👉 Left Menu → Elastic Block Store → Volumes
+     * 👉 Click Create Volume
 
 ## 🔵 STEP 2: CONFIGURE EBS VOLUME
  ### configuration:
+ ```yaml
   Volume Type (Choose based on use case) 
-  * volume_type: "gp3"                  # ⚡ General Purpose SSD (Recommended)
-  * size: "10 GiB"                      # 📦 Minimum: 1 GiB (SSD), 500 GiB (HDD)
-  * availability_zone: "ap-south-1a"    # 🌍 Must match EC2 AZ
-  * snapshot_id: null                    # 📸 Optional (use existing snapshot)
+  * volume_type: "gp3"                           # ⚡ General Purpose SSD (Recommended)
+  * size: "10 GiB"                               # 📦 Minimum: 1 GiB (SSD), 500 GiB (HDD)
+  * availability_zone: "ap-south-1a"             # 🌍 Must match EC2 AZ
+  * snapshot_id: null                            # 📸 Optional (use existing snapshot)
   * encryption:
-    * enabled: true                      # 🔐 Encrypt using AWS KMS
+    * enabled: true                              # 🔐 Encrypt using AWS KMS
     * kms_key: "default/aws/ebs"
   * tags:
     * Name: "MyEBSVolume"
     * Environment: "Dev"
 
     action: "Click Create Volume"
-
+```
 ## 🟡 STEP 3: ATTACH VOLUME TO EC2
  ### attach_volume:
+ ```yaml
    * Select created volume
    * Click Actions → Attach Volume
       details:
-       * instance_id: "i-xxxxxxxxxxxx"
-       *  device_name: "/dev/xvdf"               # 💡 Linux device name
-
+        * instance_id: "i-xxxxxxxxxxxx"
+        *  device_name: "/dev/xvdf"                # 💡 Linux device name
+```
 ## 🔴 STEP 4: FORMAT & MOUNT (LINUX)
  ### linux_commands:
   ```hcl
