@@ -27,10 +27,12 @@
 
  * 👉 🏢 Business Support Plan
  * Because:
-    * ⏰ `24×7` support
-    * ⚡ Fast response times
-    * 🔍 Full access to Trusted Advisor
-    * 🛠 Supports production systems
+| 🧩 Feature                           | 💡 Details                                    | 🧠 Why It Matters                |
+| ------------------------------------ | --------------------------------------------- | -------------------------------- |
+| ⏰ **24×7 Support**                  | 👨‍💻 Round-the-clock access to AWS engineers | 🔐 Ensures uptime for production |
+| ⚡ **Fast Response Times**           | ⏱️ ~1 hour for high-severity issues           | 🚀 Reduces downtime impact       |
+| 🔍 **Trusted Advisor (Full access)** | 🛡 Cost, security, performance checks         | 📊 Optimize & secure workloads   |
+| 🛠 **Production Support**            | 🌐 Designed for live environments             | ⚙️ Reliable operations at scale     |
 
 ## 📌 What is SLA in AWS Support❓
 
@@ -41,8 +43,10 @@
 
 ## ⏱ What is the response time for a critical issue in Business and Enterprise plans❓
 
-  * 🏢 Business → `< 30` minutes
-  * 🚀 Enterprise → `< 15` minutes
+| 🧩 **Plan**       | 🔥 **Critical Case Response Time** | 🧠 **Reality**                     |
+| ----------------- | ---------------------------------- | ---------------------------------- |
+| 🏢 **Business**   | ~1 hour                            | Not <30 min (common misconception) |
+| 🚀 **Enterprise** | ~15 minutes                        | Fastest SLA                        |
 
 ## 👨‍💻 What is a Technical Account Manager (TAM)❓
 
@@ -63,13 +67,14 @@
 
 ## 🚦 What are the severity levels in AWS Support❓
 
-| Severity | Meaning             |
-| -------- | ------------------- |
-| 🔴 Critical | System down         |
-| 🟠 Urgent   | Production down     |
-| 🟡 High     | Production impaired |
-| 🔵 Normal   | System impaired     |
-| ⚪ Low      | General guidance    |
+| 🧩 Severity                                        | 📖 Meaning                       | 🧠 When to Use                          | 💡 Example             |
+| -------------------------------------------------- | -------------------------------- | --------------------------------------- | ---------------------- |
+| 🔴 **Critical**                                    | 💥 Production system down        | 👉 Business-critical system unavailable | Entire app down        |
+| 🟠 **Urgent**  *(sometimes called “High” in docs)*  | 🚫 Severe production impact      | 👉 Major functionality broken           | Payments failing       |
+| 🟡 **High**                                         | ⚠️ Production partially impaired | 👉 Degraded performance                 | Slow APIs              |
+| 🔵 **Normal**                                       | 🛠 Non-critical issue            | 👉 System works but needs fix           | Minor bug/config issue |
+| ⚪ **Low**                                          | 💬 General guidance / questions | 👉 No production impact                 | “How to configure S3?” |
+
 
 ## ⚖️ Difference between Business and Enterprise Support❓
 
@@ -119,7 +124,7 @@
 ## 🔄 Support vs Service SLA Confusion
 | 🧩 **Type**        | 📖 **Meaning**          | 🧠 **What It Covers**               | 💡 **Example**                   |
 | ------------------ | ----------------------- | ----------------------------------- | -------------------------------- |
-| ☁️ **Service SLA** | Uptime guarantee        | 👉 Availability of AWS services     | EC2 = 99.99% uptime              |
+| ☁️ **Service SLA** | Uptime guarantee        | 👉 Availability of AWS services     | EC2 = `99.99%` uptime              |
 | 🛠 **Support SLA** | Response time guarantee | 👉 How quickly AWS support responds | Critical issue → 15 min response |
 
 ## 🚀 You are doing a one-time high-risk production migration. Which plan is best temporarily❓
