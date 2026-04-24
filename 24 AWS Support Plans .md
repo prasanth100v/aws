@@ -1,133 +1,140 @@
- ## What are AWS Support Plans?
+## 🌟 What are AWS Support Plans❓
   * AWS provides four support plans through Amazon Web Services:
-    * Basic
-    * Developer
-    * Business
-    * Enterprise
+    * 🆓 Basic
+    * 🧪 Developer
+    * 🏢 Business
+    * 🚀 Enterprise
     * Each plan offers different levels of technical support, response time SLAs, and guidance.
     * SLA → Agreement with customer (e.g., `response time`)
 
-## What is included in Basic Support?
+| 🧩 **Plan**       | 📖 **Description** | ⏱ **Response Time (Critical)** | 🎯 **Best For**       | 💡 **Key Features**                                     |
+| ----------------- | ------------------ | ------------------------------ | --------------------- | ------------------------------------------------------- |
+| 🆓 **Basic**      | Free plan          | ❌ No technical support         | Beginners, learning   | Docs, forums, basic guidance                            |
+| 🧪 **Developer**  | Entry-level paid   | ⏱ ~12–24 hours                 | Dev/test environments | Email support, limited guidance                         |
+| 🏢 **Business**   | Production support | ⚡ ~1 hour                      | Production workloads  | 24/7 support, Trusted Advisor, phone/chat               |
+| 🚀 **Enterprise** | Premium support    | 🔥 ~15 minutes                 | Mission-critical apps | Dedicated TAM, proactive support, architecture guidance |
 
- * Free for all AWS users
- * Access to documentation, whitepapers, forums
- * Billing & account support only
-  * ❌ No technical support
-  * ❌ No SLA
-  * 👉 Used for learning or non-critical workloads
+## 📘 What is included in Basic Support❓
 
-## Which AWS support plan is recommended for production workloads?
+ * 🆓 Free for all AWS users
+ * 📚 Access to documentation, whitepapers, forums
+ * 💳 Billing & account support only
+    * ❌ No technical support
+    * ❌ No SLA
+    * 👉 Used for learning or non-critical workloads
 
- * 👉 Business Support Plan
+## 🎯 Which AWS support plan is recommended for production workloads❓
+
+ * 👉 🏢 Business Support Plan
  * Because:
-    * `24×7` support
-    * Fast response times
-    * Full access to Trusted Advisor
-    * Supports production systems
+    * ⏰ `24×7` support
+    * ⚡ Fast response times
+    * 🔍 Full access to Trusted Advisor
+    * 🛠 Supports production systems
 
-## What is SLA in AWS Support?
+## 📌 What is SLA in AWS Support❓
 
  * SLA (`Service Level Agreement`) defines expected response time for `support cases` based on severity.
  * ⚠️ Important:
       * AWS provides `response time SLA`, `not resolution SLA`
       * AWS guarantees response time only, `Resolution` depends on `complexity`
 
-## What is the response time for a critical issue in Business and Enterprise plans?
+## ⏱ What is the response time for a critical issue in Business and Enterprise plans❓
 
-  * Business → `< 30` minutes
-  * Enterprise → `< 15` minutes
+  * 🏢 Business → `< 30` minutes
+  * 🚀 Enterprise → `< 15` minutes
 
-## What is a Technical Account Manager (TAM)?
+## 👨‍💻 What is a Technical Account Manager (TAM)❓
 
  * A TAM is a dedicated AWS expert available in the Enterprise Support Plan who:
-    * Provides architecture guidance
-    * Helps with cost optimization
-    * Assists in incident management
-    * Offers proactive recommendations
+    * 🧠 Provides architecture guidance
+    * 💰 Helps with cost optimization
+    * 🚑 Assists in incident management
+    * 📊 Offers proactive recommendations
 
-## What is AWS Trusted Advisor?
+## 🔍 What is AWS Trusted Advisor❓
 
  * A tool in Amazon Web Services that provides recommendations for:
-    * Cost optimization
-    * Security
-    * Performance
-    * Fault tolerance
+    * 💰 Cost optimization
+    * 🔒 Security
+    * ⚡ Performance
+    * 🛡 Fault tolerance
     * 👉 Full access available in `Business` & `Enterprise` plans
 
-## What are the severity levels in AWS Support?
+## 🚦 What are the severity levels in AWS Support❓
 
 | Severity | Meaning             |
 | -------- | ------------------- |
-| Critical | System down         |
-| Urgent   | Production down     |
-| High     | Production impaired |
-| Normal   | System impaired     |
-| Low      | General guidance    |
+| 🔴 Critical | System down         |
+| 🟠 Urgent   | Production down     |
+| 🟡 High     | Production impaired |
+| 🔵 Normal   | System impaired     |
+| ⚪ Low      | General guidance    |
 
-## Difference between Business and Enterprise Support?
+## ⚖️ Difference between Business and Enterprise Support❓
 
 | Feature             | Business | Enterprise |
 | ------------------- | -------- | ---------- |
-| Response (critical) | < 30 min | < 15 min   |
-| TAM                 | ❌        | ✅          |
-| Proactive support   | Limited  | Advanced   |
-| Cost                | Lower    | Higher     |
+| ⏱ Response (critical) | < 30 min | < 15 min   |
+| 👨‍💻 TAM                 | ❌        | ✅          |
+| 🔄 Proactive support   | Limited  | Advanced   |
+| 💰 Cost                | Lower    | Higher     |
 
-## Is AWS SLA same for all services?
+## Is AWS SLA same for all services❓
 
  * ❌ No
  * Each AWS service (EC2, S3, etc.) has its own SLA
  * Support plan SLA is different from service SLA
 
-## What happens if AWS violates SLA?
+## 💰 What happens if AWS violates SLA❓
 
  * Customers may receive `service credits`
- * Not direct financial compensation
+ * ❌ Not direct financial compensation
  * ❌ Not direct refund
 
-## Which plan gives 24/7 support?
+## 🕐 Which plan gives 24/7 support❓
 
- * Business & Enterprise
- * 👉 Developer → `Business hours only`
+ * 🏢 Business & 🚀 Enterprise
+ * 👉 🧪 Developer → `Business hours only`
 
-## Your production website is down. Which support plan is required?
+## 🚨 Your production website is down. Which support plan is required❓
 
- * 👉 At least Business Support Plan
+ * 👉 At least 🏢 Business Support Plan
  * Because:
-     * 24×7 support
-     * Fast response (`<30 min`)
+     * ⏰ 24×7 support
+     * ⚡ Fast response (`<30 min`)
 
-## Why not use Enterprise for all workloads?
+## 🤔 Why not use Enterprise for all workloads❓
 
- * `High cost` & Not required for `small` or `non-critical systems`
- * Business plan is sufficient for `most production use cases`
+ * 💸 `High cost` & Not required for `small` or `non-critical systems`
+ * 🏢 Business plan is sufficient for `most production use cases`
 
-## Startup runs production workloads but uses Basic plan to save cost. Is it okay?
+## ⚠️ Startup runs production workloads but uses Basic plan to save cost. Is it okay❓
 
  * ❌ Risky decision
  * Because:
-    * No technical support, No SLA & No urgent help
-    * Recommendation : `At least Business Support Plan`
+    * ❌ No technical support, No SLA & No urgent help
+    * 👉 Recommendation : `At least Business Support Plan`
 
-## Support vs Service SLA Confusion
+## 🔄 Support vs Service SLA Confusion
 | 🧩 **Type**        | 📖 **Meaning**          | 🧠 **What It Covers**               | 💡 **Example**                   |
 | ------------------ | ----------------------- | ----------------------------------- | -------------------------------- |
 | ☁️ **Service SLA** | Uptime guarantee        | 👉 Availability of AWS services     | EC2 = 99.99% uptime              |
 | 🛠 **Support SLA** | Response time guarantee | 👉 How quickly AWS support responds | Critical issue → 15 min response |
 
-## You are doing a one-time high-risk production migration. Which plan is best temporarily?
+## 🚀 You are doing a one-time high-risk production migration. Which plan is best temporarily❓
 
  * 👉 Enterprise (short-term upgrade)
  * Because:
-    * Fastest response
-    * TAM support
-    * Migration guidance
+    * ⚡ Fastest response
+    * 👨‍💻 TAM support
+    * 🧠 Migration guidance
 
 ## ⚡ AWS Support Plans – Rapid Fire Q&A
 
 | 🔢     | ❓ Question                        | 💡 Answer                                  |
 | ------ | --------------------------------- | ------------------------------------------ |
-| 1️⃣    | How many support plans?           | 4 → Basic, Developer, Business, Enterprise |
+| 1️⃣    | How many support plans❓          | 4 → Basic, Developer, Business, Enterprise |
 | 2️⃣    | Which plan is free?               | Basic                                      |
 | 3️⃣    | Basic has technical support?      | ❌ No                                       |
 | 4️⃣    | Minimum for production?           | 👉 Business                                |
