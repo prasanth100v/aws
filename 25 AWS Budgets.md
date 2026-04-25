@@ -22,6 +22,8 @@
 | 🧾 **Reservation Budget**  | Reserved Instance (RI) usage     | 👉 Tracks RI utilization & coverage   | Ensure RIs are fully used               |
 | ⚡ **Savings Plans Budget** | Savings Plans usage              | 👉 Monitors commitment usage          | Check if savings plan is underutilized  |
 
+## 💰 AWS Budgets vs 📊 Cost Explorer
+
 | 🧩 **Feature**       | 💰 **AWS Budgets**     | 📊 **Cost Explorer** | 🧠 **Explanation**                                    | 💡 **Use Case**           |
 | -------------------- | ---------------------- | -------------------- | ----------------------------------------------------- | ------------------------- |
 | 🎯 **Purpose**       | Control spending       | Analyze spending     | Budgets = proactive control, Cost Explorer = insights | Prevent vs analyze        |
