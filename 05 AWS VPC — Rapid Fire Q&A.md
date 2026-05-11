@@ -69,6 +69,6 @@
 | 🎯 Q26  | How to make subnet public?                         | 👉 Attach route table with IGW route.                                                                                                                                                               |
 | 🎯 Q27  | Why not place DB in public subnet?                 | 👉 Security risk.                                                                                                                                                                                   |
 | 🎯 Q28  | Can a subnet be both public & private?             | 👉 ❌ No — depends on route table.                                                                                                                                                                   |
-| 🔥 Q29  | Pro Tips (Interview Gold)                          | 👉 ✔ Always use private subnets for backend & DB <br> ✔ Use NAT Gateway for outbound internet <br> ✔ Design across multiple AZs <br> ✔ Keep public exposure minimal <br> ✔ Use proper CIDR planning |
+| 🔥 Q29  | Pro Tips (Interview Gold)                          | ✔ Always use private subnets for backend & DB <br> ✔ Use NAT Gateway for outbound internet <br> ✔ Design across multiple AZs <br> ✔ Keep public exposure minimal <br> ✔ Use proper CIDR planning |
 
 
