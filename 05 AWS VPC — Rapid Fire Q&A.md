@@ -104,7 +104,7 @@
 | 🎯 Q24  | Why is subnet not public despite IGW attached? | 👉 Missing route to IGW.                                                                                                                                                                 |
 | 🎯 Q25  | Why private instance cannot access internet?   | 👉 Missing NAT Gateway route.                                                                                                                                                            |
 | 🎯 Q26  | Can you have multiple default routes?          | 👉 ❌ No — one per destination.                                                                                                                                                           |
-| 🔥 Q27  | Pro Tips (Interview Gold)                      | 👉 ✔ Always verify subnet association <br> ✔ Public subnet = IGW route <br> ✔ Private subnet = NAT route <br> ✔ Route tables don’t provide security <br> ✔ Avoid overlapping CIDR ranges |
+| 🔥 Q27  | Pro Tips (Interview Gold)                      | ✔ Always verify subnet association <br> ✔ Public subnet = IGW route <br> ✔ Private subnet = NAT route <br> ✔ Route tables don’t provide security <br> ✔ Avoid overlapping CIDR ranges  |
 | 🚀 Q28  | Quick Summary                                  | 👉 Route Table = Traffic controller of VPC <br> 👉 Maps destination → target <br> 👉 Key to defining public vs private subnets                                                           |
 
 ---
