@@ -198,3 +198,4 @@
 | 📋 **Rule Processing**  | All rules evaluated          | Rules processed in order  | NACL stops at first matching rule       | 
 | 🔐 **Default Behavior** | Deny inbound, allow outbound | Depends on rules          | SG safer by default                     | 
 | 🔗 **Association**      | Attached to instances        | Attached to subnets       | Different protection scope              |
+
