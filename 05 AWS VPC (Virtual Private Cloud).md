@@ -36,6 +36,15 @@
    * To create a subnet in AWS, go to the VPC dashboard, select Subnets, click Create subnet, choose the `VPC`, provide` subnet name`, Availability Zone,
    * and CIDR block, then configure routing depending on whether it is `public` or `private`.
 
+## 🏗️ Public vs Private Subnet
+| 🧩 **Feature**            | 🌍 **Public Subnet**             | 🔒 **Private Subnet**       | 🧠 **Explanation**                   | 🎯 **Common Use Case**         |
+| ------------------------- | -------------------------------- | --------------------------- | ------------------------------------ | ------------------------------ |
+| 🌐 **Internet Access**    | ✅ Yes (via Internet Gateway)     | ❌ No direct internet access | Public subnet routes traffic to IGW  | External vs internal workloads |
+| 🛣️ **Route Table**       | Route to IGW (`0.0.0.0/0 → IGW`) | No direct IGW route         | Determines internet connectivity     | Network isolation              |
+| 🖥️ **Typical Resources** | Web servers, Load Balancers      | Databases, backend apps     | Public-facing vs internal services   | Layered architecture           |
+| 🔐 **Security Level**     | Less isolated                    | More secure                 | Private subnets reduce exposure      | Sensitive workloads            |
+| 🌍 **Public IP**          | Usually assigned                 | Usually not assigned        | Public IP needed for internet access | External communication         |
+
 ## 🛣️ Route Tables
   * Route Table controls the path of network traffic for `subnets` inside a VPC.
   * 🎯 Interview Answer 
@@ -148,143 +157,44 @@
 |             | ⚡                               | Actions → Security → Change security groups                                           |
 |             | 📌                              | Attach the created Security Group                                                     |
 
-### 🧱 Network ACLs (NACLs)
-- Subnet-level firewall
-- Stateless (rules apply both ways)
-
----
-
-### 🔗 VPC Peering
-- Connect two VPCs privately
-
-### 🌉 Transit Gateway
-- Central hub for connecting multiple VPCs
-
-### 🚪 VPC Endpoints
-- Private access to AWS services (S3, DynamoDB)
-- No internet required
-
-### 🌐 IP Support
-- Supports both IPv4 & IPv6
-
-## 🏗️ Public vs Private Subnet
-
-| Feature | Public Subnet | Private Subnet |
-|--------|---------------|----------------|
-| Internet Access | ✅ Yes (via IGW) | ❌ No |
-| Use Case | Web servers | Databases, backend |
-
----
-
-## 📏 CIDR Block
-
-- Defines IP range of VPC  
-- Example: `10.0.0.0/16` → 65,536 IPs
-
-## 🔢 VPC Limits
-
-- Default: 5 VPCs per region per account
-- Can request increase via AWS Support
-
-## 🌍 Region Scope
-
-- VPC is **region-specific**
-- Cannot span multiple regions
-
-## 💰 VPC Pricing
-
-- VPC itself → FREE ✅
-- Paid services:
-  - NAT Gateway 💸
-  - Transit Gateway 💸
-  - Cross-region peering 💸
-
 ## 🌐 Elastic IP (EIP)
+ * Elastic IP is a `fixed Static public IPv4 address` used for `stable internet connectivity` in AWS.
+ * Unlike normal public IPs, an Elastic IP `does not change` when the instance is stopped and started.
+ * Used for EC2 / NAT Gateway
+ * 💰 Pricing :
+    * ✅ One attached Elastic IP is usually free. ✅ Elastic IP works only with `IPv4`.
+    * ❌ Unused Elastic IPs are chargeable.
 
-- Static public IPv4 address
-- Used for EC2 / NAT Gateway
-- Charged if unused
+ * 🎯 Interview Answer 
+  * To create an `Elastic IP` in AWS, go to the EC2 dashboard, allocate a new Elastic IP, and associate it with an EC2 instance to provide a `static public IP` address.
 
----
 
-## 🏢 Availability Zones (AZs)
+### 🧱 Network ACLs (NACLs)
+ * A Network ACL (`Network Access Control List`) is a security layer in a VPC that controls inbound and outbound traffic at the `subnet level`
+ * Subnet-level firewall
+ * Stateless (rules apply both ways)
 
-- Separate data centers in a region
-- Improves:
-  - High availability
-  - Fault tolerance
+#### 📦 Example NACL Rules
+* Inbound Rules
+| Rule # | Type        | Port | Source    | Allow/Deny |
+| ------ | ----------- | ---- | --------- | ---------- |
+| 100    | HTTP        | 80   | 0.0.0.0/0 | ALLOW      |
+| 110    | SSH         | 22   | Your IP   | ALLOW      |
+| 120    | All Traffic | All  | 0.0.0.0/0 | DENY       |
 
-👉 Example (Mumbai):
-- ap-south-1a
-- ap-south-1b
-- ap-south-1c
+* Outbound Rules
+| Rule # | Type        | Port | Destination | Allow/Deny |
+| ------ | ----------- | ---- | ----------- | ---------- |
+| 100    | All Traffic | All  | 0.0.0.0/0   | ALLOW      |
 
-## ⚖️ IGW vs NAT Gateway
+* 🎯 Interview Answer 
+  * To create a Network ACL in AWS, go to the VPC dashboard, create a `Network ACL`, configure `inbound` and `outbound rules`, and associate it with the `required subnet`.
 
-| Feature | IGW | NAT Gateway |
-|--------|-----|-------------|
-| Inbound | ✅ Yes | ❌ No |
-| Outbound | ✅ Yes | ✅ Yes |
-
----
-
-## 🔐 VPN Connection
-
-- Secure connection between:
-  - On-premises ↔ AWS VPC
-
-## 🚀 AWS Direct Connect
-
-- Private dedicated connection to AWS
-- Benefits:
-  - Better performance
-  - More secure
-  - Reliable
-
-## 🚪 VPC Endpoint
-
-- Private access to AWS services
-- No need for:
-  - Internet Gateway
-  - NAT Gateway
-  - VPN
-
-## 🌉 Virtual Private Gateway (VGW)
-
-- Connects VPC to:
-  - VPN
-  - Direct Connect
-
----
-
-## 🛠️ Steps to Create VPC
-
-1. Login to AWS Console  
-2. Open VPC Service  
-3. Click **Create VPC**  
-4. Enter:
-   - Name
-   - CIDR (e.g., 10.0.0.0/16)
-5. Enable DNS (optional)  
-6. Click Create  
-
-#### 🔧 Next Steps
-
-- Create Subnets  
-- Attach Internet Gateway  
-- Configure Route Tables  
-- Setup Security Groups & NACLs  
-
----
-
-## 🎯 Summary
-
-- VPC = Private AWS network
-- Subnets = Divide network
-- IGW/NAT = Internet access control
-- SG/NACL = Security layers
-- Multi-AZ = High availability
-
----
-
-🔥 **Master VPC = Strong Networking Foundation for AWS & DevOps!**
+### 🛡️ Security Group vs NACL
+| 🧩 **Feature**          | 🛡️ **Security Group (SG)**  | 🚧 **Network ACL (NACL)** | 🧠 **Explanation**                      | 
+| ----------------------- | ---------------------------- | ------------------------- | --------------------------------------- |
+| 🔄 **Stateful**         | ✅ Yes                      | ❌ No                      | SG remembers connections; NACL does not | 
+| 🚦 **Allow / Deny**     | Allow only                   | Allow & Deny              | NACL supports explicit deny rules       | 
+| 📋 **Rule Processing**  | All rules evaluated          | Rules processed in order  | NACL stops at first matching rule       | 
+| 🔐 **Default Behavior** | Deny inbound, allow outbound | Depends on rules          | SG safer by default                     | 
+| 🔗 **Association**      | Attached to instances        | Attached to subnets       | Different protection scope              |
