@@ -12,7 +12,7 @@
  * To create a VPC in AWS, go to the VPC dashboard, click Create VPC, provide a CIDR block (10.0.0.0/16), create public/private subnets, attach an Internet Gateway, configure route tables
  * and then launch resources like EC2 instances inside the VPC.
 
-## 🧩 Key Components of VPC
+# 🧩 Key Components of VPC
 | 🧩 **Feature**             | 📖 **Purpose**        | 🧠 **Explanation**                      | 💡 **Example**                |
 | -------------------------- | --------------------- | --------------------------------------- | ----------------------------- |
 | 🌐 **CIDR Block**          | IP address range      | Defines network size for VPC            | `10.0.0.0/16`                 |
@@ -22,7 +22,7 @@
 | 🛡️ **Security Rules**     | Traffic protection    | Control `inbound/outbound traffic `       | Security Groups & NACLs       |
 | 🔗 **Hybrid Connectivity** | Connect on-premises   | Integrate AWS with data centers         | `VPN / Direct Connect  `        |
 
-### 🏠 Subnets
+## 🏠 Subnets
  - It divides the VPC into smaller networks for better Security.
  - A subnet is a `range of IP addresses inside a VPC` where AWS resources like EC2 instances are launched.
  -  Limit: Up to `200 subnets` per VPC
@@ -36,12 +36,12 @@
    * To create a subnet in AWS, go to the VPC dashboard, select Subnets, click Create subnet, choose the `VPC`, provide` subnet name`, Availability Zone,
    * and CIDR block, then configure routing depending on whether it is `public` or `private`.
 
-### 🛣️ Route Tables
+## 🛣️ Route Tables
   * Route Table controls the path of network traffic for `subnets` inside a VPC.
   * 🎯 Interview Answer 
     * To create a Route Table in AWS, go to the VPC dashboard, create a Route Table, add routes like `Internet Gateway` or `NAT Gateway`, and associate the Route Table with the required `subnet`.
 
-### 🌐 Internet Gateway (IGW)
+## 🌐 Internet Gateway (IGW)
 - An Internet Gateway enables internet access for resources in `public subnets`.
 - Only **one IGW per VPC**
 
@@ -79,13 +79,74 @@
 |             |                                          | Click **Actions → Edit subnet settings**                                              |
 |             |                                           | Enable **Auto-assign public IPv4 address**                                            |
 
-### 🔄 NAT Gateway
-- Allows **private subnet → internet (outbound only)**
-- Deployed in **public subnet**
+## 🔄 NAT Gateway (Network Address Translation Gateway)
+ * NAT Gateway allows private subnet instances to access the internet without allowing incoming internet traffic directly to them.
+ * 👉 It is mainly used for:
+    * Software updates
+    * Downloading packages
+    * Allows **private subnet → internet (outbound only)**, Deployed in **public subnet**
 
-### 🔥 Security Groups
-- Instance-level firewall
-- Controls inbound & outbound traffic
+#### 📋 Steps to Create a NAT Gateway in AWS
+| 🔢 Step     | 🛠️ Action                        | 📘 Details                                                                            |
+| ----------- | --------------------------------- | ------------------------------------------------------------------------------------- |
+| 🔐 **1️⃣**  | ☁️ **Login to AWS Console**       | Open [AWS Management Console](https://aws.amazon.com/console/?utm_source=chatgpt.com) |
+| 🌐 **2️⃣**  | 📂 **Open VPC Dashboard**         | Search for **VPC** and open the VPC Dashboard                                         |
+| 🌍 **3️⃣**  | 📌 **Create Elastic IP**          | Go to **Elastic IPs**                                                                 |
+|             | ➕                                 | Click **Allocate Elastic IP address**                                                 |
+|             | ✅                                 | Click **Allocate**                                                                    |
+| 🚪 **4️⃣**  | 📡 **Go to NAT Gateways**         | From the left-side menu click **NAT Gateways**                                        |
+| 🚀 **5️⃣**  | ➕ **Create NAT Gateway**          | Click **Create NAT Gateway**                                                          |
+| ⚙️ **6️⃣**  | 📝 **Configure NAT Gateway**      | Select **Public Subnet**                                                              |
+|             | 🌍                                | Attach the **Elastic IP**                                                             |
+|             | 🏷️                               | Example Name: `My-NAT-Gateway`                                                        |
+| ✅ **7️⃣**   | 🎯 **Create NAT Gateway**         | Click **Create NAT Gateway**                                                          |
+| 🛣️ **8️⃣** | 🔒 **Update Private Route Table** | Go to **Route Tables**                                                                |
+|             | 📂                                | Select **Private Route Table**                                                        |
+|             | 🧭                                | Open **Routes** tab                                                                   |
+|             | ➕                                 | Click **Edit routes → Add route**                                                     |
+|             | 🌍                                | **Destination:** `0.0.0.0/0`                                                          |
+|             | 🎯                                | **Target:** NAT Gateway                                                               |
+|             | 💾                                | Click **Save changes**                                                                |
+
+## 🔥 Security Groups
+ * A Security Group is a Instance-level virtual firewall that controls `inbound` and `outbound traffic` for resources like EC2 instances inside a VPC
+ * A Security Group controls which traffic is allowed to enter or leave 
+ * 🚀 Security Groups are commonly attached to:
+    * EC2 Instances
+    * RDS Databases
+    * Load Balancers
+    * ECS/EKS services
+
+ #### 🛡️ Types of Security Group Rules
+| 🧩 **Rule Type**      | 📖 **Purpose**   | 🧠 **What It Controls**                  | 💡 **Common Examples**                 | 🎯 **Use Case**           |
+| --------------------- | ---------------- | ------------------------------------------ | -------------------------------------- | ------------------------- |
+| ⬇️ **Inbound Rules**  | Incoming traffic | Controls traffic entering the EC2 instance | SSH (`22`), HTTP (`80`), HTTPS (`443`) | Web server access         |
+| ⬆️ **Outbound Rules** | Outgoing traffic | Controls traffic leaving the EC2 instance  | Internet access, DB communication      | App → Database/API access |
+
+#### 🔒 Steps to Create a Security Group in AWS VPC
+| 🔢 Step     | 🛠️ Action                      | 📘 Details                                                                            |
+| ----------- | ------------------------------- | ------------------------------------------------------------------------------------- |
+| 🔐 **1️⃣**  | ☁️ **Login to AWS Console**     | Open [AWS Management Console](https://aws.amazon.com/console/?utm_source=chatgpt.com) |
+|             | 🔑                              | Sign in to your AWS account                                                           |
+|             | 🌍                              | Select your AWS Region                                                                |
+| 🌐 **2️⃣**  | 📂 **Open VPC Dashboard**       | Search for **VPC** and open the VPC Dashboard                                         |
+| 🛡️ **3️⃣** | 🔒 **Go to Security Groups**    | From the left-side menu click **Security Groups**                                     |
+|             | ➕                               | Click **Create security group**                                                       |
+| ⚙️ **4️⃣**  | 📝 **Configure Security Group** | Enter Security Group details                                                          |
+|             | 🏷️                             | **Security Group Name:** `Web-SG`                                                     |
+|             | 📄                              | **Description:** Security group for web server                                        |
+|             | 🌐                              | **VPC:** `My-VPC`                                                                     |
+| 📥 **5️⃣**  | 🚪 **Add Inbound Rules**        | Configure incoming traffic rules                                                      |
+|             | 🔑                              | **SSH** → TCP → Port `22` → Source `Your IP`                                          |
+|             | 🌍                              | **HTTP** → TCP → Port `80` → Source `0.0.0.0/0`                                       |
+|             | 🔐                              | **HTTPS** → TCP → Port `443` → Source `0.0.0.0/0`                                     |
+| 📤 **6️⃣**  | 🌐 **Add Outbound Rules**       | Configure outgoing traffic rules                                                      |
+|             | ✅                               | Default: **All Traffic → 0.0.0.0/0**                                                  |
+|             | 💡                              | Usually default outbound rule is enough                                               |
+| ✅ **7️⃣**   | 🎯 **Create Security Group**    | Click **Create security group**                                                       |
+| 🖥️ **8️⃣** | 🔗 **Attach SG to EC2**         | Go to EC2 → Select Instance                                                           |
+|             | ⚡                               | Actions → Security → Change security groups                                           |
+|             | 📌                              | Attach the created Security Group                                                     |
 
 ### 🧱 Network ACLs (NACLs)
 - Subnet-level firewall
