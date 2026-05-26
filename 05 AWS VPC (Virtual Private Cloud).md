@@ -127,15 +127,15 @@
     * ECS/EKS services
 
  #### 🛡️ Types of Security Group Rules
-| 🧩 **Rule Type**      | 📖 **Purpose**   | 🧠 **What It Controls**                  | 💡 **Common Examples**                 | 🎯 **Use Case**           |
-| --------------------- | ---------------- | ------------------------------------------ | -------------------------------------- | ------------------------- |
-| ⬇️ **Inbound Rules**  | Incoming traffic | Controls traffic entering the EC2 instance | SSH (`22`), HTTP (`80`), HTTPS (`443`) | Web server access         |
-| ⬆️ **Outbound Rules** | Outgoing traffic | Controls traffic leaving the EC2 instance  | Internet access, DB communication      | App → Database/API access |
+ | 🧩 **Traffic Type**     | 📖 **Meaning**                   | 🧠 **Detailed Explanation**                      | 💡 **Example**                          | 🎯 **Common Use Case**      |
+| ----------------------- | -------------------------------- | --------------------------------------------------- | --------------------------------------- | --------------------------- |
+| ⬇️ **Inbound Traffic**  | Incoming traffic to a resource   | Requests coming *into* a server, instance,         | User accessing website on port `80/443` | Web server access           |
+| ⬆️ **Outbound Traffic** | Outgoing traffic from a resource | Requests leaving a server, instance                | Internet access, DB communication   | App → Database, software updates |
 
 #### 🔒 Steps to Create a Security Group in AWS VPC
 | 🔢 Step     | 🛠️ Action                      | 📘 Details                                                                            |
 | ----------- | ------------------------------- | ------------------------------------------------------------------------------------- |
-| 🔐 **1️⃣**  | ☁️ **Login to AWS Console**     | Open [AWS Management Console](https://aws.amazon.com/console/?utm_source=chatgpt.com) |
+| 🔐 **1️⃣**  | ☁️ **Login to AWS Console**     | Open [AWS Management Console]                                                      |
 |             | 🔑                              | Sign in to your AWS account                                                           |
 |             | 🌍                              | Select your AWS Region                                                                |
 | 🌐 **2️⃣**  | 📂 **Open VPC Dashboard**       | Search for **VPC** and open the VPC Dashboard                                         |
@@ -176,6 +176,7 @@
 
 #### 📦 Example NACL Rules
 * Inbound Rules
+
 | Rule # | Type        | Port | Source    | Allow/Deny |
 | ------ | ----------- | ---- | --------- | ---------- |
 | 100    | HTTP        | 80   | 0.0.0.0/0 | ALLOW      |
