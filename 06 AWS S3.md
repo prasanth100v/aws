@@ -160,52 +160,48 @@
 | 🔢 Q#   | ❓ Question                                     | 💡 Answer                                                                                         |
 | ------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------- |
 | 🔹 Q1   | What is S3?                                    | 👉 Amazon Web Services Simple Storage Service — object storage service.                           |
-| 🔹 Q2   | What type of storage is S3?                    | 👉 Object storage.                                                                                |
-| 🔹 Q3   | What can S3 store?                             | 👉 Files, backups, logs, media, static websites, etc.                                             |
+| 🔹 Q2   | What type of storage is S3?                    | 👉 `Object storage.`                                                                                |
+| 🔹 Q3   | What can S3 store?                             | 👉 `Files`, `backups`, `logs`, `media`, `static websites`, etc.       \                           |
 | 📦 Q4   | What is a bucket?                              | 👉 Container for storing objects in S3.                                                           |
-| 📦 Q5   | What is an object in S3?                       | 👉 File + metadata stored in bucket.                                                              |
+| 📦 Q5   | What is an object in S3?                       | 👉 `File + metadata` stored in bucket.                                                              |
 | 📦 Q6   | Maximum object size in S3?                     | 👉 `5 TB`                                                                                         |
-| 💾 Q7   | Common S3 storage classes?                     | 👉 Standard <br> Standard-IA <br> One Zone-IA <br> Glacier <br> Intelligent-Tiering               |
+| 💾 Q7   | Common S3 storage classes?                     |  Standard <br> Standard-IA <br> One Zone-IA <br> Glacier <br> Intelligent-Tiering               |
 | 💾 Q8   | Cheapest storage class for archival?           | 👉 Glacier Deep Archive.                                                                          |
 | 💾 Q9   | What is Intelligent-Tiering?                   | 👉 Automatically moves data between tiers based on usage.                                         |
 | 🛡️ Q10 | S3 durability?                                 | 👉 `99.999999999%` (11 nines)                                                                     |
 | 🛡️ Q11 | S3 availability for Standard class?            | 👉 `99.99%`                                                                                       |
-| 🔐 Q12  | How secure S3 buckets?                         | 👉 IAM policies <br> Bucket policies <br> Encryption <br> Block public access                     |
-| 🔐 Q13  | What is bucket policy?                         | 👉 JSON policy controlling bucket access.                                                         |
+| 🔐 Q12  | How secure S3 buckets?                         |  IAM policies <br> Bucket policies <br> Encryption <br> Block public access                     |
+| 🔐 Q13  | What is bucket policy?                         |  JSON policy controlling bucket access.                                                         |
 | 🔐 Q14  | What is ACL in S3?                             | 👉 Legacy access control mechanism.                                                               |
-| 🔒 Q15  | Types of S3 encryption?                        | 👉 SSE-S3 <br> SSE-KMS <br> SSE-C                                                                 |
+| 🔒 Q15  | Types of S3 encryption?                        |  SSE-S3 <br> SSE-KMS <br> SSE-C                                                                 |
 | 🔒 Q16  | Recommended encryption method?                 | 👉 SSE-KMS                                                                                        |
-| 🕘 Q17  | What is versioning in S3?                      | 👉 Keeps multiple versions of objects.                                                            |
+| 🕘 Q17  | What is versioning in S3?                      | 👉 Keeps `multiple versions` of objects.                                                            |
 | 🕘 Q18  | Why enable versioning?                         | 👉 Protect from accidental deletion/overwrite.                                                    |
 | 🔄 Q19  | What is lifecycle policy?                      | 👉 Automatically transitions/deletes objects.                                                     |
-| 🔄 Q20  | Example lifecycle use case?                    | 👉 Move old logs to Glacier.                                                                      |
-| 🌍 Q21  | What is CRR?                                   | 👉 Cross-Region Replication.                                                                      |
-| 🌍 Q22  | What is SRR?                                   | 👉 Same-Region Replication.                                                                       |
-| 🌐 Q23  | Can S3 host websites?                          | 👉 ✅ Yes                                                                                          |
+| 🔄 Q20  | Example lifecycle use case?                    | 👉 `Move old logs to Glacier.    `                                                                  |
 | 🌐 Q24  | Requirement for static website hosting?        | 👉 Enable static website hosting in bucket properties.                                            |
-| 🔑 Q25  | IAM policy vs Bucket policy?                   | 👉 IAM → user/service permissions <br> Bucket policy → bucket-level access                        |
+| 🔑 Q25  | IAM policy vs Bucket policy?                   |  IAM → user/service permissions <br> Bucket policy → bucket-level access                        |
 | 🔑 Q26  | How grant EC2 access to S3 securely?           | 👉 IAM Role.                                                                                      |
 | 📤 Q27  | CLI command to upload file?                    | 👉 `aws s3 cp file.txt s3://mybucket/`                                                            |
 | 📤 Q28  | Sync local folder to S3?                       | 👉 `aws s3 sync ./data s3://mybucket/`                                                            |
 | 🔔 Q29  | Can S3 trigger events?                         | 👉 ✅ Yes                                                                                          |
-| 🔔 Q30  | Common event integrations?                     | 👉 AWS Lambda <br> SQS <br> SNS                                                                   |
+| 🔔 Q30  | Common event integrations?                     |  AWS Lambda <br> SQS <br> SNS                                                                   |
 | ⚡ Q31   | Is S3 scalable?                                | 👉 ✅ Automatically scalable.                                                                      |
-| ⚡ Q32   | Does S3 support parallel uploads?              | 👉 ✅ Multipart upload.                                                                            |
-| 📊 Q33  | How monitor S3 activity?                       | 👉 Amazon CloudWatch <br> AWS CloudTrail <br> S3 access logs                                      |
-| 🛠️ Q34 | Access denied to bucket — checks?              | 👉 IAM policy <br> Bucket policy <br> Block public access                                         |
-| 🛠️ Q35 | Public bucket not accessible — why?            | 👉 Block Public Access enabled.                                                                   |
+| 📊 Q33  | How monitor S3 activity?                       |  Amazon CloudWatch <br> AWS CloudTrail <br> S3 access logs                                      |
+| 🛠️ Q34 | Access denied to bucket — checks?              |  IAM policy <br> Bucket policy <br> Block public access                                         |
+| 🛠️ Q35 | Public bucket not accessible — why?            |  Block Public Access enabled.                                                                   |
 | 🏭 Q36  | Accidentally deleted file — recovery possible? | 👉 Yes, if versioning enabled.                                                                    |
-| 💰 Q37  | High S3 cost — possible reasons?               | 👉 Large storage <br> Frequent retrievals <br> Data transfer                                      |
-| ☸️ Q38  | How EKS apps access S3 securely?               | 👉 IAM Roles for Service Accounts (IRSA).                                                         |
+| 💰 Q37  | High S3 cost — possible reasons?               |  Large storage <br> Frequent retrievals <br> Data transfer                                      |
+| ☸️ Q38  | How EKS apps access S3 securely?               |  IAM Roles for Service Accounts (IRSA).                                                         |
 | 🔗 Q39  | What is pre-signed URL?                        | 👉 Temporary secure URL for object access.                                                        |
 | 📂 Q40  | What is multipart upload?                      | 👉 Upload large files in chunks.                                                                  |
 | 🛡️ Q41 | What is object lock?                           | 👉 Prevents deletion/modification.                                                                |
 | 🛡️ Q42 | What is MFA delete?                            | 👉 Requires MFA for delete/version changes.                                                       |
-| 🆚 Q43  | S3 vs EBS?                                     | 👉 S3 = object storage <br> 👉 EBS = block storage                                                |
-| 🆚 Q44  | S3 vs EFS?                                     | 👉 S3 = object storage <br> 👉 EFS = shared file storage                                          |
+| 🆚 Q43  | S3 vs EBS?                                     |  S3 = object storage <br> 👉 EBS = block storage                                                |
+| 🆚 Q44  | S3 vs EFS?                                     |  S3 = object storage <br> 👉 EFS = shared file storage                                          |
 | 🧪 Q45  | List buckets?                                  | 👉 `aws s3 ls`                                                                                    |
 | 🧪 Q46  | Remove object?                                 | 👉 `aws s3 rm s3://bucket/file.txt`                                                               |
-| 🔐 Q47  | Best practices for S3 security?                | 👉 Enable encryption <br> Block public access <br> Use least privilege IAM <br> Enable versioning |
+| 🔐 Q47  | Best practices for S3 security?                |  Enable encryption <br> Block public access <br> Use least privilege IAM <br> Enable versioning |
 | 💽 Q48  | How use S3 for backups?                        | 👉 Store snapshots, database dumps, logs.                                                         |
 | 🌍 Q49  | Why replicate buckets across regions?          | 👉 Disaster recovery.                                                                             |
 
@@ -215,45 +211,43 @@
 
 | 🔢 Q#   | ❓ Scenario Question                                                         | 💡 Answer                                                                           |
 | ------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| 🔐 Q1   | User getting “Access Denied” while accessing S3 bucket — what do you check? | 👉 IAM policy <br> Bucket policy <br> Block Public Access <br> Object ACL           |
+| 🔐 Q1   | User getting “Access Denied” while accessing S3 bucket — what do you check? |  IAM policy <br> Bucket policy <br> Block Public Access <br> Object ACL           |
 | 🔐 Q2   | EC2 instance cannot access S3 bucket — why?                                 | 👉 Missing IAM Role permissions.                                                    |
 | 🔐 Q3   | Public bucket still inaccessible — reason?                                  | 👉 Block Public Access enabled.                                                     |
-| 🔐 Q4   | Developer accidentally made bucket public — action?                         | 👉 Disable public access <br> Review bucket policy <br> Audit exposed data          |
+| 🔐 Q4   | Developer accidentally made bucket public — action?                         |  Disable public access <br> Review bucket policy <br> Audit exposed data          |
 | 💽 Q5   | File accidentally deleted from S3 — recovery possible?                      | 👉 Yes, if versioning enabled.                                                      |
 | 💽 Q6   | Bucket deleted accidentally — recovery possible?                            | 👉 Difficult unless backups/replication exist.                                      |
-| 💽 Q7   | How prevent accidental object deletion?                                     | 👉 Enable versioning <br> MFA delete <br> Object Lock                               |
-| 💰 Q8   | S3 bill suddenly increased — possible reasons?                              | 👉 Large storage <br> Frequent retrievals <br> Data transfer <br> Many API requests |
+| 💽 Q7   | How prevent accidental object deletion?                                     |  Enable versioning <br> MFA delete <br> Object Lock                               |
+| 💰 Q8   | S3 bill suddenly increased — possible reasons?                              |  Large storage <br> Frequent retrievals <br> Data transfer <br> Many API requests |
 | 💰 Q9   | Old logs consuming huge storage — solution?                                 | 👉 Lifecycle policy to move to Glacier.                                             |
 | 💰 Q10  | Best storage class for archive data?                                        | 👉 Glacier Deep Archive.                                                            |
-| 🌐 Q11  | Static website hosted in S3 not accessible — checks?                        | 👉 Static hosting enabled <br> Bucket policy <br> Index document configured         |
+| 🌐 Q11  | Static website hosted in S3 not accessible — checks?                        |  Static hosting enabled <br> Bucket policy <br> Index document configured         |
 | 🌐 Q12  | Website returns Access Denied — why?                                        | 👉 Missing public read permissions.                                                 |
 | 🔒 Q13  | Sensitive data stored unencrypted in S3 — fix?                              | 👉 Enable SSE-KMS encryption.                                                       |
 | 🔒 Q14  | Why avoid public buckets in production?                                     | 👉 Security and data leak risks.                                                    |
 | 🔒 Q15  | How securely allow temporary file access?                                   | 👉 Pre-signed URLs.                                                                 |
 | 🌍 Q16  | Need disaster recovery across regions — solution?                           | 👉 Cross-Region Replication (CRR).                                                  |
-| 🌍 Q17  | Replication not working — checks?                                           | 👉 Versioning enabled <br> IAM replication role <br> Replication rules              |
+| 🌍 Q17  | Replication not working — checks?                                           |  Versioning enabled <br> IAM replication role <br> Replication rules              |
 | ⚡ Q18   | Uploading large file fails — better approach?                               | 👉 Multipart upload.                                                                |
-| ⚡ Q19   | Application uploads slow to S3 — possible reasons?                          | 👉 Network latency <br> Large single uploads <br> No multipart upload               |
+| ⚡ Q19   | Application uploads slow to S3 — possible reasons?                          |  Network latency <br> Large single uploads <br> No multipart upload               |
 | 📊 Q20  | Need audit trail for bucket access — service?                               | 👉 AWS CloudTrail                                                                   |
 | 📊 Q21  | Need object-level access logs — enable?                                     | 👉 S3 Server Access Logging.                                                        |
 | 🔄 Q22  | Automatically delete old backups after 90 days — how?                       | 👉 Lifecycle policy.                                                                |
 | 🔄 Q23  | Automatically move infrequently used data to cheaper storage — how?         | 👉 Lifecycle transition rules.                                                      |
 | 🔑 Q24  | Best way for EC2 to upload files to S3?                                     | 👉 IAM Role attached to EC2.                                                        |
 | 🔑 Q25  | Why avoid storing AWS keys on EC2?                                          | 👉 Security risk.                                                                   |
-| ☸️ Q26  | EKS pod cannot access S3 — checks?                                          | 👉 IAM Roles for Service Accounts (IRSA) <br> Pod permissions <br> Bucket policy    |
+| ☸️ Q26  | EKS pod cannot access S3 — checks?                                          |  IAM Roles for Service Accounts (IRSA) <br> Pod permissions <br> Bucket policy    |
 | 💾 Q27  | How use S3 for database backups?                                            | 👉 Store dumps/snapshots in bucket.                                                 |
-| 💾 Q28  | Backup uploads failing overnight — troubleshooting?                         | 👉 IAM permissions <br> Storage full locally <br> Network issues                    |
+| 💾 Q28  | Backup uploads failing overnight — troubleshooting?                         |  IAM permissions <br> Storage full locally <br> Network issues                    |
 | 🕘 Q29  | User overwrote important file accidentally — recovery?                      | 👉 Restore previous object version.                                                 |
 | 🕘 Q30  | Why enable versioning in production buckets?                                | 👉 Protection against accidental overwrite/delete.                                  |
 | 🔔 Q31  | Need automatic processing when file uploaded — solution?                    | 👉 S3 Event Notification → AWS Lambda                                               |
 | 🔔 Q32  | Common S3 event integrations?                                               | 👉 Lambda, SQS, SNS.                                                                |
-| 🏭 Q33  | Logs bucket growing too large — optimization?                               | 👉 Lifecycle policies + compression.                                                |
 | 🌍 Q34  | Media files accessed globally with low latency — solution?                  | 👉 Use Amazon CloudFront with S3.                                                   |
-| 🧪 Q35  | List S3 buckets?                                                            | 👉 `aws s3 ls`                                                                      |
-| 🧪 Q36  | Upload file to bucket?                                                      | 👉 `aws s3 cp file.txt s3://mybucket/`                                              |
-| 🧪 Q37  | Sync folder to bucket?                                                      | 👉 `aws s3 sync ./data s3://mybucket/`                                              |
 | 🛡️ Q38 | Prevent object deletion permanently — feature?                              | 👉 Object Lock.                                                                     |
 | 🛡️ Q39 | Enable compliance retention for files — how?                                | 👉 S3 Object Lock + retention policy.                                               |
 | 🏆 Q40  | Why choose S3 over EBS for backups?                                         | 👉 Durable, scalable, cheaper for object storage.                                   |
 | 🏆 Q41  | Why lifecycle management important?                                         | 👉 Cost optimization.                                                               |
-| 🏆 Q42  | Best practice for production S3 buckets?                                    |  Encryption <br> Versioning <br> Block public access <br> Use lifecycle policies for cost savings        |
+| 🏆 Q42  | Best practice for production S3 buckets?                                    |  Encryption <br> Versioning <br> Block public access <br> Use lifecycle policies for cost savings  |
+
+
