@@ -164,54 +164,55 @@ Response / Action 🚀
 ## ⚡ AWS Lambda — Rapid Fire Q&A
 | ❓ Question                                   | ✅ Answer                                                              |
 | -------------------------------------------- | --------------------------------------------------------------------- |
-| 🚀 What is AWS Lambda?                       | 👉 Serverless compute service that runs code without managing servers |
-| ☁️ What is serverless computing?             | 👉 Running applications without provisioning/managing infrastructure  |
+| 🚀 What is AWS Lambda?                       | 👉 Serverless compute service that `runs code without managing servers` |
+| ☁️ What is serverless computing?             | 👉 Running applications without `provisioning/managing infrastructure`  |
 | ⭐ Main advantage of Lambda?                  | 👉 Auto scaling + pay only for execution time                         |
-| ⚙️ How does Lambda execute code?             | 👉 In response to events/triggers                                     |
-| 🔔 What is an event source?                  | 👉 Service triggering Lambda execution                                |
+| ⚙️ How does Lambda execute code?             | 👉 In response to `events/triggers   `                                  |
+| 🔔 What is an event source?                  | 👉 `Service triggering Lambda execution `                               |
 | 🔗 Common Lambda triggers?                   | 👉 S3, API Gateway, CloudWatch, DynamoDB, SQS                         |
 | 💻 Supported runtimes?                       | 👉 Python, Node.js, Java, Go, .NET, Ruby, custom runtime              |
 | 📦 Can Lambda run containers?                | 👉 ✅ Yes                                                              |
 | 📈 Does Lambda auto scale?                   | 👉 ✅ Yes                                                              |
-| 🔄 What is concurrency?                      | 👉 Number of simultaneous executions                                  |
-| ⏳ Maximum Lambda timeout?                    | 👉 15 minutes                                                         |
-| 🧠 Maximum memory allocation?                | 👉 10 GB                                                              |
-| 📂 Temporary storage limit (/tmp)?           | 👉 Up to 10 GB                                                        |
-| 💰 How is Lambda priced?                     | 👉 Requests + execution duration + memory                             |
+| 🔄 What is concurrency?                      | 👉 Number of `simultaneous executions    `                              |
+| ⏳ Maximum Lambda timeout?                    | 👉 `15 minutes    `                                                     |
+| 🧠 Maximum memory allocation?                | 👉 `10 GB `                                                             |
+| 📂 Temporary storage limit (/tmp)?           | 👉 Up to `10 GB  `                                                      |
+| 💰 How is Lambda priced?                     | 👉 `Requests + execution duration + memory`                             |
 | ❄️ What is a cold start?                     | 👉 Delay during first initialization                                  |
-| 🥶 Why do cold starts happen?                | 👉 New execution environment creation                                 |
+| 🥶 Why do cold starts happen?                | 👉 `New execution environment creation  `                               |
 | 🚚 Deployment methods?                       | 👉 ZIP package or container image                                     |
-| 🏗️ IaC tools for Lambda?                    | 👉 Terraform, SAM, CloudFormation                                     |
-| 🔐 How Lambda gets AWS permissions?          | 👉 IAM Execution Role                                                 |
+| 🏗️ IaC tools for Lambda?                    | 👉 Terraform, CloudFormation                                     |
+| 🔐 How Lambda gets AWS permissions?          | 👉 `IAM Execution Role  `                                               |
 | 🚫 Why avoid hardcoded credentials?          | 👉 Security risk                                                      |
 | 🌐 Can Lambda run inside VPC?                | 👉 ✅ Yes                                                              |
 | 🏢 Why attach Lambda to VPC?                 | 👉 Access private resources like RDS                                  |
-| 📊 Which service monitors Lambda?            | 👉 Amazon CloudWatch                                                  |
+| 📊 Which service monitors Lambda?            | 👉` Amazon CloudWatch`                                                  |
 | 📝 Where are Lambda logs stored?             | 👉 CloudWatch Logs                                                    |
-| 🌍 Which service exposes Lambda as REST API? | 👉 API Gateway                                                        |
+| 🌍 Which service exposes Lambda as REST API? | 👉 `API Gateway `                                                       |
 | 🪣 Can Lambda process S3 uploads?            | 👉 ✅ Yes                                                              |
 | 🖼️ Example Lambda use case?                 | 👉 Image resizing after upload                                        |
 | ⚡ Why Lambda ideal for event-driven systems? | 👉 Executes automatically on events                                   |
-| ❌ What happens if Lambda fails?              | 👉 Retry or send to DLQ                                               |
+| ❌ What happens if Lambda fails?              | 👉 Retry or send to DLQ (Dead-Letter Queue)                      |
 | 📥 What is DLQ?                              | 👉 Dead Letter Queue for failed events                                |
-| 🏷️ What is Lambda versioning?               | 👉 Immutable function snapshots                                       |
+| 🏷️ What is Lambda versioning?               | 👉 `Immutable function snapshots`                                       |
 | 🎯 What is an alias?                         | 👉 Pointer to Lambda version                                          |
 | 🚀 How reduce cold starts?                   | 👉 Provisioned Concurrency, smaller packages                          |
 | 📚 What are Lambda Layers?                   | 👉 Shared libraries/dependencies                                      |
-| ⚙️ Why use environment variables?            | 👉 Store config separately from code                                  |
+| ⚙️ Why use environment variables?            | 👉 `Store config separately from code     `                             |
 | 🛡️ Lambda security best practices?          | 👉 Least privilege IAM, encryption, avoid public exposure             |
-| ☸️ Lambda vs Kubernetes?                     | 👉 Lambda = serverless, Kubernetes = container orchestration          |
+| ☸️ Lambda vs Kubernetes?                     |  Lambda = serverless, Kubernetes = container orchestration          |
 | 🐢 Why Lambda times out?                     | 👉 Slow APIs, heavy processing, low memory                            |
-| 💸 Why Lambda becomes expensive?             | 👉 Infinite loops, high invocations, long execution                   |
 | 🔥 What is Provisioned Concurrency?          | 👉 Pre-warmed Lambda environments                                     |
 | 📡 What is Lambda destination?               | 👉 Routing results to another service                                 |
 | 🖥️ CLI command to invoke Lambda?            | 👉 `aws lambda invoke --function-name myfunc output.txt`              |
 | 📃 CLI command to list functions?            | 👉 `aws lambda list-functions`                                        |
-| 🚫 When NOT to use Lambda?                   | 👉 Long-running/stateful/GPU workloads                                |
-| ⚔️ Lambda vs EC2?                            | 👉 Lambda = serverless, EC2 = full server control                     |
-| 🛠️ Common Lambda use cases?                 | 👉 APIs, automation, ETL, notifications                               |
+| 🚫 When NOT to use Lambda?                   | 👉 `Long-running/stateful/GPU workloads   `                             |
+| ⚔️ Lambda vs EC2?                            |  Lambda = serverless, EC2 = full server control                     |
+| 🛠️ Common Lambda use cases?                 | 👉 APIs, automation, notifications                               |
 | 🔄 CI/CD tools for Lambda?                   | 👉 GitHub Actions, Jenkins, CodePipeline                              |
 | 🚨 Lambda cannot access S3 — why?            | 👉 Missing IAM permissions                                            |
 | 🌍 Lambda inside VPC has no internet — why?  | 👉 Missing NAT Gateway                                                |
--
+
+---
+
 🎉 Happy Learning AWS Lambda!
