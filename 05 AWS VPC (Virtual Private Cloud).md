@@ -184,6 +184,7 @@
 | 120    | All Traffic | All  | 0.0.0.0/0 | DENY       |
 
 * Outbound Rules
+
 | Rule # | Type        | Port | Destination | Allow/Deny |
 | ------ | ----------- | ---- | ----------- | ---------- |
 | 100    | All Traffic | All  | 0.0.0.0/0   | ALLOW      |
