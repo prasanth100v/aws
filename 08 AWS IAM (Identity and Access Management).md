@@ -20,6 +20,7 @@
 
 ### 🔍 IAM Policy Structure
   * Policies are JSON documents that define permissions:
+
 | 🔑 **Field** | 📖 **Meaning**         | 💡 **Example**              |
 | ------------ | ---------------------- | --------------------------- |
 | Effect       | Allow or Deny access   | `"Effect": "Allow"`         |
