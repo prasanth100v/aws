@@ -1,0 +1,207 @@
+## ⚡ AWS IAM — Rapid Fire Interview Q&A
+| #️⃣    | ❓ Question                                                 | ✅ Answer                                                                                                             |
+| ------ | ---------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| 1️⃣    | 🔐 What is IAM?                                            | 👉 Amazon Web Services Identity and Access Management service used to manage authentication and authorization in AWS |
+| 2️⃣    | 🎯 What does IAM control?                                  | 👉 Who can access AWS resources and what actions they can perform                                                    |
+| 3️⃣    | 🌍 Is IAM global or regional?                              | 👉 Global service                                                                                                    |
+| 4️⃣    | 🧩 Main IAM components?                                    | 👉 Users, Groups, Roles, Policies                                                                                    |
+| 5️⃣    | 👤 What is an IAM User?                                    | 👉 Identity representing a person or application                                                                     |
+| 6️⃣    | 👥 What is an IAM Group?                                   | 👉 Collection of IAM users with shared permissions                                                                   |
+| 7️⃣    | 🎭 What is an IAM Role?                                    | 👉 Temporary identity assumed by trusted entities                                                                    |
+| 8️⃣    | 📜 What is an IAM Policy?                                  | 👉 JSON document defining permissions                                                                                |
+| 9️⃣    | 📂 Types of IAM policies?                                  | 👉 Managed policies and Inline policies                                                                              |
+| 🔟     | ⚖️ AWS-managed vs Customer-managed policy?                 | 👉 AWS-managed = created by AWS, Customer-managed = created by you                                                   |
+| 1️⃣1️⃣ | 🏗️ Structure of IAM policy?                               | 👉 Effect, Action, Resource, Condition                                                                               |
+| 1️⃣2️⃣ | ✅ What are policy effects?                                 | 👉 Allow or Deny                                                                                                     |
+| 1️⃣3️⃣ | 🚫 Which takes precedence: Allow or Deny?                  | 👉 Explicit Deny                                                                                                     |
+| 1️⃣4️⃣ | 🔑 How users authenticate to AWS?                          | 👉 Password, Access keys, MFA, SSO                                                                                   |
+| 1️⃣5️⃣ | 🔐 What is MFA?                                            | 👉 Multi-Factor Authentication                                                                                       |
+| 1️⃣6️⃣ | 🛡️ Why enable MFA for root account?                       | 👉 Extra security protection                                                                                         |
+| 1️⃣7️⃣ | 🎯 What is least privilege principle?                      | 👉 Grant minimum required permissions                                                                                |
+| 1️⃣8️⃣ | ⚠️ Why avoid using root account daily?                     | 👉 Security risk                                                                                                     |
+| 1️⃣9️⃣ | 🔑 What are access keys?                                   | 👉 Programmatic credentials for AWS API/CLI                                                                          |
+| 2️⃣0️⃣ | 🔄 Best practice for access keys?                          | 👉 Rotate regularly and avoid hardcoding                                                                             |
+| 2️⃣1️⃣ | 🎭 Why use IAM Roles instead of access keys?               | 👉 Temporary credentials are more secure                                                                             |
+| 2️⃣2️⃣ | ☁️ Common IAM Role use cases?                              | 👉 EC2 → S3 access, Lambda permissions, Cross-account access                                                         |
+| 2️⃣3️⃣ | 🔐 What is Trust Policy?                                   | 👉 Defines who can assume the role                                                                                   |
+| 2️⃣4️⃣ | 🌐 Which STS API used for IRSA/OIDC?                       | 👉 `AssumeRoleWithWebIdentity`                                                                                       |
+| 2️⃣5️⃣ | 🖥️ How securely provide AWS access to EC2?                | 👉 Attach IAM Role to instance                                                                                       |
+| 2️⃣6️⃣ | 🚫 Why avoid storing AWS keys inside EC2?                  | 👉 Security vulnerability                                                                                            |
+| 2️⃣7️⃣ | ☸️ What is IRSA in EKS?                                    | 👉 IAM Roles for Service Accounts                                                                                    |
+| 2️⃣8️⃣ | 🔒 Why use IRSA?                                           | 👉 Secure pod-level AWS permissions                                                                                  |
+| 2️⃣9️⃣ | 🌐 IRSA uses which identity provider?                      | 👉 OIDC provider                                                                                                     |
+| 3️⃣0️⃣ | 🛡️ IAM security best practices?                           | 👉 Enable MFA, Least privilege, Rotate credentials, Avoid root usage                                                 |
+| 3️⃣1️⃣ | 🚧 What is permission boundary?                            | 👉 Maximum permissions an identity can have                                                                          |
+| 3️⃣2️⃣ | ⏳ What is AWS STS?                                         | 👉 Security Token Service for temporary credentials                                                                  |
+| 3️⃣3️⃣ | 🔑 Advantage of temporary credentials?                     | 👉 Reduced security risk                                                                                             |
+| 3️⃣4️⃣ | 🌍 How allow one AWS account to access another?            | 👉 IAM Role + Trust Policy                                                                                           |
+| 3️⃣5️⃣ | 🔗 What is identity federation?                            | 👉 External identity provider access to AWS                                                                          |
+| 3️⃣6️⃣ | 👤 Examples of federated login providers?                  | 👉 Active Directory, Google, Okta                                                                                    |
+| 3️⃣7️⃣ | ⚙️ What are policy conditions?                             | 👉 Additional permission constraints                                                                                 |
+| 3️⃣8️⃣ | 🌐 Example condition use case?                             | 👉 Restrict access by IP address                                                                                     |
+| 3️⃣9️⃣ | ❌ User getting AccessDenied — checks?                      | 👉 IAM policy, SCP, Resource policy, Explicit Deny                                                                   |
+| 4️⃣0️⃣ | 🪣 EC2 cannot access S3 — why?                             | 👉 Missing IAM role permissions                                                                                      |
+| 4️⃣1️⃣ | 📊 Which service audits IAM activity?                      | 👉 Amazon Web Services CloudTrail                                                                                    |
+| 4️⃣2️⃣ | 🔍 What is IAM Access Analyzer?                            | 👉 Identifies unintended access permissions                                                                          |
+| 4️⃣3️⃣ | 🔑 What is IAM password policy?                            | 👉 Rules enforcing password complexity                                                                               |
+| 4️⃣4️⃣ | 🏢 What is SCP in AWS Organizations?                       | 👉 Organization-wide permission guardrails                                                                           |
+| 4️⃣5️⃣ | ⚠️ Developer accidentally got admin access — risk?         | 👉 Privilege escalation/security issue                                                                               |
+| 4️⃣6️⃣ | ⏱️ IAM policy changes not taking effect immediately — why? | 👉 Propagation delay                                                                                                 |
+| 4️⃣7️⃣ | 📦 What is resource-based policy?                          | 👉 Policy attached directly to resource (e.g., S3 bucket policy)                                                     |
+| 4️⃣8️⃣ | ⚖️ Identity policy vs resource policy?                     | 👉 Identity policy = attached to user/role, Resource policy = attached to resource                                   |
+| 4️⃣9️⃣ | 💻 AWS CLI command to list IAM users?                      | 👉 `aws iam list-users`                                                                                              |
+| 5️⃣0️⃣ | 📜 List attached role policies?                            | 👉 `aws iam list-attached-role-policies --role-name MyRole`                                                          |
+
+---
+
+## ⚡ Scenario-Based AWS IAM — Rapid Fire Q&A
+| #️⃣    | ❓ Scenario Question                                                        | ✅ Answer                                                                                          |
+| ------ | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| 1️⃣    | 🚫 User getting AccessDenied while accessing S3 — what do you check?       | 👉 IAM policy, Bucket policy, Explicit deny, SCPs, Resource ARN                                   |
+| 2️⃣    | ⚠️ User has AdministratorAccess but still denied — possible reasons?       | 👉 SCP restriction, Resource policy deny, Permission boundary, MFA condition failure              |
+| 3️⃣    | 🪣 EC2 cannot access S3 bucket — why?                                      | 👉 Missing IAM Role permissions                                                                   |
+| 4️⃣    | 🔐 Why use IAM Role instead of access keys on EC2?                         | 👉 More secure temporary credentials                                                              |
+| 5️⃣    | ⚡ Lambda unable to access DynamoDB — checks?                               | 👉 Lambda execution role permissions                                                              |
+| 6️⃣    | ☸️ Pod in EKS cannot access AWS services — checks?                         | 👉 IRSA configuration, OIDC provider, Service account annotation, IAM policy                      |
+| 7️⃣    | 🚨 Developer accidentally committed AWS keys to GitHub — immediate action? | 👉 Disable/rotate keys, Audit usage, Remove exposed secrets                                       |
+| 8️⃣    | 👑 Root account being used daily — concern?                                | 👉 Major security risk                                                                            |
+| 9️⃣    | 🛡️ Best practice for AWS admin access?                                    | 👉 IAM users/roles with MFA                                                                       |
+| 🔟     | 📱 User lost MFA device — recovery?                                        | 👉 Admin resets MFA configuration                                                                 |
+| 1️⃣1️⃣ | 🔒 Why enforce MFA for privileged users?                                   | 👉 Prevent unauthorized access                                                                    |
+| 1️⃣2️⃣ | 🎯 Developer requests full admin access — what do you do?                  | 👉 Grant least privilege permissions only                                                         |
+| 1️⃣3️⃣ | ⚠️ Why avoid wildcard (*) permissions?                                     | 👉 Excessive access/security risk                                                                 |
+| 1️⃣4️⃣ | 🌍 One AWS account needs access to another — solution?                     | 👉 IAM Role + Trust Policy                                                                        |
+| 1️⃣5️⃣ | 🔗 Cross-account access failing — checks?                                  | 👉 Trust relationship, IAM permissions, AssumeRole permissions                                    |
+| 1️⃣6️⃣ | ☸️ IRSA not working in EKS — troubleshooting?                              | 👉 OIDC provider exists, Correct service account annotation, Trust policy conditions, Pod restart |
+| 1️⃣7️⃣ | 🔑 Which STS API used in IRSA?                                             | 👉 `AssumeRoleWithWebIdentity`                                                                    |
+| 1️⃣8️⃣ | 📜 Policy attached but access still denied — why?                          | 👉 Wrong resource ARN, Explicit deny, Missing action permissions                                  |
+| 1️⃣9️⃣ | 📂 User can list bucket but cannot download objects — reason?              | 👉 Missing `s3:GetObject` permission                                                              |
+| 2️⃣0️⃣ | 💻 AWS CLI works locally but not on EC2 — checks?                          | 👉 IAM role attachment and metadata access                                                        |
+| 2️⃣1️⃣ | ⏱️ EC2 role updated but permissions not working immediately — why?         | 👉 Credential caching or propagation delay                                                        |
+| 2️⃣2️⃣ | 🔄 Why temporary credentials preferred?                                    | 👉 Reduced risk exposure                                                                          |
+| 2️⃣3️⃣ | ⌛ Service using expired credentials — impact?                              | 👉 Authentication failures                                                                        |
+| 2️⃣4️⃣ | 🏢 Admin user unable to create EC2 instance — why?                         | 👉 SCP restriction at organization level                                                          |
+| 2️⃣5️⃣ | ⚖️ Difference between IAM policy and SCP?                                  | 👉 IAM policy grants permissions, SCP sets maximum allowed permissions                            |
+| 2️⃣6️⃣ | 🌐 Public bucket unintentionally exposed — fix?                            | 👉 Remove public policy and enable Block Public Access                                            |
+| 2️⃣7️⃣ | 🌍 Bucket accessible from one IP only — how implemented?                   | 👉 IAM/Bucket policy conditions                                                                   |
+| 2️⃣8️⃣ | 🏢 Company wants centralized login for AWS — solution?                     | 👉 Federation or SSO                                                                              |
+| 2️⃣9️⃣ | 👥 Why enterprises prefer SSO over IAM users?                              | 👉 Centralized identity management                                                                |
+| 3️⃣0️⃣ | 📊 Need to know who deleted an EC2 instance — service?                     | 👉 Amazon Web Services CloudTrail                                                                 |
+| 3️⃣1️⃣ | 🔍 Need to identify unused permissions — tool?                             | 👉 IAM Access Analyzer                                                                            |
+| 3️⃣2️⃣ | 🔑 IAM user has long-unused active access keys — risk?                     | 👉 Credential compromise risk                                                                     |
+| 3️⃣3️⃣ | 🔄 Best practice for access key rotation?                                  | 👉 Rotate periodically and monitor usage                                                          |
+| 3️⃣4️⃣ | ⚡ Lambda can invoke another Lambda but S3 cannot — why?                    | 👉 Missing resource-based policy                                                                  |
+| 3️⃣5️⃣ | 🚧 Developer attached admin policy but still limited — reason?             | 👉 Permission boundary restriction                                                                |
+| 3️⃣6️⃣ | 🚨 Entire production deleted accidentally — prevention?                    | 👉 Least privilege, MFA, SCP guardrails                                                           |
+| 3️⃣7️⃣ | ⚠️ IAM misconfiguration caused outage — common reasons?                    | 👉 Wrong deny policy, Missing permissions, SCP mistakes                                           |
+| 3️⃣8️⃣ | 🌐 EC2 cannot access AWS API despite correct IAM role — why?               | 👉 No internet/NAT or missing VPC endpoint                                                        |
+| 3️⃣9️⃣ | ☸️ Multiple EKS apps need different AWS permissions — best approach?       | 👉 IRSA per ServiceAccount                                                                        |
+| 4️⃣0️⃣ | 💻 Check current AWS identity?                                             | 👉 `aws sts get-caller-identity`                                                                  |
+| 4️⃣1️⃣ | 📜 List attached IAM role policies?                                        | 👉 `aws iam list-attached-role-policies --role-name MyRole`                                       |
+| 4️⃣2️⃣ | 🎯 Why use condition keys in policies?                                     | 👉 Fine-grained access control                                                                    |
+| 4️⃣3️⃣ | 🌍 Example of condition-based access?                                      | 👉 Restrict access to specific IP/VPC                                                             |
+| 4️⃣4️⃣ | 🛡️ Why IAM considered foundation of AWS security?                         | 👉 Controls authentication and authorization for all AWS resources                                |
+| 4️⃣5️⃣ | 🔥 Most common IAM production mistakes?                                    | 👉 Overprivileged access, Hardcoded keys, Missing MFA, Public exposure                            |
+
+---
+
+## 🔐 IRSA, Trust Policy & OIDC — Rapid Fire Interview Q&A
+| #️⃣    | ❓ Question                                              | ✅ Answer                                                                                                              |
+| ------ | ------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| 1️⃣    | 🔐 What is a Trust Policy?                              | 👉 Defines who can assume an IAM role                                                                                       |
+| 2️⃣    | 🎯 What does a Trust Policy control?                    | 👉 Who can access/assume the role                                                                                           |
+| 3️⃣    | 📦 Which IAM entity contains Trust Policy?              | 👉 IAM Role                                                                                                                 |
+| 4️⃣    | 📝 One-line definition of Trust Policy?                 | 👉 Defines trusted entities allowed to assume a role                                                                        |
+| 5️⃣    | 👥 Common trusted entities in Trust Policy?             | 👉 IAM users, AWS services, AWS accounts, OIDC providers                                                                    |
+| 6️⃣    | 🔄 What is `sts:AssumeRole`?                            | 👉 Assume role using AWS identity                                                                                           |
+| 7️⃣    | 🌐 What is `sts:AssumeRoleWithWebIdentity`?             | 👉 Assume role using OIDC/JWT token                                                                                         |
+| 8️⃣    | ☸️ Which STS action is used by IRSA?                    | 👉 `sts:AssumeRoleWithWebIdentity`                                                                                          |
+| 9️⃣    | 🤔 Why does IRSA use AssumeRoleWithWebIdentity?         | 👉 Kubernetes provides OIDC tokens instead of AWS credentials                                                               |
+| 🔟     | 🛡️ What is STS?                                        | 👉 AWS Security Token Service                                                                                               |
+| 1️⃣1️⃣ | ⏳ Purpose of AWS STS?                                   | 👉 Generates temporary credentials                                                                                          |
+| 1️⃣2️⃣ | ⚖️ Trust Policy vs Permission Policy?                   | 👉 Trust Policy = who can assume role; Permission Policy = allowed actions                                                  |
+| 1️⃣3️⃣ | 🔑 Which policy defines AWS actions?                    | 👉 Permission Policy                                                                                                        |
+| 1️⃣4️⃣ | 👤 Which policy defines trusted entities?               | 👉 Trust Policy                                                                                                             |
+| 1️⃣5️⃣ | 📌 Where is Permission Policy attached?                 | 👉 User, Role, or Group                                                                                                     |
+| 1️⃣6️⃣ | 📍 Where is Trust Policy attached?                      | 👉 IAM Role only                                                                                                            |
+| 1️⃣7️⃣ | 👥 What is Principal in Trust Policy?                   | 👉 Trusted entity allowed to assume role                                                                                    |
+| 1️⃣8️⃣ | ☁️ Example Principal for EC2?                           | 👉 `"ec2.amazonaws.com"`                                                                                                    |
+| 1️⃣9️⃣ | ☸️ Example Principal for IRSA?                          | 👉 OIDC provider ARN                                                                                                        |
+| 2️⃣0️⃣ | ⚙️ What is Effect field?                                | 👉 Allow or Deny access                                                                                                     |
+| 2️⃣1️⃣ | ✅ Most common Effect value?                             | 👉 `"Allow"`                                                                                                                |
+| 2️⃣2️⃣ | 🔒 Purpose of Condition in Trust Policy?                | 👉 Adds extra security restrictions                                                                                         |
+| 2️⃣3️⃣ | 🛡️ Why is Condition important?                         | 👉 Prevents unauthorized role assumption                                                                                    |
+| 2️⃣4️⃣ | 📋 Examples of Condition checks?                        | 👉 IP restriction, MFA, OIDC sub, aud claim                                                                                 |
+| 2️⃣5️⃣ | 🌐 What is OIDC?                                        | 👉 OpenID Connect identity provider                                                                                         |
+| 2️⃣6️⃣ | ☸️ Why is OIDC used in EKS?                             | 👉 Securely verifies Pod identities                                                                                         |
+| 2️⃣7️⃣ | 🔑 What does OIDC provider do in IRSA?                  | 👉 AWS trusts Kubernetes-issued tokens                                                                                      |
+| 2️⃣8️⃣ | ❌ What happens if OIDC provider is missing?             | 👉 IRSA fails completely                                                                                                    |
+| 2️⃣9️⃣ | 🔍 Command to verify EKS OIDC provider?                 | 👉 `aws eks describe-cluster --name my-cluster --query "cluster.identity.oidc.issuer"`                                      |
+| 3️⃣0️⃣ | 🔗 Command to enable OIDC provider?                     | 👉 `eksctl utils associate-iam-oidc-provider --cluster my-cluster --approve`                                                |
+| 3️⃣1️⃣ | ☸️ What is IRSA?                                        | 👉 IAM Roles for Service Accounts                                                                                           |
+| 3️⃣2️⃣ | 🎯 Main purpose of IRSA?                                | 👉 Secure AWS access for Pods without static credentials                                                                    |
+| 3️⃣3️⃣ | 🚫 Problem solved by IRSA?                              | 👉 Avoid storing AWS keys inside Pods                                                                                       |
+| 3️⃣4️⃣ | 📝 One-line IRSA definition?                            | 👉 Kubernetes Pods securely access AWS using IAM roles and OIDC                                                             |
+| 3️⃣5️⃣ | 🔄 Core IRSA flow?                                      | 👉 Pod → ServiceAccount → IAM Role → AWS Access                                                                             |
+| 3️⃣6️⃣ | 🔐 What does IRSA Trust Policy define?                  | 👉 Which Kubernetes ServiceAccount can assume IAM role                                                                      |
+| 3️⃣7️⃣ | ⚡ Important action in IRSA Trust Policy?                | 👉 `"sts:AssumeRoleWithWebIdentity"`                                                                                        |
+| 3️⃣8️⃣ | 👤 What does `sub` condition represent?                 | 👉 Kubernetes ServiceAccount identity                                                                                       |
+| 3️⃣9️⃣ | 🏷️ Format of IRSA `sub` value?                         | 👉 `system:serviceaccount:<namespace>:<serviceaccount>`                                                                     |
+| 4️⃣0️⃣ | 📌 Example `sub` value?                                 | 👉 `system:serviceaccount:default:my-app`                                                                                   |
+| 4️⃣1️⃣ | 📂 What does namespace in `sub` provide?                | 👉 Scope restriction                                                                                                        |
+| 4️⃣2️⃣ | ❌ What happens if namespace mismatches?                 | 👉 Access denied                                                                                                            |
+| 4️⃣3️⃣ | 🎯 Why add `aud: sts.amazonaws.com`?                    | 👉 Ensure token intended for AWS STS                                                                                        |
+| 4️⃣4️⃣ | 🚫 What happens if `aud` missing?                       | 👉 Token validation fails                                                                                                   |
+| 4️⃣5️⃣ | ⚠️ What happens if Condition removed from Trust Policy? | 👉 Any Pod could assume role                                                                                                |
+| 4️⃣6️⃣ | ☠️ Why is wildcard `*` dangerous in Trust Policy?       | 👉 Allows excessive Pod access                                                                                              |
+| 4️⃣7️⃣ | 📜 Command to create IAM policy?                        | 👉 `aws iam create-policy`                                                                                                  |
+| 4️⃣8️⃣ | 🏗️ Command to create IAM role?                         | 👉 `aws iam create-role`                                                                                                    |
+| 4️⃣9️⃣ | 🔗 Command to attach policy to role?                    | 👉 `aws iam attach-role-policy`                                                                                             |
+| 5️⃣0️⃣ | 🛡️ Why attach least privilege policies?                | 👉 Minimize security risks                                                                                                  |
+| 5️⃣1️⃣ | 👤 Purpose of Kubernetes ServiceAccount in IRSA?        | 👉 Pod identity                                                                                                             |
+| 5️⃣2️⃣ | 🏷️ Important ServiceAccount annotation?                | 👉 `eks.amazonaws.com/role-arn`                                                                                             |
+| 5️⃣3️⃣ | 🔗 What does annotation do?                             | 👉 Links IAM role to Kubernetes ServiceAccount                                                                              |
+| 5️⃣4️⃣ | ❌ What happens if annotation is wrong?                  | 👉 Pod won’t get AWS access                                                                                                 |
+| 5️⃣5️⃣ | 📥 Command to apply ServiceAccount YAML?                | 👉 `kubectl apply -f sa.yaml`                                                                                               |
+| 5️⃣6️⃣ | 🔄 How does Pod get AWS credentials?                    | 👉 Pod calls STS using OIDC token                                                                                           |
+| 5️⃣7️⃣ | 🔑 Are AWS access keys stored in Pod?                   | 👉 No                                                                                                                       |
+| 5️⃣8️⃣ | ⏳ What type of credentials are returned?                | 👉 Temporary STS credentials                                                                                                |
+| 5️⃣9️⃣ | 🔍 Command to verify identity inside Pod?               | 👉 `aws sts get-caller-identity`                                                                                            |
+| 6️⃣0️⃣ | 📋 Expected output of get-caller-identity?              | 👉 IAM role ARN                                                                                                             |
+| 6️⃣1️⃣ | 📂 Where is OIDC token mounted inside Pod?              | 👉 `/var/run/secrets/...`                                                                                                   |
+| 6️⃣2️⃣ | 🔄 Does Kubernetes refresh OIDC token automatically?    | 👉 Yes                                                                                                                      |
+| 6️⃣3️⃣ | 🔁 Internal IRSA authentication flow?                   | 👉 Pod starts → OIDC token mounted → STS AssumeRoleWithWebIdentity → Trust policy validation → Temporary credentials issued |
+| 6️⃣4️⃣ | 🛡️ Who validates OIDC token?                           | 👉 AWS STS                                                                                                                  |
+| 6️⃣5️⃣ | 🔍 What validates Pod identity?                         | 👉 Trust Policy `sub` condition                                                                                             |
+| 6️⃣6️⃣ | ⚠️ Most common IRSA issue?                              | 👉 Namespace or ServiceAccount mismatch                                                                                     |
+| 6️⃣7️⃣ | 🔎 IRSA not working — first thing to check?             | 👉 OIDC provider enabled                                                                                                    |
+| 6️⃣8️⃣ | 👤 Pod using default ServiceAccount — why no access?    | 👉 Default SA usually has no IAM role annotation                                                                            |
+| 6️⃣9️⃣ | 🔄 IRSA stopped after recreating EKS cluster — why?     | 👉 OIDC provider ID changed                                                                                                 |
+| 7️⃣0️⃣ | 🛠️ Fix after OIDC ID changes?                          | 👉 Update Trust Policy                                                                                                      |
+| 7️⃣1️⃣ | 👥 Multiple ServiceAccounts using same role — how?      | 👉 Use `StringLike` with multiple sub values                                                                                |
+| 7️⃣2️⃣ | 🌍 Namespace-wide access example?                       | 👉 `system:serviceaccount:default:*`                                                                                        |
+| 7️⃣3️⃣ | ⚠️ Is namespace-wide access recommended?                | 👉 No, avoid unless necessary                                                                                               |
+| 7️⃣4️⃣ | 🛡️ Best IRSA security practice?                        | 👉 Least privilege                                                                                                          |
+| 7️⃣5️⃣ | 🔒 Why separate IAM roles per app?                      | 👉 Reduce blast radius                                                                                                      |
+| 7️⃣6️⃣ | ❌ Why avoid `Resource: "*"`?                            | 👉 Prevent over-permission                                                                                                  |
+| 7️⃣7️⃣ | 📊 Why audit IAM roles regularly?                       | 👉 Detect misuse and privilege creep                                                                                        |
+| 7️⃣8️⃣ | ☁️ EC2 accessing S3 uses what Principal?                | 👉 `ec2.amazonaws.com`                                                                                                      |
+| 7️⃣9️⃣ | ☸️ EKS Pod accessing S3 securely uses what?             | 👉 IRSA                                                                                                                     |
+| 8️⃣0️⃣ | 🔐 Why is IRSA better than access keys?                 | 👉 No static credentials                                                                                                    |
+| 8️⃣1️⃣ | 🚀 Final one-line IRSA explanation?                     | 👉 OIDC + Trust Policy securely map Kubernetes Pods to IAM roles                                                            |
+
+---
+
+## 🔥 IAM Interview Gold Tips
+| ⭐ Best Practice                        | 💡 Why Important                |
+| -------------------------------------- | ------------------------------- |
+| 🔐 Enable MFA everywhere               | Extra account protection        |
+| 🎯 Follow least privilege              | Reduce attack surface           |
+| 🚫 Avoid root account usage            | Prevent accidental damage       |
+| ⏳ Use IAM Roles instead of access keys | Temporary credentials are safer |
+| 🔄 Rotate access keys regularly        | Improve security                |
+| ☸️ Use IRSA for EKS Pods               | Secure pod-level AWS access     |
+| 📊 Enable CloudTrail logging           | Auditing and compliance         |
+| 🔍 Use IAM Access Analyzer             | Detect unintended access        |
+| 🚧 Use SCPs in Organizations           | Centralized guardrails          |
+| 🌐 Use federation/SSO                  | Centralized identity management |
