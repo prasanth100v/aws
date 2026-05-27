@@ -94,6 +94,7 @@
 
 ## What happens when multiple policies are attached?
   * IAM evaluate policies
+
 | 🧩 Rule             | 💡 Meaning                                     |
 | -------------------- | ---------------------------------------------- |
 | ❌ **Explicit Deny** | 🚫 Highest priority, overrides `any Allow`    |
@@ -110,7 +111,6 @@
 
 ### 🔐 Multi-Factor Authentication (MFA)
 📘 What is MFA?
-
  * Adds extra security layer:
     - Password 🔑
     - OTP / Code 📱
@@ -143,10 +143,10 @@
 | ------------------------------ | --------------- | ------------------------------------------------------------------------- | -------------------------------------------------------- |
 | 👤 **Human login**             | 👤 IAM User    | 🧑 Individual identity for developers/admins to access AWS Console or CLI | 👉 Prefer SSO/temporary credentials over long-term users |
 | 🤖 **AWS service interaction** | 🤖 IAM Role    | ⚙️ Permissions assumed by services (EC2, Lambda, EKS Pods via IRSA)       | 👉 Use roles instead of hardcoding credentials           |
-| 🔑 **API/CLI access**          | 🔑 Access Keys | 💻 Programmatic access (Access Key ID + Secret Key)                       | ⚠️ Avoid long-lived keys; rotate regularly               |
+| 🔑 **API/CLI access**          | 🔑 Access Keys | 💻 Programmatic access (`Access Key ID + Secret Key`)                     | ⚠️ Avoid long-lived keys; rotate regularly               |
 
 ## 🔄 IAM Users vs Roles
-| 🧩 Feature     | 👤 IAM User                        | 🔄 IAM Role                      | 🧠 Explanation                                                  |
+| 🧩 Feature     | 👤 IAM User                       | 🔄 IAM Role                      | 🧠 Explanation                                                  |
 | -------------- | ---------------------------------- | -------------------------------- | --------------------------------------------------------------- |
 | 🔑 Access      | 🔒 Permanent                       | ⏳ Temporary                      | Users have long-term access; roles are assumed for limited time |
 | 🧾 Credentials | 🔑 Access Key + Secret (long-term) | 🎟️ STS tokens (short-term)      | Roles use temporary credentials issued by AWS STS             |
@@ -167,7 +167,6 @@
 | ☁️ **AWS Service**         | EC2, Lambda, ECS, EKS        | 👉 AWS service assumes role via service principal (`ec2.amazonaws.com`) | App accessing S3 without keys     |
 | 🏢 **AWS Account**         | IAM Users / Roles            | 👉 Another account/user assumes role using `sts:AssumeRole`             | Cross-account access (Dev → Prod) |
 | 🌐 **Web Identity (OIDC)** | External IdP / Kubernetes    | 👉 Uses OIDC token with `sts:AssumeRoleWithWebIdentity`                 | IRSA in EKS, Google login         |
-| 🏛 **SAML**                 | Corporate Identity Providers | 👉 Uses SAML assertion for authentication                               | Enterprise SSO (Okta, Azure AD)   |
 
 ---
 
@@ -205,14 +204,13 @@ Secure Access to AWS Resource 🔐
   }
 }
 ```
-## How do you audit IAM permissions?
 
+## How do you audit IAM permissions?
  * IAM Access Analyzer
  * CloudTrail logs
  * Credential reports
 
 ## ⚠️ I attached full S3 access, but still getting Access Denied. Why?
-
  * Even if IAM allows, access can still be denied due to:
     * ❌ `Explicit Deny` in any policy
     * ❌ `S3 Bucket Policy` blocking access
@@ -221,8 +219,7 @@ Secure Access to AWS Resource 🔐
     * 👉 Key line to say: `Explicit Deny` always overrides Allow across all policy types.
 
 ## 🔐 User can access AWS Console but not CLI. Why?
-
- * Console uses password (authentication)
+ * Console uses password (`authentication`)
  * CLI requires access keys
  * 👉 Possible issue: Access keys `not created` or `inactive`
 
@@ -239,7 +236,6 @@ Secure Access to AWS Resource 🔐
 ```
 
 ## Developer accidentally exposed access keys on GitHub. What do you do?
-
  * ❌ Immediately disable/delete keys
  * 🔄 Rotate credentials
  * 🔍 Check logs using CloudTrail
@@ -247,13 +243,11 @@ Secure Access to AWS Resource 🔐
  * 🚫 Use roles instead of keys going forward
 
 ## You have 100 developers. How do you manage permissions efficiently?
-
  * Use Groups
  * Attach managed policies to groups
  * Avoid individual user policies
 
 ## User says they didn’t delete resource, but it’s gone. How do you investigate?
-
  * Check AWS CloudTrail logs
  * Identify:
    * Who performed action
@@ -261,25 +255,37 @@ Secure Access to AWS Resource 🔐
    * From which IP
 
 ## How to allow access to only one specific S3 bucket?”
-
   * Define resource ARN : `Resource": "arn:aws:s3:::my-bucket/*`
 
 ---
 
 ## 🛠️ Steps to Create IAM User
-
-1. 🔑 Login to AWS Console  
-2. ⚙️ Go to **IAM Service** ` Identity & Access Management `
-3. 👤 Click **Users → Add User**  
-4. 🏷️ Enter username  
-5. 🔐 Choose access type:
-      - Console access  
-      - Programmatic access  
-6. 🛡️ Attach permissions:
-      - AdministratorAccess  
-      - ReadOnlyAccess  
-7. 🔑 Enable MFA `multi-factor authentication` (🚨 Strongly recommended)  
-8. ✅ Review & Create user  `🔍 Double-check permissions`
+| 🔢 Step       | 🛠️ Action                  | 📘 Details                                                                            |
+| ------------- | --------------------------- | ------------------------------------------------------------------------------------- |
+| 🔐 **1️⃣**    | ☁️ **Login to AWS Console** | Open [AWS Management Console]                                                        |
+|               | 🔑                          | Sign in using root or admin account                                                   |
+| 🛡️ **2️⃣**   | 📂 **Open IAM Service**     | Search for **IAM**                                                                    |
+|               | 🌐                          | Open the **IAM Dashboard**                                                            |
+| 👥 **3️⃣**    | 📋 **Go to Users**          | From the left-side menu click **Users**                                               |
+| ➕ **4️⃣**     | 🚀 **Add User**             | Click **Create user**                                                                 |
+| 📝 **5️⃣**    | 👤 **Enter User Details**   | Provide user information                                                              |
+|               | 📛                          | **User Name:** `devops-user`                                                          |
+| 🔑 **6️⃣**    | ⚙️ **Select Access Type**   | Choose required access                                                                |
+|               | 🌐                          | **AWS Management Console access**                                                     |
+|               | 💻                          | **Programmatic access (CLI/API)** *(optional)*                                        |
+| 🔒 **7️⃣**    | 🛡️ **Set Password**        | Choose auto-generated or custom password                                              |
+|               | 🔄                          | Optional: Force password reset                                                        |
+| 📜 **8️⃣**    | 🔐 **Set Permissions**      | Choose one permission method                                                          |
+|               | 👥                          | Add user to group                                                                     |
+|               | 📋                          | Copy permissions                                                                      |
+|               | 📎                          | Attach policies directly                                                              |
+| 🏷️ **9️⃣**   | 📌 **Attach Policies**      | Example IAM policies                                                                  |
+|               | 👑                          | `AdministratorAccess`                                                                 |
+|               | 📦                          | `AmazonS3ReadOnlyAccess`                                                              |
+|               | 🖥️                         | `AmazonEC2FullAccess`                                                                 |
+| 👀 **🔟**     | ✅ **Review Configuration**  | Verify all settings                                                                   |
+| 🚀 **1️⃣1️⃣** | 🎯 **Create User**          | Click **Create user**                                                                 |
+| 💾 **1️⃣2️⃣** | 🔑 **Download Credentials** | Save username, password, or access keys securely                                      |
 
 ---
 
