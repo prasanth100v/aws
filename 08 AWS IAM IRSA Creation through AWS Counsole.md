@@ -43,6 +43,7 @@
   * Create
 
 ## 🧩 Step 3: Create IAM Role (GUI)
+
 | 🔢 Step | 📖 Action                                        | 🧠 How It Works                                                        | 💡 Important Note              |
 | ------- | ------------------------------------------------ | ---------------------------------------------------------------------- | ------------------------------ |
 | 1️⃣     | 🧭 Go to IAM → Click Roles → Create role         | 👉 Start role creation                                                 | Core IRSA step                 |
