@@ -25,12 +25,12 @@
 
 
 ## 📦 Task Definition (Blueprint)
- * A **Task Definition** is a blueprint for running a container in ECS. It includes details (`JSON format`) like:
+ * A **Task Definition** is a blueprint for running a container in ECS. It includes details like:
     * 🐳 Container Image
     * 💻 CPU & Memory
     * 🌐 Networking
     * 📜 Logging
-    * 🔐 IAM Roles 👉 Defined in JSON format.
+    * 🔐 IAM Roles 👉 Defined in `JSON format`.
 
 ## 🎯 Key Features (`Amazon ECS`)
 | 🧩 Feature                 | 💡 Description                                              |
