@@ -15,6 +15,7 @@
 ### 🧠 Control Plane
  - Managed by AWS
  - Includes:
+
 | 🧩 Component          | 💡 Description                           |
 | --------------------- | ---------------------------------------- |
 | 🌐 API Server         | 🔗 Entry point for cluster management & Handles requests(`kubectl/API calls`)   |
@@ -31,6 +32,7 @@
 ### 🖥️ Worker Nodes
  - Run our applications (`pods`)  
  - Can be:
+
 | 🧩 Option              | 💡 Description                           |
 | ---------------------- | -------------------------------------------- |
 | 🖥️ 🛠️ Self-managed Nodes | `EC2 Instances `🔧 You manage nodes manually    |
@@ -48,6 +50,7 @@
  - Collection of worker nodes  
  - Same configuration  
  - Can be managed or self-managed
+
 | 🧩 Type               | 💡 Description                   |
 | --------------------- | -------------------------------- |
 | ⚙️ Managed Node Group | 🤖 AWS manages scaling & updates |
@@ -55,6 +58,7 @@
 
 ### 🔌 Add-ons (Extra features 🔌)
  * Pre-configured Kubernetes components: 
+
 | 🧩 Add-on     | 💡 Purpose           |
 | ------------- | -------------------- |
 | 🌐 CoreDNS    | 🔍 Service discovery |
