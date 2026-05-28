@@ -1,31 +1,30 @@
 # 📦 Amazon ECR (Elastic Container Registry) – Complete Guide
 ## 🌟 What is Amazon ECR?
-**Amazon Elastic Container Registry (ECR)** is a fully managed Docker container registry from Amazon Web Services. 
-
-👉 It is used to:
-  * 📦 Store Docker images
-  * 🔄 Manage image versions
-  * 🚀 It integrates seamlessly with services like:
+ * **Amazon Elastic Container Registry (ECR)** is a fully managed Docker container registry from Amazon Web Services.
+ * 👉 It is used to:
+   * 📦 Store Docker images
+   * 🔄 Manage image versions
+   * 🚀 It integrates seamlessly with services like:
        * 🚀 ECS (Elastic Container Service)
        * ☸️ EKS (Elastic Kubernetes Service)
        * ⚡ Fargate
 
-💡 Think: 🐳 “ECR = Docker Hub but inside AWS (secure + integrated)”
+💡 Think: 🐳 “ECR = Docker Hub but inside AWS (`secure + integrated`)”
 
 ---
 
 ## 🔐 Public vs Private Repositories
-Amazon ECR supports two types of repositories:
+ * Amazon ECR supports two types of repositories:
 
 ### 🌍 Public Repositories
-- Anyone can **pull images**
-- No authentication required
-- Ideal for open-source images
+  - Anyone can **pull images**
+  - No authentication required
+  - Ideal for open-source images
 
 ### 🔒 Private Repositories
-- Restricted access via **IAM policies**
-- Secure storage for internal applications
-- Only authorized users can access
+  - Restricted access via **IAM policies**
+  - Secure storage for internal applications
+  - Only authorized users can access
 
 ---
 
@@ -34,7 +33,7 @@ Amazon ECR supports two types of repositories:
 | -------------------------- | ------------------------------------------------------------------------------------------------ |
 | ✨ Fully Managed & Scalable | ☁️ No infrastructure to manage — AWS handles scaling automatically (AWS handles everything) |
 | 🔐 Secure by Default       | 🛡️ IAM-based access control + Image vulnerability scanning             |
-| 🔗 AWS Integration         | ⚙️ Works seamlessly with ECS, EKS, and Fargate            |
+| 🔗 AWS Integration         | ⚙️ Works seamlessly with `ECS`, `EKS`, and `Fargate`            |
 | 📦 Flexible Repositories   | 🌐 Supports both public & private container registries         |
 | 🧹 Lifecycle Policies      | 🗑️ Auto-delete old/unused images → reduces cost            |
 | 🛡️ Image Scanning         | 🔍 Detects vulnerabilities in container images for better security           |
@@ -45,22 +44,22 @@ Amazon ECR supports two types of repositories:
 | 🧩 Concept            | 📌 Description                 | 💡 Why it Matters                                     |
 | --------------------- | ------------------------------ | ----------------------------------------------------- |
 | 📄 Repository         | 📦 Storage location for images | 🗂️ Organizes container images (e.g., `my-app-repo`)  |
-| 🏷️ Tags              | 🔢 Versioning of images        | 🔄 Helps rollback & track versions (`v1.0`, `latest`) |
+| 🏷️ Tags               | 🔢 Versioning of images        | 🔄 Helps rollback & track versions (`v1.0`, `latest`) |
 | 🔍 Image Scanning     | 🛡️ Detect vulnerabilities     | 🔐 Improves container security                        |
 | 🔄 Lifecycle Policies | 🗑️ Auto-delete old images     | 💰 Saves storage cost                                 |
 
 ### 🔐 Security Features
 | 🧩 Feature            | 💡 Description                                 |
 | --------------------- | ---------------------------------------------- |
-| 🔑 IAM Access Control | 👤 Control who can push/pull images            |
+| 🔑 IAM Access Control | 👤 Control` who can push/pull images `           |
 | 🔐 KMS Encryption     | 🛡️ Encrypt images at rest                     |
-| 🌐 VPC Endpoints      | 🔒 Private network access (no internet needed) |
+| 🌐 VPC Endpoints      | 🔒 Private network access (`no internet needed`) |
 | 🔍 Image Scanning     | 🚨 Detect vulnerabilities in images            |
 
 
 ## 💾 Storage & Pricing
-- Uses **Amazon S3** for storing container images  
-- Ensures **high durability and availability**
+  - Uses **Amazon S3** for storing container images  
+  - Ensures **high durability and availability**
 
 💰 Pricing is based on:
 | 🧩 Factor         | 💡 Description             |
@@ -70,41 +69,38 @@ Amazon ECR supports two types of repositories:
 | 🔍 Image Scanning | ⚙️ Optional paid feature   |
 
 ## 🏷️ Image Tagging
-Tags help:
-- Version images (e.g., `v1`, `latest`)
-- Identify specific builds
-- Manage deployments easily
+* Tags help:
+  - Version images (e.g., `v1`, `latest`)
+  - Identify specific builds
+  - Manage deployments easily
 
 ---
 
 # 🛠️ Step-by-Step: Create ECR Repository
 
 ## 🏗️ 1. Create a Repository
-
 1. Open **Amazon ECR Dashboard**
 2. Click **"Create repository"**
 3. Enter repository name  
-   👉 Example: `my-app-repo`
+   * 👉 Example: `my-app-repo`
 
 ### ⚙️ Optional Settings
+ - 🔒 **Tag Immutability**
+    - Mutable → tags can be overwritten  
+    - Immutable → prevents overwriting  
 
-- 🔒 **Tag Immutability**
-  - Mutable → tags can be overwritten  
-  - Immutable → prevents overwriting  
+ - 🛡️ **Scan on Push**
+    - Automatically scans images for vulnerabilities  
 
-- 🛡️ **Scan on Push**
-  - Automatically scans images for vulnerabilities  
+ - 🔐 **KMS Encryption**
+    - Encrypt repository using AWS KMS  
 
-- 🔐 **KMS Encryption**
-  - Encrypt repository using AWS KMS  
-
-👉 Click **Create Repository**
-
-🎉 Your repository is ready!
+ * 👉 Click **Create Repository**
+ * 🎉 Your repository is ready!
 
 ---
 
-# 🔑 Authenticate Docker with ECR
+## 🔑 Authenticate Docker with ECR
 ### How ECR Works (Flow)
 🔄 Workflow:
 
@@ -115,35 +111,36 @@ Tags help:
 5️⃣ Container runs 🚀
 
 Use the following command:
-
-```bash
+```hcl
 aws ecr get-login-password --region <region> | docker login \
 --username AWS \
 --password-stdin <aws_account_id>.dkr.ecr.<region>.amazonaws.com
 ```
-### 🐳 3. Build and Tag Docker Image
 
-```
+### 🐳 3. Build and Tag Docker Image
+```hcl
 docker build -t my-app-image .                                           # 🔨 Build Image
 
 docker tag my-app-image:latest \                                         # 🏷️ Tag Image
 <aws_account_id>.dkr.ecr.<region>.amazonaws.com/my-app-repo:latest
 ```
+
 ### 🚀 4. Push Image to ECR
-```
+```hcl
 docker push <aws_account_id>.dkr.ecr.<region>.amazonaws.com/<repository-name>:<tag>
 ```
+
 ### 📥 5. Pull Image from ECR
-```
+```hcl
 docker pull <aws_account_id>.dkr.ecr.<region>.amazonaws.com/my-app:latest
 ```
+
 ## 🎯 Summary
- * 📦 ECR = Secure Docker image registry on AWS
- * 🔐 Supports IAM-based access
- * 🌍 Public & Private repositories
- * 🧹 Lifecycle policies reduce storage cost
- * 🛡️ Image scanning improves security
- * ⚡ Seamless integration with ECS, EKS, Fargate
+  * 📦 ECR = Secure Docker image registry on AWS
+  * 🔐 Supports IAM-based access
+  * 🌍 Public & Private repositories
+  * 🧹 Lifecycle policies reduce storage cost
+  * 🛡️ Image scanning improves security
+  * ⚡ Seamless integration with `ECS`, `EKS`, `Fargate`
 
 ### 💡 Amazon ECR is the backbone of container image management in AWS, making deployments faster, safer, and scalable.
-
