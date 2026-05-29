@@ -205,7 +205,7 @@
 | 4️⃣ | Common threats blocked?           | 👉 SQL Injection, XSS, bots, malicious requests                              |
 | 5️⃣ | AWS services integrated with WAF? | 👉 `ALB`, `CloudFront`, `API Gateway`,                                       |
 
-### 🔹 Common Attacks
+### 💥 Common Attacks
 | 🚨 **Attack Type**                 | 📖 **Description**                                      | 🎯 **Target**          |
 | ---------------------------------- | ------------------------------------------------------- | ---------------------- |
 | 💉 **SQL Injection (SQLi)**        | Malicious SQL commands injected into application inputs | Database               |
