@@ -219,86 +219,74 @@ df -h
 
 ## ⚡ AWS EBS (Elastic Block Store) — Rapid Fire Interview Q&A
 
-| #️⃣ | ❓ Question                               | ✅ Answer                                                                                     |
-| --- | ---------------------------------------- | -------------------------------------------------------------------------------------------- |
-| 1️⃣ | 💾 What is Amazon EBS?                   | 👉 Amazon Elastic Block Store (EBS) is a persistent block storage service for EC2 instances. |
-| 2️⃣ | 🏗️ What type of storage is EBS?         | 👉 Block Storage  (Block storage is a data storage method that divides files into identically sized pieces called "blocks".)     |
+| #️⃣ | ❓ Question                              | ✅ Answer                                                                                                                  |
+| --- | ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| 1️⃣ | 💾 What is Amazon EBS?                   | 👉 Amazon Elastic Block Store (EBS) is a `persistent block storage service` for EC2 instances.                              |
+| 2️⃣ | 🏗️ What type of storage is EBS?         | 👉 Block Storage  (Block storage is a `data storage method `that divides files into identically sized pieces called "blocks".)     |
 | 3️⃣ | ☁️ Which AWS service primarily uses EBS? | 👉 EC2                                                                                       |
-| 4️⃣ | 🎯 Main purpose of EBS?                  | 👉 Persistent storage for operating systems, databases, and applications.                    |
-| 5️⃣ | 🔄 Is EBS persistent?                    | 👉 ✅ Yes                                                                                     |
-| 6️⃣ | ❌ Does EBS survive EC2 reboot?           | 👉 ✅ Yes                                                                                     |
+| 4️⃣ | 🎯 Main purpose of EBS?                  | 👉 Persistent storage for `operating systems`, `databases`, and `applications`.             |
+| 5️⃣ | 🔄 Is EBS persistent?                    | 👉 ✅ Yes                                                                                   |
+| 6️⃣ | ❌ Does EBS survive EC2 reboot?           | 👉 ✅ Yes                                                                                   |
 | 7️⃣ | 🌍 Is EBS regional or AZ-specific?       | 👉 Availability Zone specific                                                                |
 | 8️⃣ | 📦 What is an EBS Volume?                | 👉 Virtual hard disk attached to EC2 instances.                                              |
 | 9️⃣ | 🛡️ Is EBS automatically replicated?     | 👉 Yes, within the same Availability Zone.                                                   |
-| 🔟  | 🔌 Can EBS exist without EC2?            | 👉 ✅ Yes, as a detached volume.                                                              |
-
-
-| #️⃣    | ❓ Question                                  | ✅ Answer       |
-| ------ | ------------------------------------------- | -------------- |
-| 1️⃣1️⃣ | 📊 Main EBS volume categories?              | 👉 SSD and HDD |
-| 1️⃣2️⃣ | ⚡ General Purpose SSD volume?               | 👉 gp3         |
-| 1️⃣3️⃣ | 📈 Previous generation SSD volume?          | 👉 gp2         |
-| 1️⃣4️⃣ | 🚀 Highest performance EBS type?            | 👉 io2         |
-| 1️⃣5️⃣ | 💽 Throughput-optimized HDD?                | 👉 st1         |
-| 1️⃣6️⃣ | 🗄️ Cold HDD volume type?                   | 👉 sc1         |
-| 1️⃣7️⃣ | 🏆 Recommended volume for most workloads?   | 👉 gp3         |
-| 1️⃣8️⃣ | 📊 Best volume for databases?               | 👉 io2         |
-| 1️⃣9️⃣ | 🎬 Best volume for big data/log processing? | 👉 st1         |
-| 2️⃣0️⃣ | 📦 Best volume for archive workloads?       | 👉 sc1         |
-
-
-## Scenario-Based EBS Q&A
-| #️⃣    | 🚨 Scenario                           | ✅ Answer                                                      |
-| ------ | ------------------------------------- | ------------------------------------------------------------- |
-| 5️⃣9️⃣ | EC2 suddenly slow                     | 👉 Check EBS volume type, IOPS, throughput, QueueLength.      |
-| 6️⃣0️⃣ | Root disk 100% full                   | 👉 Clean files, extend EBS volume, resize filesystem.         |
-| 6️⃣1️⃣ | Expanded volume but OS shows old size | 👉 Filesystem not resized.                                    |
-| 6️⃣2️⃣ | New volume attached but not visible   | 👉 Check `lsblk` and `fdisk -l`.                              |
-| 6️⃣3️⃣ | Mount fails after attaching volume    | 👉 Filesystem missing or wrong device name.                   |
-| 6️⃣4️⃣ | EC2 accidentally deleted              | 👉 Restore EBS snapshot and create new volume.                |
-| 6️⃣5️⃣ | Need DR in another AZ                 | 👉 Create snapshot and restore volume in target AZ.           |
-| 6️⃣6️⃣ | Database latency issue                | 👉 Use io2 volume.                                            |
-| 6️⃣7️⃣ | Multiple servers need same volume     | 👉 Use Multi-Attach (io2/io1).                                |
-| 6️⃣8️⃣ | Root volume deleted                   | 👉 Instance becomes unusable.                                 |
-| 6️⃣9️⃣ | Security team requires encryption     | 👉 Enable EBS encryption with KMS.                            |
-| 7️⃣0️⃣ | EBS bill increasing                   | 👉 Check unused volumes, snapshots, and overprovisioned IOPS. |
-| 7️⃣1️⃣ | Volume stuck in optimizing state      | 👉 Normal behavior; volume remains usable.                    |
-| 7️⃣2️⃣ | Application slow after migration      | 👉 Verify filesystem expansion and volume type.               |
-| 7️⃣3️⃣ | EKS PVC stuck Pending                 | 👉 Check StorageClass, CSI driver, AZ mismatch.               |
-| 7️⃣4️⃣ | Data lost after EC2 termination       | 👉 Volume deleted on termination or no backup.                |
-| 7️⃣5️⃣ | Need 50,000 IOPS database storage     | 👉 Use io2.                                                   |
-
-| #️⃣    | ❓ Question                                           | ✅ Answer                                                             |
-| ------ | ---------------------------------------------------- | -------------------------------------------------------------------- |
-| 4️⃣1️⃣ | 📈 Can EBS volumes be resized?                       | 👉 ✅ Yes                                                             |
-| 4️⃣2️⃣ | ⚡ Can resize happen online?                          | 👉 ✅ Yes                                                             |
-| 4️⃣3️⃣ | 🔄 What must be done after volume expansion?         | 👉 Resize filesystem.                                                |
-| 4️⃣4️⃣ | 🔌 Can multiple volumes attach to one EC2?           | 👉 ✅ Yes                                                             |
-| 4️⃣5️⃣ | 🖥️ Can one volume attach to multiple EC2 instances? | 👉 Only with Multi-Attach (io1/io2).                                 |
-| 4️⃣6️⃣ | 📊 What is Multi-Attach?                             | 👉 One EBS volume attached to multiple EC2 instances simultaneously. |
-| 4️⃣7️⃣ | 🌍 Can EBS move between AZs directly?                | 👉 ❌ No                                                              |
-| 4️⃣8️⃣ | 🔄 How move volume to another AZ?                    | 👉 Snapshot → Create new volume in target AZ.                        |
-| 4️⃣9️⃣ | 📎 Linux command to view disks?                      | 👉 `lsblk`                                                           |
-| 5️⃣0️⃣ | 💽 Linux command to view partitions?                 | 👉 `fdisk -l`                                                        |
-
-| #️⃣    | ❓ Question                                 | ✅ Answer                                  |
-| ------ | ------------------------------------------ | ----------------------------------------- |
-| 2️⃣6️⃣ | 📸 What is an EBS Snapshot?                | 👉 Point-in-time backup of an EBS volume. |
-| 2️⃣7️⃣ | ☁️ Where are snapshots stored?             | 👉 Amazon S3 (managed internally by AWS). |
+| 🔟  | 🔌 Can EBS exist without EC2?            | 👉 ✅ Yes, as a `detached volume.`                                                         |
+| 1️⃣1️⃣ | 📊 Main EBS volume categories?              | 👉 SSD and HDD    |
+| 1️⃣2️⃣ | ⚡ General Purpose SSD volume?               | 👉 gp3           |
+| 1️⃣3️⃣ | 📈 Previous generation SSD volume?          | 👉 gp2            |
+| 1️⃣4️⃣ | 🚀 Highest performance EBS type?            | 👉 io2            |
+| 1️⃣5️⃣ | 💽 Throughput-optimized HDD?                | 👉 st1            |
+| 2️⃣6️⃣ | 📸 What is an EBS Snapshot?                | 👉 `Point-in-time backup of an EBS volume.` |
+| 2️⃣7️⃣ | ☁️ Where are snapshots stored?             | 👉 Amazon S3 (`managed internally by AWS`). |
 | 2️⃣8️⃣ | 🔄 Are snapshots incremental?              | 👉 ✅ Yes                                  |
-| 2️⃣9️⃣ | 💰 Why are incremental snapshots useful?   | 👉 Lower storage cost.                    |
+| 2️⃣9️⃣ | 💰 Why are incremental snapshots useful?   | 👉 Lower storage cost.                     |
 | 3️⃣0️⃣ | 🔁 Can you create a volume from snapshot?  | 👉 ✅ Yes                                  |
 | 3️⃣1️⃣ | 🌍 Can snapshots be copied across regions? | 👉 ✅ Yes                                  |
-| 3️⃣2️⃣ | 🛡️ Why take snapshots?                    | 👉 Backup and disaster recovery.          |
-| 3️⃣3️⃣ | ⚡ Snapshot impact on production?           | 👉 Minimal impact.                        |
+| 3️⃣2️⃣ | 🛡️ Why take snapshots?                     | 👉 Backup and disaster recovery.           |
+| 3️⃣3️⃣ | ⚡ Snapshot impact on production?          | 👉 Minimal impact.                        |
 | 3️⃣4️⃣ | 🔐 Can snapshots be encrypted?             | 👉 ✅ Yes                                  |
 | 3️⃣5️⃣ | 📦 Can AMIs use EBS snapshots?             | 👉 ✅ Yes                                  |
+| 4️⃣1️⃣ | 📈 Can EBS volumes be resized?                       | 👉 ✅ Yes                                                             |
+| 4️⃣2️⃣ | ⚡ Can resize happen online?                         | 👉 ✅ Yes                                                             |
+| 4️⃣3️⃣ | 🔄 What must be done after volume expansion?         | 👉 `Resize filesystem.`                                                |
+| 4️⃣4️⃣ | 🔌 Can multiple volumes attach to one EC2?           | 👉 ✅ Yes                                                             |
+| 4️⃣5️⃣ | 🖥️ Can one volume attach to multiple EC2 instances?  | 👉 Only with Multi-Attach (`io1/io2`  High-performance SSD).          |
+| 4️⃣6️⃣ | 📊 What is Multi-Attach?                             | 👉 One EBS volume attached to multiple EC2 instances simultaneously.  |
+| 4️⃣7️⃣ | 🌍 Can EBS move between AZs directly?                | 👉 ❌ No                                                              |
+| 4️⃣8️⃣ | 🔄 How move volume to another AZ?                    | 👉    Snapshot → Create new volume in target AZ.                      |
+| 4️⃣9️⃣ | 📎 Linux command to view disks?                      | 👉 `lsblk`                                                             |
+| 5️⃣0️⃣ | 💽 Linux command to view partitions?                 | 👉 `fdisk -l`                                                          |
 
-| ❓ Question                         | ✅ Strong Interview Answer                                                                             |
+---
+
+## Scenario-Based EBS Q&A
+| #️⃣    | 🚨 Scenario                           | ✅ Answer                                                            |
+| ------ | ------------------------------------- | --------------------------------------------------------------------- |
+| 5️⃣9️⃣ | EC2 suddenly slow                     | 👉 Check `EBS volume type`, `IOPS`, `throughput`, `QueueLength. `     |
+| 6️⃣0️⃣ | Root disk 100% full                   | 👉 `Clean files, extend EBS volume, resize filesystem`.         |
+| 6️⃣1️⃣ | Expanded volume but OS shows old size | 👉 Filesystem not resized.                                    |
+| 6️⃣2️⃣ | New volume attached but not visible   | 👉 Check `lsblk` and `fdisk -l`.                              |
+| 6️⃣3️⃣ | Mount fails after attaching volume    | 👉 `Filesystem missing` or `wrong device name`.                   |
+| 6️⃣4️⃣ | EC2 accidentally deleted              | 👉 `Restore EBS snapshot and create new volume.`                |
+| 6️⃣5️⃣ | Need DR in another AZ                 | 👉 `Create snapshot` and restore volume in target AZ.           |
+| 6️⃣6️⃣ | Database latency issue                | 👉 Use `io2 volume`.                                            |
+| 6️⃣7️⃣ | Multiple servers need same volume     | 👉 Use Multi-Attach (`io2/io1`).                                |
+| 6️⃣8️⃣ | Root volume deleted                   | 👉 `Instance becomes unusable.`                                 |
+| 6️⃣9️⃣ | Security team requires encryption     | 👉 Enable EBS encryption with `KMS`.                            |
+| 7️⃣0️⃣ | EBS bill increasing                   | 👉 Check `unused volumes`, `snapshots`, and `overprovisioned IOPS`. |
+| 7️⃣1️⃣ | Volume stuck in optimizing state      | 👉 Normal behavior ; `volume remains usable`.                    |
+| 7️⃣2️⃣ | Application slow after migration      | 👉 `Verify filesystem expansion` and `volume type`.               |
+| 7️⃣3️⃣ | EKS PVC stuck Pending                 | 👉 `Check StorageClass`, `CSI driver`, `AZ mismatch`.               |
+| 7️⃣4️⃣ | Data lost after EC2 termination       | 👉 Volume deleted on termination or no backup.                |
+| 7️⃣5️⃣ | Need 50,000 IOPS database storage     | 👉 Use `io2`.                                                   |
+
+---
+
+| ❓ Question                         | ✅ Strong Interview Answer                                                                          |
 | ---------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| 💾 What is EBS?                    | 👉 "EBS is AWS's persistent block storage service used primarily with EC2 instances."                 |
-| ⚡ gp3 vs gp2?                      | 👉 "gp3 provides independent IOPS and throughput configuration with better cost efficiency than gp2." |
-| 📸 Why use snapshots?              | 👉 "Snapshots provide incremental backups for disaster recovery and migration."                       |
-| 🔐 How secure EBS?                 | 👉 "Use KMS encryption, IAM policies, snapshots, and least-privilege access."                         |
-| 🌍 Can EBS be attached across AZs? | 👉 "No. EBS volumes are AZ-specific; snapshots are used to move data between AZs."                    |
+| 💾 What is EBS?                    | 👉 "EBS is AWS's persistent block storage service used primarily with `EC2 instances`."              |
+| ⚡ gp3 vs gp2?                      |👉 "gp3 provides `independent IOPS` and `throughput configuration` with better cost efficiency than `gp2`." |
+| 📸 Why use snapshots?              | 👉 "Snapshots provide incremental backups for `disaster recovery and migration`."                     |
+| 🔐 How secure EBS?                 | 👉 "Use `KMS encryption`, `IAM policies`, `snapshots`, and `least-privilege access`."                  |
+| 🌍 Can EBS be attached across AZs? | 👉 "No. EBS volumes are `AZ-specific`; snapshots are used to move data `between AZs`."                 |
 
