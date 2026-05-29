@@ -19,7 +19,6 @@
 | 🔗 Shared File System    | 👥 Multiple EC2 instances can `read/write` simultaneously                                                        |
 | 🔐 Security              | 🔒 Encryption at rest (KMS)<br>🔐 Encryption in transit (TLS)<br>🚦 Controlled via Security Groups (port `2049`) |
 
- 
 ### 🔗 NFS-Based
  - Uses NFSv4 (4.0 & 4.1) protocol
  - Amazon EFS (Elastic File System) uses the NFS (`Network File System`) protocol.
@@ -45,16 +44,19 @@
 | 💰 Infrequent Access (IA) | 🗂️ Rarely used data (lower cost, slightly `higher latency`)  |
 
 ## 🚄 Throughput Modes
-| 🧩 Mode        | 💡 Description                                                             |
-| -------------- | -------------------------------------------------------------------------- |
-| ⚡ Bursting     | 📈 Default mode, automatically scales throughput based on file system size |
-| 🎯 Provisioned | 📊 Fixed throughput for consistent performance (independent of size)       |
+ * Throughput in Amazon EFS (`Elastic File System`) defines how much data your file system can `read` or `write per second`.
+
+| 🧩 Mode                | 💡 Description                                                                                                            |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| ⚡ Bursting            | 📈 Default mode, automatically scales throughput based on file system size                                                 |
+| 🎯 Provisioned         | 📊 Fixed throughput for consistent performance (User specifies throughput manually)                                        |
+| 🎯 Elastic Throughput  | 📊  Automatically scales throughput  (EFS adjusts throughput based on workload demand, Uses Most modern applications ✅)   |
 
 ## 🔐 Security & Encryption
  * 🔒 Encryption at rest → `AWS KMS`
  * 🔐 Encryption in transit → Use `-o tls` while mounting
 
-💡 Encryption = converting data into a secret code accessible only with a key.
+💡 Encryption = converting data into a `secret code` accessible only with a `key`.
 
 ## 💰 Pricing (Billing)
 - Pay for:
@@ -75,10 +77,10 @@
 ## 🔍 Important Points
   * ✅ Supports multiple EC2 instances simultaneously
   * ✅ Works only with Linux systems
-  * ❌ For Windows → Use FSx for Windows
-  * ✅ Max file size: 52.7 TB
-  * ✅ No minimum storage (pay-as-you-use)
-  * ✅ Supports 10+ GB/s throughput
+  * ❌ For Windows → Use `FSx` for Windows
+  * ✅ Max file size: `52.7` TB
+  * ✅ No minimum storage (`pay-as-you-use`)
+  * ✅ Supports `10+ GB/s` throughput
   * ✅ Can be mounted on:
       * EC2
       * Lambda
@@ -86,7 +88,7 @@
   * ✅ Accessible from on-prem via:
       * AWS VPN
       * Direct Connect
-  * ✅ Limit: 125 file systems per region
+  * ✅ Limit: `125` file systems per region
 
 ---
 
@@ -122,8 +124,11 @@
   * 📍 Attach subnets in VPC
   * 🛡️ Configure Security Group:
       * 🔓 Allow NFS (`port 2049`)
-  * 🔒 Enable encryption (optional)
-  * 🎉 Click Create File System               🚀 EFS ready to use      
+  * 🔒 Enable encryption (`optional`)
+  * 🎉 Click Create File System
+
+  
+ 🚀 EFS ready to use      
 
 ---
 
@@ -152,13 +157,13 @@ df -h | grep efs                                    # ✅ Verify Mount
 | 🔧 `-t efs`        | EFS mount type    | 📦 Uses EFS mount helper (`amazon-efs-utils`) |
 | 🔐 `-o tls`        | Enable encryption | 🛡️ Encrypts data in transit (`EC2 ↔ EFS`)      |
 | 🆔 `fs-xxxxxxxx:/` | File system ID    | 📂 Your EFS identifier                        |
-| 📍 `/mnt/efs`      | Mount point       | 🖥️ Local directory to access files           |
+| 📍 `/mnt/efs`      | Mount point       | 🖥️ Local directory to access files            |
 
 ---
 
 ## 📌 Final Summary
 
  - EFS = Shared, scalable file storage  
- - Best for multi-instance and Kubernetes workloads  
+ - Best for `multi-instance` and `Kubernetes workloads`  
  - Fully managed, highly available, secure  
 
