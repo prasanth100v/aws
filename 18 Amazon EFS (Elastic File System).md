@@ -1,49 +1,48 @@
 # 🌐 Amazon EFS (Elastic File System) 
 ## 📌 What is Amazon EFS?
-Amazon Elastic File System (EFS) is a serverless, scalable, fully managed file storage service that allows multiple EC2 instances to access the same file system using the NFSv4 protocol.
-
-✨ Designed for:
-- High availability  
-- High durability  
-- Multi-AZ architecture  
+ * Amazon Elastic File System (EFS) is a serverless, scalable, fully managed file storage service that allows `multiple EC2 instances to access the same file` system using the `NFSv4 protocol`.
+ * ✨ Designed for:
+    * High availability
+    * High durability
+    * Multi-AZ architecture  
 
 ### 🖼️ How EFS Works (Architecture)
- * 👉 Multiple EC2 instances connect to EFS using NFS protocol (v4.0 & v4.1)
- * 👉 Data is automatically stored across multiple Availability Zones (AZs)
+  * 👉 Multiple EC2 instances connect to EFS using NFS protocol (`v4.0 `& `v4.1`)
+  * 👉 Data is automatically stored across multiple Availability Zones (`AZs`)
 
 ## 📂✨ Key Features of Amazon EFS
 | 🧩 Feature               | 💡 Description                                                                                                 |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------- |
-| 🔧 Fully Managed         | ☁️ No infrastructure (servers) management required — AWS handles everything scaling, patching, and maintenance  |
-| 📈 Elastic & Scalable    | 📊 Automatically grows (from KBs → Petabytes) and shrinks based on usage  (no manual resize)                 |
-| 🌍 Multi-AZ Availability | 🛡️ Data stored (replicated) across multiple AZs → high availability & durability                            |
-| 🔗 Shared File System    | 👥 Multiple EC2 instances can read/write simultaneously                                                        |
-| 🔐 Security              | 🔒 Encryption at rest (KMS)<br>🔐 Encryption in transit (TLS)<br>🚦 Controlled via Security Groups (port 2049) |
+| 🔧 Fully Managed         | ☁️ No infrastructure (servers) management required — AWS handles everything `scaling`, `patching`, and `maintenance`  |
+| 📈 Elastic & Scalable    | 📊 Automatically grows (from KBs → terabytes ) and shrinks based on usage  (`no manual resize`)                 |
+| 🌍 Multi-AZ Availability | 🛡️ Data stored (`replicated`) across multiple AZs → high availability & durability                            |
+| 🔗 Shared File System    | 👥 Multiple EC2 instances can `read/write` simultaneously                                                        |
+| 🔐 Security              | 🔒 Encryption at rest (KMS)<br>🔐 Encryption in transit (TLS)<br>🚦 Controlled via Security Groups (port `2049`) |
 
  
 ### 🔗 NFS-Based
-- Uses NFSv4 (4.0 & 4.1) protocol
-- Amazon EFS (Elastic File System) uses the NFS (Network File System) protocol.
-- Specifically NFSv4.0 and NFSv4.1, to allow multiple systems to access shared files over a network.
+ - Uses NFSv4 (4.0 & 4.1) protocol
+ - Amazon EFS (Elastic File System) uses the NFS (`Network File System`) protocol.
+ - Specifically NFSv4.0 and NFSv4.1, to allow multiple systems to access shared files over a network.
 
 ### 🔥 Why EFS uses NFSv4.1 
- Amazon EFS recommends NFSv4.1 because:
- * ⚡ Higher performance (handles more requests)
- * 🔄 Parallel connections → better throughput
- * 🔐 Stronger locking & consistency
- * 💪 Better fault tolerance
+* Amazon EFS recommends NFSv4.1 because:
+  * ⚡ Higher performance (handles more requests)
+  * 🔄 Parallel connections → better throughput
+  * 🔐 Stronger locking & consistency
+  * 💪 Better fault tolerance
 
 ## ⚡ Performance Modes
 | 🧩 Mode            | 💡 Description                                                           |
 | ------------------ | ------------------------------------------------------------------------ |
-| 🚀 General Purpose | ⚡ Low latency, best for most applications (web apps, CMS, dev workloads) |
-| 📊 Max I/O         | 🔄 High throughput for parallel workloads (big data, analytics)          |
+| 🚀 General Purpose | ⚡ Low latency, best for most applications (`web apps`, `dev workloads`) |
+| 📊 Max I/O         | 🔄 High throughput for parallel workloads (`big data`, `analytics`)       |
 
 ## 💾 Storage Classes
 | 🧩 Storage Class          | 💡 Use Case                                                 |
 | ------------------------- | ----------------------------------------------------------- |
-| 🚀 Standard               | 📊 Frequently accessed data (low latency, high performance) |
-| 💰 Infrequent Access (IA) | 🗂️ Rarely used data (lower cost, slightly higher latency)  |
+| 🚀 Standard               | 📊 Frequently accessed data (`low latency`, `high performance`) |
+| 💰 Infrequent Access (IA) | 🗂️ Rarely used data (lower cost, slightly `higher latency`)  |
 
 ## 🚄 Throughput Modes
 | 🧩 Mode        | 💡 Description                                                             |
@@ -52,8 +51,8 @@ Amazon Elastic File System (EFS) is a serverless, scalable, fully managed file s
 | 🎯 Provisioned | 📊 Fixed throughput for consistent performance (independent of size)       |
 
 ## 🔐 Security & Encryption
- * 🔒 Encryption at rest → AWS KMS
- * 🔐 Encryption in transit → Use -o tls while mounting
+ * 🔒 Encryption at rest → `AWS KMS`
+ * 🔐 Encryption in transit → Use `-o tls` while mounting
 
 💡 Encryption = converting data into a secret code accessible only with a key.
 
@@ -73,23 +72,21 @@ Amazon Elastic File System (EFS) is a serverless, scalable, fully managed file s
   * ☸️ Kubernetes (EKS) stateful apps
   * 🐳 Containers (ECS, EKS)
 
----
-
 ## 🔍 Important Points
- * ✅ Supports multiple EC2 instances simultaneously
- * ✅ Works only with Linux systems
- * ❌ For Windows → Use FSx for Windows
- * ✅ Max file size: 52.7 TB
- * ✅ No minimum storage (pay-as-you-use)
- * ✅ Supports 10+ GB/s throughput
- * ✅ Can be mounted on:
-     * EC2
-     * Lambda
-     * ECS / EKS / Kubernetes
- * ✅ Accessible from on-prem via:
-     * AWS VPN
-     * Direct Connect
- * ✅ Limit: 125 file systems per region
+  * ✅ Supports multiple EC2 instances simultaneously
+  * ✅ Works only with Linux systems
+  * ❌ For Windows → Use FSx for Windows
+  * ✅ Max file size: 52.7 TB
+  * ✅ No minimum storage (pay-as-you-use)
+  * ✅ Supports 10+ GB/s throughput
+  * ✅ Can be mounted on:
+      * EC2
+      * Lambda
+      * ECS / EKS / Kubernetes
+  * ✅ Accessible from on-prem via:
+      * AWS VPN
+      * Direct Connect
+  * ✅ Limit: 125 file systems per region
 
 ---
 
@@ -106,33 +103,33 @@ Amazon Elastic File System (EFS) is a serverless, scalable, fully managed file s
 ## 🏗️ How to Create EFS File System
 
 ### 1️⃣ Create File System
-  * 🌐 Go to AWS Console → EFS
+  * 🌐 Go to AWS Console → `EFS`
   *  Click Create File System
   * 🌍 Select VPC
   * 🏗️ Choose Type :
-     * 🌍 Regional (recommended)
-     * 🟡 One Zone (cheaper)
+      * 🌍 Regional (recommended)
+      * 🟡 One Zone (cheaper)
   * Click Next
 
 ### 2️⃣ Configure Settings
   * 🏷️ Set name
   * Choose:
-    * ⚡ Performance Mode → General Purpose / Max I/O
-    * 📈 Throughput Mode → Bursting / Provisioned
-  * 🔄 Enable Lifecycle Management (optional)
+     * ⚡ Performance Mode → `General Purpose` / ` Max I/O`
+     * 📈 Throughput Mode → Bursting / Provisioned
+     * 🔄 Enable Lifecycle Management (optional)
 
 ### 3️⃣ Network & Security
   * 📍 Attach subnets in VPC
   * 🛡️ Configure Security Group:
-     * 🔓 Allow NFS (port 2049)
+      * 🔓 Allow NFS (`port 2049`)
   * 🔒 Enable encryption (optional)
   * 🎉 Click Create File System               🚀 EFS ready to use      
 
 ---
 
 ## 🔗 Mount EFS to EC2
-### Install NFS Utilities
-```bash
+ ### Install NFS Utilities
+```hcl
 
 sudo yum install -y amazon-efs-utils                 # Amazon Linux
 sudo apt install -y nfs-common                       # Ubuntu/Debian
@@ -150,10 +147,10 @@ df -h | grep efs                                    # ✅ Verify Mount
 ### 🧩 Command Breakdown
 | 🧩 Part            | 📌 Meaning        | 💡 Explanation                                |
 | ------------------ | ----------------- | --------------------------------------------- |
-| 🛠️ `sudo`         | Run as admin      | 🔒 Required for mounting file systems         |
+| 🛠️ `sudo`          | Run as admin      | 🔒 Required for mounting file systems         |
 | 📂 `mount`         | Linux command     | 🔗 Attaches storage to your system            |
 | 🔧 `-t efs`        | EFS mount type    | 📦 Uses EFS mount helper (`amazon-efs-utils`) |
-| 🔐 `-o tls`        | Enable encryption | 🛡️ Encrypts data in transit (EC2 ↔ EFS)      |
+| 🔐 `-o tls`        | Enable encryption | 🛡️ Encrypts data in transit (`EC2 ↔ EFS`)      |
 | 🆔 `fs-xxxxxxxx:/` | File system ID    | 📂 Your EFS identifier                        |
 | 📍 `/mnt/efs`      | Mount point       | 🖥️ Local directory to access files           |
 
@@ -161,7 +158,7 @@ df -h | grep efs                                    # ✅ Verify Mount
 
 ## 📌 Final Summary
 
-- EFS = Shared, scalable file storage  
-- Best for multi-instance and Kubernetes workloads  
-- Fully managed, highly available, secure  
+ - EFS = Shared, scalable file storage  
+ - Best for multi-instance and Kubernetes workloads  
+ - Fully managed, highly available, secure  
 
