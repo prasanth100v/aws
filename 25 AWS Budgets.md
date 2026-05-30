@@ -1,7 +1,6 @@
 # 💰✨ AWS Budgets ✨💰
-
  * AWS Budgets is a service from Amazon Web Services that helps you `track`, `control`, and `manage` your cloud spending and usage.
- * AWS Budgets is not just a monitoring tool, it’s a `cost governance` tool because it allows `automation` through budget actions.
+ * AWS Budgets is not just a monitoring tool, it’s a `cost governance tool` because it allows `automation` through budget actions.
  * What AWS Budgets Does :
      * 🎯 Set custom budgets (`cost`, `usage`, `reservations`, or `savings plans`)
      * 📊 Track your actual vs planned spending
@@ -14,7 +13,6 @@
      * 🧠 Essential for teams managing cloud costs
 
 ## 📦✨ Types of Budgets
-
 | 🧩 **Budget Type**         | 📖 **What It Tracks**            | 🧠 **How It Works**                   | 💡 **Example Use Case**                 |
 | -------------------------- | -------------------------------- | ------------------------------------- | --------------------------------------- |
 | 💰 **Cost Budget**         | Spending ($)                     | 👉 Monitors `actual & forecasted costs` | Alert when monthly bill exceeds `₹10,000` |
@@ -23,7 +21,6 @@
 | ⚡ **Savings Plans Budget** | Savings Plans usage              | 👉 Monitors commitment usage          | Check if savings plan is underutilized  |
 
 ## 💰 AWS Budgets vs 📊 Cost Explorer
-
 | 🧩 **Feature**       | 💰 **AWS Budgets**     | 📊 **Cost Explorer** | 🧠 **Explanation**                                    | 💡 **Use Case**           |
 | -------------------- | ---------------------- | -------------------- | ----------------------------------------------------- | ------------------------- |
 | 🎯 **Purpose**       | Control spending       | Analyze spending     |` Budgets = proactive control`, `Cost Explorer = insights` | Prevent vs analyze        |
@@ -34,7 +31,6 @@
 | ⏱ **Usage**          | Real-time monitoring   | Historical analysis  | Different focus areas                                 | Ops vs reporting          |
 
 ## 🎯 What is a Budget Threshold?
-
  * A threshold is a percentage or amount at which alerts are triggered.
  * budget thresholds act like an `early warning system`.
  * Example:
@@ -43,7 +39,6 @@
     * 🔔 Alert when spending reaches `$80`
 
 ## 🔔 What are Budget Alerts?
-
  * Notifications sent when:
     * Actual cost `exceeds threshold`
     * Forecasted cost is expected to `exceed threshold`.
@@ -62,19 +57,16 @@
      * 🚫 Restrict user access
 
 ## 🤖 Can AWS Budgets stop resources automatically?
-
-* ✅ Yes — using Budget Actions
-* Example:
-   * If cost `> $100` → 🛑 stop EC2 instances automatically
+ * ✅ Yes — using Budget Actions
+ * Example:
+    * If cost `> $100` → 🛑 stop EC2 instances automatically
 
 ## 🔗 What services integrate with AWS Budgets?
-
  * 📡 Amazon SNS → Notifications
  * 🔐 AWS IAM → Permissions & actions
  * 📊 AWS Cost Explorer → Data insights
 
 ## 🧠 What is the best practice for AWS Budgets?
-
  * 🎯 Set multiple thresholds (`50%`, `80%`, `100%`)
  * 🔮 Use forecast alerts
  * ⚙️ Enable Budget Actions
@@ -82,41 +74,28 @@
  * 📡 Integrate with SNS for automation
 
 ## 💰 Is AWS Budgets free❓
-
   * First 2 budgets → `Free`
   * Additional budgets → Charged
 
 ## 🚨 Your company suddenly receives a $2,000 bill instead of the usual $300. How would you prevent this in the future❓
-
  * I would implement AWS Budgets with:
-   * 📅 A monthly cost budget (e.g., `$400`)
-   * 🎯 Multiple thresholds (`50%`, `80%`, `100%`)
-   * 🔮 Forecast alerts to detect early spikes
-   * 📡 Integrate alerts with `Amazon SNS` for instant notifications
-   * ⚙️ Configure Budget Actions to:
-      * 🛑 Stop non-critical Amazon EC2 instances
-      * 🔒 Restrict IAM permissions if needed
-   * 👉 This ensures both visibility + automated control
+    * 📅 A monthly cost budget (e.g., `$400`)
+    * 🎯 Multiple thresholds (`50%`, `80%`, `100%`)
+    * 🔮 Forecast alerts to detect early spikes
+    * 📡 Integrate alerts with `Amazon SNS` for instant notifications
+    * ⚙️ Configure Budget Actions to:
+       * 🛑 Stop non-critical Amazon EC2 instances
+       * 🔒 Restrict IAM permissions if needed
+    * 👉 This ensures both visibility + automated control
 
 ## 👥 Different teams (Dev, QA, Prod) are overspending. How do you track and control each team separately❓
-
  * 🏷 Use resource tagging (`Team=Dev`, `QA`, `Prod`)
  * 📊 Create `separate budgets` per tag
  * 🎯 Set team-specific thresholds
  * 📡 Share alerts with respective `team emails` via `SNS`
  * 👉 Ensures accountability + cost visibility per team
 
-## ⚠️ A developer accidentally launches expensive instances. How do you control this❓
-
- * 🎯 Set service-specific budget (EC2)
- * 🔔 Alerts for abnormal spend
- * ⚙️ Budget Action:
-     * 🔓 Detach IAM policy or restrict access
-     * 🔐 Combine with IAM policies (limit instance types)
- * 👉 Prevents human error cost leakage
-
 ## 📅 Would you use daily or monthly budgets❓
-
 | 🧩 **Budget Type**    | 📖 **Purpose**       | 🧠 **How It Helps**                            | 💡 **Best Use Case**            |
 | --------------------- | -------------------- | ---------------------------------------------- | ------------------------------- |
 | 📅 **Monthly Budget** | Overall cost control | 👉 Tracks total spending for the billing cycle | Keep within ₹ / $ monthly limit |
@@ -125,7 +104,6 @@
  * 👉 Best practice: Use both together
 
 ## 🏗 Full Cost-Control Architecture using AWS Budgets❓
-
  * AWS Budgets monitors cost
  * 🎯 Threshold reached → `triggers alert`
  * 📡 Alert sent via `SNS`
@@ -150,15 +128,14 @@
 | 🔢     | ❓ Question                | 💡 Answer                                      |
 | ------ | ------------------------- | ---------------------------------------------- |
 | 1️⃣    | What is AWS Budgets?      | 💰 Service to set, track & control costs/usage |
-| 2️⃣    | Main purpose?             | 🚫 Prevent overspending                        |
+| 2️⃣    | Main purpose?             | 🚫 `Prevent overspending`                        |
 | 3️⃣    | Types of budgets?         | Cost, Usage, Reservation, Savings Plans        |
 | 4️⃣    | Cost budget?              | 💵 Tracks spend ($)                            |
 | 5️⃣    | Usage budget?             | 📊 Tracks usage (hours, GB)                    |
-| 6️⃣    | Threshold?                | 🎯 Alert trigger level (e.g., 80%)             |
+| 6️⃣    | Threshold?                | 🎯 Alert trigger level (e.g.,` 80%`)             |
 | 7️⃣    | Alert types?              | Actual & Forecast                              |
 | 8️⃣    | Forecast alert?           | 🔮 Predicts overspending                       |
 | 9️⃣    | Notifications?            | 📧 Email + 📣 SNS                              |
-| 🔟     | Budget actions?           | ✅ Yes (automation supported)                   |
 | 1️⃣1️⃣ | Example action?           | 🛑 Stop EC2 instances                          |
 | 1️⃣2️⃣ | Restrict users?           | ✅ Yes (via IAM policies)                       |
 | 1️⃣3️⃣ | Real-time?                | ❌ No (few hours delay)                         |
@@ -180,65 +157,27 @@
 ---
 
 ## AWS Budgets creation steps
-
-# 💰 AWS Budgets – Steps to Create (AWS Console)
-## 🔹 Step 1: Login to AWS 🔐
-  - Go to 👉 `https://console.aws.amazon.com  `
-  - Sign in to your AWS account  
-
-## 🔹 Step 2: Open AWS Budgets 🔍
-  - In the search bar, type **“Budgets”**  
-  - Click **AWS Budgets** (under Billing section)  
-
-## 🔹 Step 3: Create Budget ➕
-  - Click **“Create budget”**
-
-## 🔹 Step 4: Choose Budget Type 📊
- * Select one:
-    - 💰 **Cost Budget** (Most common ✅)
-    - 📦 Usage Budget  
-    - 🧾 Reservation Budget  
-    - 📉 Savings Plans Budget  
-
-## 🔹 Step 5: Set Budget Details 📝
- * Fill in:
-    - **Budget name** → `Monthly-Cost-Control`
-    - **Period** → Monthly / Quarterly / Annual  
-    - **Start date** → Select date  
-    - **Budget amount** → `$100`  
-
-## 🔹 Step 6: Set Scope (Optional but Powerful) 🎯
- * Filter by:
-    - Service → (`EC2`, `S3`, `RDS`)
-    - Tag → `Project=Dev`
-    - Account → (for Organizations)
-    - 👉 Helps in **team-wise cost tracking**
-
-## 🔹 Step 7: Configure Alerts 🚨
- * Set thresholds:
-    - ⚠️ 50%  
-    - ⚡ 80%  
-    - 🔥 100%  
- * Alert types:
-    - Actual cost  
-    - Forecasted cost  
-
-## 🔹 Step 8: Add Notifications 📩
-  - Enter email addresses  
-  - Or connect to **Amazon SNS**
-  - Example:
-     - ⚠️ 80% → Warning email  
-     - 🔴 100% → Critical alert  
-
-## 🔹 Step 9: Configure Budget Actions (Optional) 🤖
- * Automate actions:
-    - 🛑 Stop EC2 instances  
-    - 🔐 Restrict IAM users
-    - 👉 Requires proper IAM permissions  
-
-## 🔹 Step 10: Review & Create ✅
-   - Review all settings  
-   - Click **Create Budget 🚀**
+``
+🔐 Login AWS Console
+          ⬇️
+💰 Open AWS Budgets
+          ⬇️
+➕ Create Budget
+          ⬇️
+🎯 Select Budget Type (🧾 Reservation Budget & 📉 Savings Plans Budget)
+          ⬇️
+💵 Set Budget Amount  (`$100`)
+          ⬇️
+📅 Choose Time Period   ( Monthly / Quarterly / Annual ) 
+          ⬇️
+🚨 Configure Alerts    (Set thresholds : ⚠️ 50% ⚡ 80%  🔥 100%)
+          ⬇️
+📧 Add Email Recipients  ( Example : ⚠️ 80% → Warning email & 🔴 100% → Critical alert )
+          ⬇️
+✅ Create Budget
+          ⬇️
+📊 Monitor AWS Costs
+``
 
 ---
 
