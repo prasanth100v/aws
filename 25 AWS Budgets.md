@@ -157,7 +157,7 @@
 ---
 
 ## AWS Budgets creation steps
-``
+```hcl
 🔐 Login AWS Console
           ⬇️
 💰 Open AWS Budgets
@@ -177,7 +177,7 @@
 ✅ Create Budget
           ⬇️
 📊 Monitor AWS Costs
-``
+```
 
 ---
 
