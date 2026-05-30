@@ -15,7 +15,6 @@
 | 🚀 **Enterprise** | Premium support    | 🔥 ~15 minutes                 | Mission-critical apps | Dedicated TAM, proactive support, architecture guidance |
 
 ## 📘 What is included in Basic Support❓
-
  * 🆓 Free for all AWS users
  * 📚 Access to documentation, whitepapers, forums
  * 💳 Billing & account support only
@@ -24,7 +23,6 @@
     * 👉 Used for learning or non-critical workloads
 
 ## 🎯 Which AWS support plan is recommended for production workloads❓
-
  * 👉 🏢 Business Support Plan
  * Because:
 
@@ -36,29 +34,25 @@
 | 🛠 **Production Support**            | 🌐 Designed for live environments             | ⚙️ Reliable operations at scale     |
 
 ## 📌 What is SLA in AWS Support❓
-
  * SLA (`Service Level Agreement`) defines expected response time for `support cases` based on severity.
  * ⚠️ Important:
       * AWS provides `response time SLA`, `not resolution SLA`
       * AWS guarantees response time only, `Resolution` depends on `complexity`
 
 ## ⏱ What is the response time for a critical issue in Business and Enterprise plans❓
-
 | 🧩 **Plan**       | 🔥 **Critical Case Response Time** | 🧠 **Reality**                     |
 | ----------------- | ---------------------------------- | ---------------------------------- |
 | 🏢 **Business**   | ~1 hour                            | Not <30 min (common misconception) |
 | 🚀 **Enterprise** | ~15 minutes                        | Fastest SLA                        |
 
 ## 👨‍💻 What is a Technical Account Manager (TAM)❓
-
- * A TAM is a dedicated AWS expert available in the Enterprise Support Plan who:
+ * A TAM is a dedicated AWS expert available in the `Enterprise Support Plan` who:
     * 🧠 Provides architecture guidance
     * 💰 Helps with cost optimization
     * 🚑 Assists in incident management
     * 📊 Offers proactive recommendations
 
 ## 🔍 What is AWS Trusted Advisor❓
-
  * A tool in Amazon Web Services that provides recommendations for:
     * 💰 Cost optimization
     * 🔒 Security
@@ -67,61 +61,44 @@
     * 👉 Full access available in `Business` & `Enterprise` plans
 
 ## 🚦 What are the severity levels in AWS Support❓
-
 | 🧩 Severity                                        | 📖 Meaning                       | 🧠 When to Use                          | 💡 Example             |
-| -------------------------------------------------- | -------------------------------- | --------------------------------------- | ---------------------- |
-| 🔴 **Critical**                                    | 💥 Production system down        | 👉 Business-critical system unavailable | Entire app down        |
+| -------------------------------------------------- | ---------------------------------- | --------------------------------------- | ---------------------- |
+| 🔴 **Critical**                                     | 💥 Production system down        | 👉 Business-critical system unavailable | Entire app down        |
 | 🟠 **Urgent**  *(sometimes called “High” in docs)*  | 🚫 Severe production impact      | 👉 Major functionality broken           | Payments failing       |
 | 🟡 **High**                                         | ⚠️ Production partially impaired | 👉 Degraded performance                 | Slow APIs              |
 | 🔵 **Normal**                                       | 🛠 Non-critical issue            | 👉 System works but needs fix           | Minor bug/config issue |
 | ⚪ **Low**                                          | 💬 General guidance / questions | 👉 No production impact                 | “How to configure S3?” |
 
-
-## ⚖️ Difference between Business and Enterprise Support❓
-
-| Feature             | Business | Enterprise |
-| ------------------- | -------- | ---------- |
-| ⏱ Response (critical) | < 30 min | < 15 min   |
-| 👨‍💻 TAM                 | ❌        | ✅          |
-| 🔄 Proactive support   | Limited  | Advanced   |
-| 💰 Cost                | Lower    | Higher     |
-
 ## Is AWS SLA same for all services❓
-
- * ❌ No
- * Each AWS service (EC2, S3, etc.) has its own SLA
- * Support plan SLA is different from service SLA
+  * ❌ No
+  * Each AWS service (EC2, S3, etc.) has its own SLA
+  * Support plan SLA is different from service SLA
 
 ## 💰 What happens if AWS violates SLA❓
-
- * Customers may receive `service credits`
- * ❌ Not direct financial compensation
- * ❌ Not direct refund
+  * Customers may receive `service credits`
+  * ❌ Not direct financial compensation
+  * ❌ Not direct refund
 
 ## 🕐 Which plan gives 24/7 support❓
-
- * 🏢 Business & 🚀 Enterprise
- * 👉 🧪 Developer → `Business hours only`
+  * 🏢 Business & 🚀 Enterprise
+  * 👉 🧪 Developer → `Business hours only`
 
 ## 🚨 Your production website is down. Which support plan is required❓
-
- * 👉 At least 🏢 Business Support Plan
- * Because:
+  * 👉 At least 🏢 Business Support Plan
+  * Because:
      * ⏰ 24×7 support
      * ⚡ Fast response (`<30 min`)
 
 ## 🤔 Why not use Enterprise for all workloads❓
-
- * 💸 `High cost` & Not required for `small` or `non-critical systems`
- * 🏢 Business plan is sufficient for `most production use cases`
+  * 💸 `High cost` & Not required for `small` or `non-critical systems`
+  * 🏢 Business plan is sufficient for `most production use cases`
 
 ## ⚠️ Startup runs production workloads but uses Basic plan to save cost. Is it okay❓
-
- * ❌ Risky decision
- * Because:
-    * ❌ No technical support, No SLA & No urgent help
-    * 👉 Recommendation : `At least Business Support Plan`
-
+  * ❌ Risky decision
+  * Because:
+     * ❌ No technical support, No SLA & No urgent help
+     * 👉 Recommendation : `At least Business Support Plan`
+ 
 ## 🔄 Support vs Service SLA Confusion
 | 🧩 **Type**        | 📖 **Meaning**          | 🧠 **What It Covers**               | 💡 **Example**                   |
 | ------------------ | ----------------------- | ----------------------------------- | -------------------------------- |
@@ -129,15 +106,13 @@
 | 🛠 **Support SLA** | Response time guarantee | 👉 How quickly AWS support responds | Critical issue → 15 min response |
 
 ## 🚀 You are doing a one-time high-risk production migration. Which plan is best temporarily❓
-
- * 👉 Enterprise (short-term upgrade)
- * Because:
-    * ⚡ Fastest response
-    * 👨‍💻 TAM support
-    * 🧠 Migration guidance
+  * 👉 Enterprise (short-term upgrade)
+  * Because:
+     * ⚡ Fastest response
+     * 👨‍💻 TAM support
+     * 🧠 Migration guidance
 
 ## ⚡ AWS Support Plans – Rapid Fire Q&A
-
 | 🔢     | ❓ Question                        | 💡 Answer                                  |
 | ------ | --------------------------------- | ------------------------------------------ |
 | 1️⃣    | How many support plans❓          | 4 → Basic, Developer, Business, Enterprise |
@@ -175,21 +150,17 @@
 
 # ☁️ AWS Support Plan Setup Guide
 
-## 🎯 🔹 Step 1: Login to AWS
-  * 🔐 Sign in to your **AWS account**
-
-## 🛠️ 🔹 Step 2: Open Support Center
-  * ➡️ From the top menu:  
-    * 👉 Click **Support**
-    * 👉 Select **Support Center**
-
-## 📊 🔹 Step 3: Navigate to Support Plans
-
- * 📍 Inside Support Center:  
-    * 👉 Click **Support plans** (`left panel` or `top tab`)
-
-## 📦 🔹 Step 4: Choose Your Plan
-  * You will see available plans:
+ * 🎯 🔹 Step 1: Login to AWS
+     * 🔐 Sign in to your **AWS account**
+ * 🛠️ 🔹 Step 2: Open Support Center
+     * ➡️ From the top menu:  
+         * 👉 Click **Support**
+         * 👉 Select **Support Center**
+ * 📊 🔹 Step 3: Navigate to Support Plans
+      * 📍 Inside Support Center:  
+         * 👉 Click **Support plans** (`left panel` or `top tab`)
+ * 📦 🔹 Step 4: Choose Your Plan
+      * You will see available plans:
 
 | Plan | Description |
 |------|------------|
@@ -197,11 +168,9 @@
 | 👨‍💻 **Developer** | Dev/Test support |
 | 🏢 **Business** | Production-ready |
 | 🏆 **Enterprise** | Advanced + TAM |
-
-👉 Click **Change / Upgrade**
-
-## 💰 🔹 Step 5: Review Pricing 
-  * 💡 Pricing depends on **monthly AWS usage**
+  * 👉 Click **Change / Upgrade**
+ * 💰 🔹 Step 5: Review Pricing 
+     * 💡 Pricing depends on `monthly AWS usage`
 
 | Plan | Cost Model |
 |------|-----------|
@@ -209,18 +178,17 @@
 | Business | 📈 % of usage |
 | Enterprise | 📊 Higher % |
 
-## ✅ 🔹 Step 6: Confirm Plan
-  * 👉 Click **Confirm / Activate**
-  * 🎉 **Your plan is activated immediately**
+ * ✅ 🔹 Step 6: Confirm Plan
+      * 👉 Click **Confirm / Activate**
+      * 🎉 **Your plan is activated immediately**
 
-## 🔍 🔹 Step 7: Verify Plan
-   * Go back to **Support Center**
-   * Check your **Current Support Plan**
+ * 🔍 🔹 Step 7: Verify Plan
+       * Go back to **Support Center**
+       * Check your **Current Support Plan**
 
 ---
 
 # 🚀 🎯 Key Notes
-
  - 🟢 **Basic plan is default (no setup needed)**
  - ⚡ **Upgrade happens instantly**
  - ⏳ **Downgrade applies next billing cycle**
