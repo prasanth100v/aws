@@ -115,15 +115,15 @@
 | 1️⃣    | What is a Route Table?                                                | 🛣️ A Route Table contains rules (routes) that determine where network traffic is directed within a VPC.                  |
 | 2️⃣    | Why do we need a Route Table?                                         | 🌐 To control traffic flow between subnets, internet, NAT Gateway, VPN, and other networks.                               |
 | 3️⃣    | Where is a Route Table used?                                          | 🏗️ Inside a VPC.                                                                                                         |
-| 4️⃣    | What is a Route?                                                      | 🚦 A route is a rule that specifies destination CIDR and target.                                                          |
-| 5️⃣    | Main components of a Route Table?                                     | 📍 Destination + 🎯 Target                                                                                                |
+| 4️⃣    | What is a Route?                                                      | 🚦 A route is a `rule that specifies destination CIDR and target.    `                                                      |
+| 5️⃣    | Main components of a Route Table?                                     | 📍 `Destination + 🎯 Target  `                                                                                              |
 | 6️⃣    | What is the default route in AWS?                                     | 🌍 `0.0.0.0/0` (all IPv4 traffic)                                                                                         |
 | 7️⃣    | What does local route mean?                                           | 🔄 Allows communication within the VPC.                                                                                   |
-| 8️⃣    | Can a subnet exist without a Route Table?                             | ❌ No, every subnet must be associated with a Route Table.                                                                 |
+| 8️⃣    | Can a subnet exist without a Route Table?                             | ❌ No, `every subnet must be associated with a Route Table. `                                                                |
 | 9️⃣    | What is the Main Route Table?                                         | ⭐ Default Route Table automatically created with a VPC.                                                                   |
-| 🔟     | Can a VPC have multiple Route Tables?                                 | ✅ Yes                                                                                                                     |
+| 🔟     | Can a VPC have multiple Route Tables?                                | ✅ Yes                                                                                                                     |
 | 1️⃣1️⃣ | Can multiple subnets share one Route Table?                           | ✅ Yes                                                                                                                     |
-| 1️⃣2️⃣ | What is Route Table Association?                                      | 🔗 Linking a Route Table to a subnet.                                                                                     |
+| 1️⃣2️⃣ | What is Route Table Association?                                      | 🔗` Linking a Route Table to a subnet.`                                                                                     |
 | 1️⃣3️⃣ | What is Route Propagation?                                            | 🔄 Automatically adds routes from VPN or Direct Connect.                                                                  |
 | 1️⃣4️⃣ | Common Route Table targets?                                           | 🌐 IGW, 🚪 NAT Gateway, 🔒 VPN Gateway, 🔗 VPC Peering, ⚡ Transit Gateway                                                 |
 | 1️⃣5️⃣ | What is Internet Gateway (IGW)?                                       | 🌍 Gateway that enables internet access for public resources.                                                             |
@@ -133,8 +133,8 @@
 | 1️⃣9️⃣ | How identify whether subnet is public or private?                     | 🔍 Check Route Table.                                                                                                     |
 | 2️⃣0️⃣ | Public subnet route example?                                          | 🌍 `0.0.0.0/0 → igw-xxxx`                                                                                                 |
 | 2️⃣1️⃣ | Private subnet route example?                                         | 🚪 `0.0.0.0/0 → nat-xxxx`                                                                                                 |
-| 2️⃣2️⃣ | What is NAT Gateway?                                                  | 🚪 Managed AWS service allowing outbound internet access from private subnets.                                            |
-| 2️⃣3️⃣ | Why use NAT Gateway?                                                  | 🔒 Allow private EC2 instances to access internet without exposing them publicly.                                         |
+| 2️⃣2️⃣ | What is NAT Gateway?                                                  | 🚪 Managed AWS service `allowing outbound internet access from private subnets`.                                            |
+| 2️⃣3️⃣ | Why use NAT Gateway?                                                  | 🔒 Allow private EC2 instances to access internet `without exposing them publicly`.                                         |
 | 2️⃣4️⃣ | Does NAT Gateway allow inbound internet traffic?                      | ❌ No                                                                                                                      |
 | 2️⃣5️⃣ | Does NAT Gateway allow outbound internet traffic?                     | ✅ Yes                                                                                                                     |
 | 2️⃣6️⃣ | Where should NAT Gateway be deployed?                                 | 🌐 Public Subnet                                                                                                          |
@@ -142,8 +142,8 @@
 | 2️⃣8️⃣ | Does NAT Gateway require Elastic IP?                                  | ✅ Yes                                                                                                                     |
 | 2️⃣9️⃣ | What is the traffic flow through NAT Gateway?                         | 🔒 Private EC2 → NAT Gateway → IGW → Internet                                                                             |
 | 3️⃣0️⃣ | What happens if NAT Gateway has no Elastic IP?                        | ❌ Internet access fails.                                                                                                  |
-| 3️⃣1️⃣ | Can multiple private subnets use one NAT Gateway?                     | ✅ Yes                                                                                                                     |
-| 3️⃣2️⃣ | Is NAT Gateway highly available?                                      | ✅ Within a single AZ                                                                                                      |
+| 3️⃣1️⃣ | Can multiple private subnets use one NAT Gateway?                     | ✅ `Yes `                                                                                                                    |
+| 3️⃣2️⃣ | Is NAT Gateway highly available?                                      | ✅ Within a `single AZ  `                                                                                                    |
 | 3️⃣3️⃣ | Best practice for HA NAT Gateway?                                     | 🏗️ One NAT Gateway per AZ                                                                                                |
 | 3️⃣4️⃣ | Difference between NAT Gateway and NAT Instance?                      | 🚪 NAT Gateway = Managed Service, 🖥️ NAT Instance = EC2-based solution                                                   |
 | 3️⃣5️⃣ | Which is preferred today?                                             | ✅ NAT Gateway                                                                                                             |
@@ -152,16 +152,13 @@
 | 3️⃣8️⃣ | What controls traffic to NAT Gateway?                                 | 🛡️ NACLs and Route Tables                                                                                                |
 | 3️⃣9️⃣ | NAT Gateway status remains Pending. Why?                              | 🔍 Check subnet, EIP allocation, IGW availability                                                                         |
 | 4️⃣0️⃣ | Private EC2 cannot access internet. First check?                      | 🚪 NAT Gateway route in Route Table                                                                                       |
-| 4️⃣1️⃣ | Private EC2 still cannot access internet despite NAT Gateway. Checks? | 🔍 Route Table, NACL, Security Group, NAT Gateway state                                                                   |
+| 4️⃣1️⃣ | Private EC2 still cannot access internet despite NAT Gateway. Checks? | 🔍 `Route Table, NACL, Security Group, NAT Gateway state  `                                                                 |
 | 4️⃣2️⃣ | EC2 in private subnet cannot run `yum update`. Why?                   | 🚪 NAT Gateway missing or misconfigured                                                                                   |
 | 4️⃣3️⃣ | Public EC2 cannot access internet. Checks?                            | 🌍 IGW, Route Table, Public IP                                                                                            |
 | 4️⃣4️⃣ | Route Table has IGW route but EC2 still unreachable. Why?             | 🔍 Missing public IP or Security Group issue                                                                              |
 | 4️⃣5️⃣ | Why use private subnets for applications?                             | 🔒 Better security                                                                                                        |
 | 4️⃣6️⃣ | Why place databases in private subnets?                               | 🛡️ Prevent direct internet exposure                                                                                      |
 | 4️⃣7️⃣ | Typical 3-tier architecture subnet design?                            | 🌍 Public (ALB) → 🔒 Private App → 🗄️ Private DB                                                                         |
-| 4️⃣8️⃣ | Route Table for ALB subnet?                                           | 🌍 Route to IGW                                                                                                           |
-| 4️⃣9️⃣ | Route Table for App subnet?                                           | 🚪 Route to NAT Gateway                                                                                                   |
-| 5️⃣0️⃣ | Route Table for DB subnet?                                            | 🔒 Local VPC routes only                                                                                                  |
 | 5️⃣1️⃣ | How does EKS private node access internet?                            | 🚪 Through NAT Gateway                                                                                                    |
 | 5️⃣2️⃣ | Why do EKS worker nodes need NAT Gateway?                             | 📦 Pull images, updates, AWS API access                                                                                   |
 | 5️⃣3️⃣ | ECS tasks in private subnet need internet. Solution?                  | 🚪 NAT Gateway                                                                                                            |
