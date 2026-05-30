@@ -164,13 +164,13 @@
           ⬇️
 ➕ Create Budget
           ⬇️
-🎯 Select Budget Type (🧾 Reservation Budget & 📉 Savings Plans Budget)
+🎯 Select Budget Type    (🧾 Reservation Budget & 📉 Savings Plans Budget)
           ⬇️
-💵 Set Budget Amount  (`$100`)
+💵 Set Budget Amount     (`$100`)
           ⬇️
-📅 Choose Time Period   ( Monthly / Quarterly / Annual ) 
+📅 Choose Time Period    ( Monthly / Quarterly / Annual ) 
           ⬇️
-🚨 Configure Alerts    (Set thresholds : ⚠️ 50% ⚡ 80%  🔥 100%)
+🚨 Configure Alerts      (Set thresholds : ⚠️ 50% ⚡ 80%  🔥 100%)
           ⬇️
 📧 Add Email Recipients  ( Example : ⚠️ 80% → Warning email & 🔴 100% → Critical alert )
           ⬇️
